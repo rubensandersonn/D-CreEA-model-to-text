@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AppService } from "src/app/services/app.service";
+import { AppEnvironment } from "src/app/shared/models/app.environment";
 
 @Component({
     selector: 'app-header',
@@ -10,7 +11,7 @@ export class HeaderComponent implements OnInit{
     
     activeMenu: number = -1;
 
-    constructor(/*readonly appEnvironment: AppEnvironment,*/ private appService: AppService) {}
+    constructor(readonly appEnvironment: AppEnvironment, private appService: AppService) {}
     
     ngOnInit(){ }
 

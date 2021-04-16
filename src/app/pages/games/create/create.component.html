@@ -1,27 +1,38 @@
 <div class="clr-col-12">
     <div class="content-area">
-        <div class="card">
-            <div class="card-header">Create a Game</div>
-            <div class="card-block">
-
-                <div class="card-text">
-                    <div class="clr-row">
-                        <div class="clr-col-lg-12 clr-col-md-12 clr-col-12">
-                            <!-- <form clrForm>
-                                <clr-input-container>
-                                    <label>User Name</label>
-                                    <input clrInput name="name" [(ngModel)]="user.name" type="text" />
-                                </clr-input-container>
-                            </form> -->
+        <div class="clr-row">
+            <div class="clr-col-8">
+                <div class="card">
+                    <div class="card-header">manipulation area</div>
+                    <div class="card-block">
+                        <div class="card-text">
+                            <div class="clr-row">
+                                <button class="btn btn-primary float-items-right" (click)="onShowGDDForm()">Create GDD</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                </div> 
             </div>
-            <div class="card-footer">
-                <!-- <button class="btn btn-primary float-items-right" (click)="saveUser()">Save</button> -->
+            <div class="clr-col-4">
+                <div class="card">
+                    <div class="card-header">Create a Game</div>
+                    <div class="card-block">
+        
+                        <div class="card-text">
+                            <div class="clr-row">
+                                <div class="clr-col-lg-12 clr-col-md-12 clr-col-12">
+                                    <app-game-description-form *ngIf="showGDDForm"></app-game-description-form>
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div>
+                    <div class="card-footer">
+                        <!-- <button class="btn btn-primary float-items-right" (click)="saveUser()">Save</button> -->
+                    </div>
+                </div> 
             </div>
-        </div> 
+        </div>
         
 
     </div>

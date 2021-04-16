@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -7,32 +7,43 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { AppRouting } from './app.routing';
-import { GDFormDirective } from './components/gdform.directive';
-import { GameDescriptionFormComponent } from './components/game-description-form/game-description-form.component';
-import { TransitionRuleFormComponent } from './components/transition-rule-form/transition-rule-form.component';
-import { ConditionalRuleFormComponent } from './components/conditional-rule-form/conditional-rule-form.component';
+
+import { AppService } from './services/app.service';
+import { AppEnvironment } from './shared/models/app.environment';
+import { HomeService } from './services/home.service';
+import { FormsModule } from '@angular/forms';
+
+export function init_app(homeService: HomeService, appEnvironment: AppEnvironment) {
+  return async () => {
+      await delay(1);
+  }
+}
+
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    GDFormDirective,
-    GameDescriptionFormComponent,
-    TransitionRuleFormComponent,
-    ConditionalRuleFormComponent
   ],
   imports: [
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
     MainModule,
+    FormsModule,
     AppRouting
   ],
-  providers: [
-    // AppService,
-    // AppEnvironment
-  ],
   exports: [ClarityModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    AppService,
+    AppEnvironment,
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [HomeService, AppEnvironment], multi: true },
+  ]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(){}
+}

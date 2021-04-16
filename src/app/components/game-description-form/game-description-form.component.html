@@ -1,6 +1,30 @@
 <form clrForm>
     <clr-input-container>
-        <label>Game Description</label>
-        <input clrInput name="name" [(ngModel)]="gdd.name" type="text" />
+        <label>Nome do Jogo</label>
+        <input clrInput name="name" value="gdd.name" [(ngModel)]="gdd.name" type="text" required/>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Descrição</label>
+        <input clrInput name="description" [(ngModel)]="gdd.description" type="text" required/>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Público Alvo</label>
+        <input clrInput name="targetAudience" [(ngModel)]="gdd.targetAudience" type="text" required/>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Campo de Conhecimento</label>
+        <input clrInput name="knowledgeField" [(ngModel)]="gdd.knowledgeField" type="text" required/>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Requisitos de Conhecimento Necessários</label>
+        <input clrInput name="requirements" [(ngModel)]="gdd.requirements" type="text" required/>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Mínimo de Jogadores</label>
+        <input clrInput name="minNumberPlayers" [(ngModel)]="gdd.minNumberPlayers" type="number" min="0" required/>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Máximo de Jogadores</label>
+        <input clrInput name="maxNumberPlayers" [(ngModel)]="gdd.maxNumberPlayers" type="number" min="0" required/>
     </clr-input-container>
 </form>
