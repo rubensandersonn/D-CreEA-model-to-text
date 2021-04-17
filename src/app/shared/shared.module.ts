@@ -1,3 +1,4 @@
+import { DragDropModule } from "@angular/cdk/drag-drop";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
@@ -23,6 +24,7 @@ import { commonComponents, flattenPageComponents, PipeModule } from "../app.impo
         ApiInterceptorModule,
         HttpClientModule,
         PipeModule,
+        DragDropModule,
         commonComponents
         // DndModule
     ],
@@ -39,6 +41,7 @@ import { commonComponents, flattenPageComponents, PipeModule } from "../app.impo
         ApiInterceptorModule,
         HttpClientModule,
         PipeModule,
+        DragDropModule,
         commonComponents
         // DndModule
     ]

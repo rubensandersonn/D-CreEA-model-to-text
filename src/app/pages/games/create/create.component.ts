@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { DragNDropToolComponent } from 'src/app/components/drag-n-drop-tool/drag-n-drop-tool.component';
 import { GameDescriptionFormComponent } from 'src/app/components/game-description-form/game-description-form.component';
 import { AppService } from 'src/app/services/app.service';
 import { GameCreationServiceService } from 'src/app/services/game-creation-service.service';
