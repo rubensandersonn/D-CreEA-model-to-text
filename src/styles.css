@@ -130,3 +130,6 @@ body {font-family: robotoregular,Roboto,Metropolis,Avenir Next,Helvetica Neue,Ar
 .header .header-actions>.dropdown .dropdown-menu,.header .settings>.dropdown .dropdown-menu,header .header-actions>.dropdown .dropdown-menu,header .settings>.dropdown .dropdown-menu{margin-top:-.166667rem;left:auto;right:0}
 .header .header-actions>.dropdown :last-child.dropdown-menu,.header .settings>.dropdown :last-child.dropdown-menu,header .header-actions>.dropdown :last-child.dropdown-menu,header .settings>.dropdown :last-child.dropdown-menu{margin-right:.333333rem}
 .header .header-nav:last-child>.nav-link:last-child:after,header .header-nav:last-child>.nav-link:last-child:after{content:none}
+
+.form-by-rows label, input, textarea {min-width: 90%;}
+.form-by-rows input, textarea {margin-bottom:15px;}
