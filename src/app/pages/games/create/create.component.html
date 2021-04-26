@@ -1,22 +1,38 @@
-<div class="clr-col-12">
-    <div class="content-area">
-        <div class="clr-row">
-            <div class="clr-col-8">
-                <div class="card">
-                    <div class="card-header">manipulation area</div>
-                    <div class="card-block">
-                        <app-drag-n-drop-tool></app-drag-n-drop-tool>
+<div class="content-area">
+    <div class="clr-row">
+        <div class="clr-col-10">
+            <div class="card">
+                <div class="card-header">
+                    <div class="clr-row">
+                        <div class="clr-col-6">
+                            Create a Game
+                        </div>
+                        
+                        <div class="clr-col-6">
+                            <button class="btn btn-primary float-items-right" (click)="onShowGDDForm()">Game Description</button>
+                            <button class="btn btn-primary float-items-right" (click)="onShowGameplayForm()">Gameplay</button>
+                            <button class="btn btn-primary float-items-right" (click)="onShowDecksForm()">Decks</button>
+                            <button class="btn btn-primary float-items-right" (click)="onShowCardsForm()">Cards</button>
+                            <button class="btn btn-primary float-items-right" (click)="onShowOverviewForm()">Overview</button>
+                        </div>
                     </div>
-                </div> 
-            </div>
-            <div class="clr-col-4">
-                <div class="clr-row">
-                    <button class="btn btn-primary float-items-right" (click)="onShowGDDForm()">Create GDD</button>
                 </div>
-                <app-game-description-form *ngIf="showGDDForm"></app-game-description-form>
+                <div class="card-block">
+                    <div class="clr-col-12" >
+                        <!-- game details -->
+                        <app-game-description-form *ngIf="showGDDForm"></app-game-description-form>
+                        
+                        <!-- Gameplay edit -->
+                        <app-drag-n-drop-tool *ngIf="showGameplayForm" ></app-drag-n-drop-tool>
+                    
+                    </div>
+                </div>
             </div>
         </div>
-        
+        <div class="clr-col-2">
+            <div class="card">
 
+            </div>
+        </div>
     </div>
 </div>

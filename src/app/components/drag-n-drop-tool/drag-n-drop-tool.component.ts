@@ -10,6 +10,9 @@ import { AppEnvironment } from 'src/app/shared/models/app.environment';
 })
 export class DragNDropToolComponent implements OnInit {
 
+  editRule: boolean;
+  innerHeight: number;
+
   constructor(
     private appService: AppService, 
     private appEnvironment: AppEnvironment, 
@@ -17,6 +20,16 @@ export class DragNDropToolComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.innerHeight = window.innerHeight * 0.6;
+    this.editRule = true;
+  }
+  
+  showRuleForm(){
+    this.hideAllForms();
+    this.editRule = true;
   }
 
+  hideAllForms(){
+    this.editRule = false;
+  }
 }

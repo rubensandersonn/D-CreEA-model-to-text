@@ -13,8 +13,13 @@ import { GameCreationServiceService } from 'src/app/services/game-creation-servi
 })
 export class CreateComponent implements OnInit {
 
+  innerHeight: number;
   // @ViewChild(GameDescriptionFormComponent)
   showGDDForm: boolean;
+  showGameplayForm: boolean;
+  showDecksForm: boolean;
+  showCardsForm: boolean;
+  showOverviewForm: boolean;
 
   constructor(
     private gamesService: GameCreationServiceService, 
@@ -23,6 +28,7 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.onHideAll();
+    
   }
 
   onShowGDDForm(){
@@ -30,8 +36,33 @@ export class CreateComponent implements OnInit {
     this.showGDDForm = true;
   }
 
-  onHideAll(){
-    this.showGDDForm = false;
+  onShowGameplayForm(){
+    this.onHideAll();
+    this.showGameplayForm = true;
   }
-
+  
+  onShowDecksForm(){
+    this.onHideAll();
+    this.showDecksForm = true;
+  }
+  
+  onShowOverviewForm(){
+    this.onHideAll();
+    this.showOverviewForm = true;
+  }
+  
+  onShowCardsForm(){
+    this.onHideAll();
+    this.showCardsForm = true;
+  }
+  
+  onHideAll(){
+    this.showOverviewForm = false;
+    this.showGDDForm = false;
+    this.showCardsForm = false;
+    this.showDecksForm = false;
+    this.showGameplayForm = false;
+  }
+  
+  
 }
