@@ -72,15 +72,15 @@ export interface Actor {
 
 }
 
-export interface Condition {
-
+export interface Statement {
+    fact:string;
 }
 
 export interface GameStatement {
     me: Actor;// - eu: *jogador testador*
     for: string;// - para que: *eu cumpra um desafio*
     given: string;// - dado que: *dado que eu tenho um carta de jogo na mão cujo tipo é X*
-    when: Condition;// - quando: (condição -> and, or, not)
+    when: Statement;// - quando: (condição -> and, or, not)
     //     - *eu combinar a minha carta do tipo X a uma carta desafio na mesa*
     //     - *a carta desafio contem nas respostas o tipo de carta X*
     then: string;// - então: *eu venci o desafio*
@@ -89,7 +89,7 @@ export interface GameStatement {
 
 
 export interface Rule {
-
+    label: string;
 }
 
 export interface StatementRule extends Rule {
@@ -106,17 +106,19 @@ export interface EffectRule extends Rule {
     effect: Effect;
 }
 
-interface ifelse {
-    condition: string;
-    stateIfTrue: State;
-}
 export interface ConditionalRule extends Rule {
-    case: ifelse; // state to go when the condition is true
+    conditions: Condition[]; // state to go when the condition is true
     otherwise: State;
 }
 
-export interface State {
+interface Condition {
+    test: Statement;
+    effectIfTrue: Effect,
+    stateIfTrue: State;
+}
 
+export interface State {
+    label:string;
 }
 
 export interface Deck {
@@ -127,5 +129,5 @@ export interface Deck {
 }
 
 export interface Card {
-    
+    title:string;
 }

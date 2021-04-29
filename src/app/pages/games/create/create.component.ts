@@ -21,6 +21,8 @@ export class CreateComponent implements OnInit {
   showCardsForm: boolean;
   showOverviewForm: boolean;
 
+  game: any;
+
   constructor(
     private gamesService: GameCreationServiceService, 
     private appService: AppService, 
@@ -28,7 +30,13 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.onHideAll();
-    
+    this.game = {
+      gdd: null,
+      states: {
+        initialState: null,
+      },
+      cards: []
+    }
   }
 
   onShowGDDForm(){

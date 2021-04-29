@@ -1,14 +1,22 @@
-<div>
-    <div class="clr-row boundary" [style.height.px]="innerHeight">
-        <div class="state-box" cdkDragBoundary=".boundary" cdkDrag>
-            Estado Inicial
+<div class="card" style="margin:0%">
+    <div class="card-block">
+        <div class="clr-col-12">
+            <div class="clr-row">
+                <div class="boundary" [style.height.px]="innerHeight">
+                    <div class="state-box" cdkDragBoundary=".boundary" cdkDrag>
+                        Estado Inicial
+                    </div>
+                    <div class="state-box" cdkDragBoundary=".boundary" cdkDrag>
+                        Estado Setup de Jogo
+                    </div>
+                </div>
+            </div>
+            <div class="clr-row">
+                <div class="clr-col-12" *ngIf="editRule">
+                    <app-rule-form></app-rule-form>
+                </div>
+            </div>
         </div>
-        <div class="state-box" cdkDragBoundary=".boundary" cdkDrag>
-            Estado Setup de Jogo
-        </div>
-    </div>
-    <div class="clr-row" *ngIf="editRule">
-        <app-rule-form ></app-rule-form>
     </div>
 </div>
 

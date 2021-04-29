@@ -1,12 +1,12 @@
 
 
-<div class="card" style="margin:0%">
+<div class="card">
     <div class="card-header">
         <div class="clr-row">
-            <div class="clr-col-6">
+            <div class="clr-col-7">
                 Create / Edit a Rule
             </div>
-            <div class="clr-col-6">
+            <div class="clr-col-5">
                 <button class="btn btn-primary float-items-right" (click)="showTransitionForm()">Transição</button>
                 <button class="btn btn-primary float-items-right" (click)="showConditionalForm()">Condicional</button>
                 <button class="btn btn-primary float-items-right" (click)="showStatementForm()">Statement</button>
@@ -23,7 +23,13 @@
                             <input placeholder="Label..." clrInput name="label" value="transitionRule.label" [(ngModel)]="transitionRule.label" type="text" required/>
                             <clr-control-error>item necessário!</clr-control-error>
                         </clr-input-container>
-                        
+                        <clr-select-container>
+                            <label>Go To State</label>
+                            <select clrSelect name="gotoState" [(ngModel)]="transitionRule.gotoState">
+                                <option *ngFor="let st of states" [value]="st">{{st}}</option>
+                            </select>
+                            <clr-control-error>item necessário!</clr-control-error>
+                        </clr-select-container>
                     </div>
                     <div class="clr-col-6">
                         
@@ -33,6 +39,6 @@
         </div>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary float-items-right" (click)="createGDDForm()">Salvar</button>
+        <button class="btn btn-primary float-items-right" (click)="saveRuleState()">Salvar</button>
     </div>
 </div> 
