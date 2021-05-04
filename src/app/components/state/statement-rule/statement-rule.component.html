@@ -1,0 +1,98 @@
+<div class="card">
+    <div class="card-header">
+        <div class="clr-row">
+            <div class="clr-col-8">
+                Regra Statement
+            </div>
+            <div class="clr-col-4">
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="clr-col-12">
+            <form clrForm>
+                <div class="clr-row">
+                    <div class="clr-col-6">
+                        <form>
+                            <clr-input-container>
+                                <label>Label</label>
+                                <input clrInput name="label" type="text" 
+                                    placeholder="Label..." 
+                                    value="statementRule.label" 
+                                    [(ngModel)]="statementRule.label" required/>
+                                <clr-control-error>item necessário!</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Eu, </label>
+                                <input clrInput name="me" type="text" 
+                                    placeholder="me..." 
+                                    value="statementRule.me" 
+                                    [(ngModel)]="statementRule.me" required/>
+                                <clr-control-error>item necessário!</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Para</label>
+                                <input clrInput name="to" type="text" 
+                                    placeholder="to..." 
+                                    value="statementRule.to" 
+                                    [(ngModel)]="statementRule.to" required/>
+                                <clr-control-error>item necessário!</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Dado que</label>
+                                <input clrInput name="given" type="text" 
+                                    placeholder="given..." 
+                                    value="statementRule.given" 
+                                    [(ngModel)]="statementRule.given" required/>
+                                <clr-control-error>item necessário!</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Quando</label>
+                                <input clrInput name="when" type="text" 
+                                    placeholder="when..." 
+                                    value="statementRule.when" 
+                                    [(ngModel)]="statementRule.when" required/>
+                                <clr-control-error>item necessário!</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Então</label>
+                                <input clrInput name="then" type="text" 
+                                    placeholder="then..." 
+                                    value="statementRule.then" 
+                                    [(ngModel)]="statementRule.then" required/>
+                                <clr-control-error>item necessário!</clr-control-error>
+                            </clr-input-container>
+                            <clr-input-container>
+                                <label>Senão</label>
+                                <input clrInput name="otherwise" type="text" 
+                                    placeholder="otherwise..." 
+                                    value="statementRule.otherwise" 
+                                    [(ngModel)]="statementRule.otherwise" required/>
+                                <clr-control-error>item necessário!</clr-control-error>
+                            </clr-input-container>
+                        </form>
+                    </div>
+                    <div class="clr-col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Regra
+                            </div>
+                            <div class="card-block">
+                                <p class="card-text">Eu, {{statementRule.me}}</p>
+                                <p class="card-text">Para {{statementRule.to}}</p>
+                                <p class="card-text">Dado que {{statementRule.given}}</p>
+                                <p class="card-text">Quando {{printWhenConditions(statementRule.when)}}</p>
+                                <p class="card-text">Então {{statementRule.then}}</p>
+                                <p class="card-text">Senão {{statementRule.otherwise}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <button class="btn btn-primary float-items-right" (click)="saveRuleState()">Salvar</button>
+    </div>
+</div>

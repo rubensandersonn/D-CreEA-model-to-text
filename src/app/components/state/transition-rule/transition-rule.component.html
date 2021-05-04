@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header">
+        <div class="clr-row">
+            <div class="clr-col-10">
+                Regra Transição
+            </div>
+            
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="clr-col-12">
+            <form clrForm>
+                <div class="clr-row">
+                    <div class="clr-col-6">
+                        <clr-input-container>
+                            <label>Label</label>
+                            <input clrInput name="label" type="text" 
+                                placeholder="Label..." 
+                                value="transitionRule.label" 
+                                [(ngModel)]="transitionRule.label" required/>
+                            <clr-control-error>item necessário!</clr-control-error>
+                        </clr-input-container>
+                    </div>
+                    <div class="clr-col-6">
+                        <clr-select-container>
+                            <label>Go To State</label>
+                            <select clrSelect name="gotoState" [(ngModel)]="transitionRule.gotoState">
+                                <option *ngFor="let st of states" [value]="st">{{st.label}}</option>
+                            </select>
+                            <clr-control-error>item necessário!</clr-control-error>
+                        </clr-select-container>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="clr-row">
+            <div class="clr-col-10">
+                
+            </div>
+            <div class="clr-col-2">
+                <button class="btn btn-primary float-items-right" (click)="saveRuleState()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 import { AppEnvironment } from 'src/app/shared/models/app.environment';
+import { StateComponent } from '../state/state.component';
 
 @Component({
   selector: 'app-drag-n-drop-tool',
@@ -31,5 +32,9 @@ export class DragNDropToolComponent implements OnInit {
 
   hideAllForms(){
     this.editRule = false;
+  }
+
+  setState(){
+    this.editRule = true;
   }
 }

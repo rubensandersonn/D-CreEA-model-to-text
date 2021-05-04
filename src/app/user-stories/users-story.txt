@@ -1,5 +1,62 @@
 
 =================================================
+-----------------------------------------------
+==== Cena-USR-1 - Create a Transition Rule =====
+as i am a game developer (gd)
+in order to: create a transition rule for a state X
+given:
+    i have accessed the creation screen
+    and i accessed the rule form
+    and i selected the transition rule creation option
+when:
+    i fill in the label (string) field
+    and I select one of the state created by using the [Cena-USS-1]
+    and I save the transition rule by pressing <Save>
+then:
+    the system saves the transition rule into the state X
+    and display a success message
+
+
+
+-----------------------------------------------
+==== Cena-USR-1 - Create a statement Rule =====
+as i am a game developer (gd)
+in order to: create a statement rule for a state X
+given:
+    i have accessed the creation screen
+    and i accessed the rule form
+    and i selected the statement rule creation option
+when:
+    i fill in the label (string) field
+    and I create a statement by using [Cena-USG-2]
+    and I save the statement rule by pressing <Save>
+then:
+    the system saves the statement rule into the state X
+    and display a success message
+
+
+
+
+-----------------------------------------------
+==== Cena-USR-1 - Create a effect Rule =====
+as i am a game developer (gd)
+in order to: create a effect rule for a state X
+given:
+    i have accessed the creation screen
+    and i accessed the rule form
+    and i selected the effect rule creation option
+when:
+    i fill in the label (string) field
+    and I create a effect by using [Cena-USG-3]
+    and I save the effect rule by pressing <Save>
+then:
+    the system saves the effect rule into the state X
+    and display a success message
+
+
+
+
+-----------------------------------------------
 ==== Cena-USR-1 - Create a Conditional Rule =====
 as i am a game developer (gd)
 in order to: create a conditional rule for a state X
@@ -9,26 +66,34 @@ given:
     and i selected the conditional rule creation option
 when:
     i fill in the label (string) field
-    and i set the otherwise state selecting one of the states filtered by the restriction [R-R1]
-    and I select one or more condition created using the [Cena-USG-1]
+    and I create one or more condition by using the [Cena-USG-1]
+    and i set the otherwise state by selecting one of the states filtered by the restriction [R-R1]
     and I save the conditional rule by pressing <Save>
 then:
-    the system saves the conditional rule
+    the system saves the conditional rule into the state X
     and display a success message
 
+    
+    
+
+
     ------------------------------------------------
+    comments: uma regra pode ter várias condições
     == Cena-USG-1 - Create a Condition ==
     when:
         I click on <create a new condition> 
         and a modal opens showing the condition fields to fill in
         and fill in all the following required fields by 
-            - selecting a Test (Statement) created using the [Cena-USG-2], 
-            - selecting a Effect If True (Effect) created using the [Cena-USG-3] and 
+            - describing the condition to respect
+            - describing the Effect If True (Effect) created using the [Cena-USG-3] and 
             - State If True (state) created using the [Cena-USS-1]
         and I press <Save>
     then:
         the system saves this condition on the context of the parent activity
         and closes the modal
+
+
+
 
     -------------------------------------------------
     == Cena-USG-2 - Create a new Statement ==
@@ -39,6 +104,10 @@ then:
         and press <Save>
     Then:
         the system saves the new Statement on the context of the parent activity
+
+
+
+
 
     -------------------------------------------------
     == Cena-USG-3 - Create a new Effect ==
@@ -56,6 +125,10 @@ then:
     Then:
         the system saves the new effect on the context of the parent activity
 
+
+
+
+
     -------------------------------------------------
     == Cena-USG-3a - Create a new EffectGameTurnPoints Effect ==
     when:
@@ -71,6 +144,10 @@ then:
     Then:
         the system saves the new effect on the context of the parent activity
 
+
+
+
+
     -------------------------------------------------
     == Cena-USG-3b - Create a new EffectGameResourcesPoints Effect ==
     when:
@@ -85,6 +162,10 @@ then:
         and press <Save>
     Then:
         the system saves the new effect on the context of the parent activity
+
+
+
+
 
     -------------------------------------------------
     == Cena-USG-3c - Create a new EffectCanPlay Effect ==
@@ -102,6 +183,16 @@ then:
     Then:
         the system saves the new effect on the context of the parent activity
 
+
+
+
+
+
+
+
+
+
+
 =================================================
 === Cena-USS-1: Create a State ===
 as i am a game developer (gd)
@@ -111,7 +202,10 @@ given:
     and i accessed the state management option
     and i selected the state creation option
 when:
-    i fill in the ...
+    i fill in the label field
+    and I create the rules for this state by 
+        pressing <new rule> and following one of the Cena-USR scenes
+        as many times this state demands
     and I press <Save>
 then:
     the system saves the state

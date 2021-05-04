@@ -37,11 +37,11 @@ export class GameDescriptionFormComponent implements OnInit {
   }
 
   createGDDForm(){
-    this.gddService.setGDD(this.gdd).subscribe(()=>{
-      this.appService.setAppAlerts([{message:"Success", type: "success"}]);
-    },(erros: string[])=>{
-      this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
-    });
+    // this.gddService.setGDD(this.gdd).subscribe(()=>{
+    //   this.appService.setAppAlerts([{message:"Success", type: "success"}]);
+    // },(erros: string[])=>{
+    //   this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
+    // });
   }
 
 }

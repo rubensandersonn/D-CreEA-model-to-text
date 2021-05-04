@@ -27,21 +27,21 @@ export class RuleFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.states = ["Initial State", "Setup State"];
-    this.transitionRule = {
-      gotoState: null,
-      label: ""
-    }
-    this.conditionalRule = {
-      conditions: [], // state to go when the condition is true
-      otherwise: null,
-      label: ""
-    }
+    // this.transitionRule = {
+    //   gotoState: null,
+    //   label: ""
+    // }
+    // this.conditionalRule = {
+    //   conditions: [], // state to go when the condition is true
+    //   otherwise: null,
+    //   label: ""
+    // }
 
-    this.statementRule = {
-      gotoState: null,
-      label: "",
-      statement: null
-    }
+    // this.statementRule = {
+    //   gotoState: null,
+    //   label: "",
+    //   : null
+    // }
   }
 
   saveRuleState(){

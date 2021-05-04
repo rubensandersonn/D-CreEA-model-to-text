@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header">
+        <div class="clr-row">
+            <div class="clr-col-10">
+                Regra Condicional
+            </div>
+            <div class="clr-col-2">
+                <button class="btn btn-primary float-items-right" (click)="saveRuleState()">Salvar</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="clr-col-12">
+            <form clrForm>
+                <div class="clr-row">
+                    <div class="clr-col-6">
+                        <clr-input-container>
+                            <label>Label</label>
+                            <input clrInput name="label" type="text" 
+                                placeholder="Label..." 
+                                value="conditionalRule.label" 
+                                [(ngModel)]="conditionalRule.label" required/>
+                            <clr-control-error>item necessário!</clr-control-error>
+                        </clr-input-container>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-block">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header">
+                    <div class="clr-row">
+                        <div class="clr-col-10">
+                            Condições
+                        </div>
+                        <div class="clr-col-2">
+                            <button class="btn btn-primary float-items-right" (click)="addSub()">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <clr-datagrid>
+                    <!-- <clr-dg-column>User ID</clr-dg-column>
+                    <clr-dg-column>Name</clr-dg-column>
+                    <clr-dg-column>Creation date</clr-dg-column>
+                    <clr-dg-column>Favorite color</clr-dg-column> -->
+                  
+                    <clr-dg-row *ngFor="let c of conditionalRule.conditions">
+                      <clr-dg-cell>IF</clr-dg-cell>
+                      <clr-dg-cell>{{c.test.fact}}</clr-dg-cell>
+                      <clr-dg-cell>DO</clr-dg-cell>
+                      <clr-dg-cell>{{printEffect(c.effectIfTrue)}}</clr-dg-cell>
+                      <clr-dg-cell>GO TO STATE</clr-dg-cell>
+                      <clr-dg-cell>{{c.stateIfTrue.label}}</clr-dg-cell>
+                      <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
+                    </clr-dg-row>
+                  
+                    <!-- <clr-dg-footer>{{conditionalRule.conditions.length}} conditions</clr-dg-footer> -->
+                  </clr-datagrid>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        
+    </div>
+</div>
