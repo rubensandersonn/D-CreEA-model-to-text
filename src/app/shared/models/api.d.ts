@@ -113,7 +113,10 @@ interface Condition {
 export interface State {
     id: number;
     label:string;
-    rules: Rule[];
+    conditionalRules: ConditionalRule[];
+    transitionRules: TransitionRule[];
+    effectRules: EffectRule[];
+    statementRules: StatementRule[];
 }
 
 export interface Deck {

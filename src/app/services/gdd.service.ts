@@ -18,8 +18,9 @@ export class GddService {
     return this.gdd.asObservable();
   }
 
-  setGDD(gdd: GDDViewModel){
+  setGDD(gdd: GDDViewModel): Observable<GDDViewModel>{
     this.gdd.next(gdd);
+    return this.gdd.asObservable();
     // return this.http.post(`api/GDD/setGDD`, gdd).pipe(
     //   catchError(handleError)
     // );

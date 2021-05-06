@@ -34,14 +34,20 @@ export class GameDescriptionFormComponent implements OnInit {
       minNumberPlayers: 0,
       maxNumberPlayers: 0,
     }
+
+    this.gddService.getGDD().subscribe(result => {
+      this.gdd = result;
+    }, (erros: string[])=>{
+      this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
+    });
   }
 
   createGDDForm(){
-    // this.gddService.setGDD(this.gdd).subscribe(()=>{
-    //   this.appService.setAppAlerts([{message:"Success", type: "success"}]);
-    // },(erros: string[])=>{
-    //   this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
-    // });
+    this.gddService.setGDD(this.gdd).subscribe(()=>{
+      this.appService.setAppAlerts([{message:"Saved", type: "success"}]);
+    },(erros: string[])=>{
+      this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
+    });
   }
 
 }
