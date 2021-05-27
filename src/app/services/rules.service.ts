@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { handleError } from '../shared/helpers/http-response-handler';
 import { ConditionalRule, EffectRule, Rule, StatementRule, TransitionRule } from '../shared/models/api';
+import { CreateStatementRuleRequest, CreateTransitionRuleRequest } from '../shared/models/requests-api';
 
 @Injectable({
   providedIn: 'root'
@@ -36,34 +39,28 @@ export class RulesService {
   
 
   setConditionalRules(rule: ConditionalRule[]){
-    this.conditionalRules.next(rule);
-    return true;
-    // return this.http.post(`api/Rules/setRules`, Rules).pipe(
-    //   catchError(handleError)
-    // );
+    return this.http.post(`api/Rules/CreateTransitionRule`, rule).pipe(
+      catchError(handleError)
+    );
   }
 
-  setTransitionRules(rule: TransitionRule[]){
-    this.transitionRules.next(rule);
-    return true;
-    // return this.http.post(`api/Rules/setRules`, Rules).pipe(
-    //   catchError(handleError)
-    // );
+  setTransitionRules(rule: CreateTransitionRuleRequest){
+    // this.transitionRules.next(rule);
+    // return true;
+    return this.http.post(`api/Rules/CreateTransitionRule`, rule).pipe(
+      catchError(handleError)
+    );
   }
 
-  setStatementRules(rule: StatementRule[]){
-    this.statementRules.next(rule);
-    return true;
-    // return this.http.post(`api/Rules/setRules`, Rules).pipe(
-    //   catchError(handleError)
-    // );
+  setStatementRules(rule: CreateStatementRuleRequest){
+    return this.http.post(`api/Rules/CreateTransitionRule`, rule).pipe(
+      catchError(handleError)
+    );
   }
 
   setEffectRules(rule: EffectRule[]){
-    this.effectRules.next(rule);
-    return true;
-    // return this.http.post(`api/Rules/setRules`, Rules).pipe(
-    //   catchError(handleError)
-    // );
+    return this.http.post(`api/Rules/CreateTransitionRule`, rule).pipe(
+      catchError(handleError)
+    );
   }
 }

@@ -3,7 +3,7 @@
         <div class="clr-col-12">
             <div class="clr-row">
                 <div class="boundary" [style.height.px]="innerHeight">
-                    <div class="state-box" [cdkDragData]="states" cdkDragBoundary=".boundary" cdkDrag>
+                    <div class="state-box" onclick="setState();" cdkDragBoundary=".boundary" cdkDrag>
                         Estado Inicial
                     </div>
                     <div class="state-box" cdkDragBoundary=".boundary" cdkDrag>
@@ -19,7 +19,3 @@
         </div>
     </div>
 </div>
-
-
-  
-  

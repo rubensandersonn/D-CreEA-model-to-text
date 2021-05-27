@@ -18,56 +18,56 @@
                                 <label>Label</label>
                                 <input clrInput name="label" type="text" 
                                     placeholder="Label..." 
-                                    value="statementRule.label" 
-                                    [(ngModel)]="statementRule.label" required/>
+                                    value="statementRuleRequest.label" 
+                                    [(ngModel)]="statementRuleRequest.label" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Eu, </label>
                                 <input clrInput name="me" type="text" 
                                     placeholder="me..." 
-                                    value="statementRule.me" 
-                                    [(ngModel)]="statementRule.me" required/>
+                                    value="statementRuleRequest.me" 
+                                    [(ngModel)]="statementRuleRequest.me" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Para</label>
                                 <input clrInput name="to" type="text" 
                                     placeholder="to..." 
-                                    value="statementRule.to" 
-                                    [(ngModel)]="statementRule.to" required/>
+                                    value="statementRuleRequest.to" 
+                                    [(ngModel)]="statementRuleRequest.to" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Dado que</label>
                                 <input clrInput name="given" type="text" 
                                     placeholder="given..." 
-                                    value="statementRule.given" 
-                                    [(ngModel)]="statementRule.given" required/>
+                                    value="statementRuleRequest.given" 
+                                    [(ngModel)]="statementRuleRequest.given" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Quando</label>
                                 <input clrInput name="when" type="text" 
                                     placeholder="when..." 
-                                    value="statementRule.when" 
-                                    [(ngModel)]="statementRule.when" required/>
+                                    value="statementRuleRequest.when" 
+                                    [(ngModel)]="statementRuleRequest.when" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Então</label>
                                 <input clrInput name="then" type="text" 
                                     placeholder="then..." 
-                                    value="statementRule.then" 
-                                    [(ngModel)]="statementRule.then" required/>
+                                    value="statementRuleRequest.then" 
+                                    [(ngModel)]="statementRuleRequest.then" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
                             <clr-input-container>
                                 <label>Senão</label>
                                 <input clrInput name="otherwise" type="text" 
                                     placeholder="otherwise..." 
-                                    value="statementRule.otherwise" 
-                                    [(ngModel)]="statementRule.otherwise" required/>
+                                    value="statementRuleRequest.otherwise" 
+                                    [(ngModel)]="statementRuleRequest.otherwise" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
                         </form>
@@ -78,12 +78,12 @@
                                 Regra
                             </div>
                             <div class="card-block">
-                                <p class="card-text">Eu, {{statementRule.me}}</p>
-                                <p class="card-text">Para {{statementRule.to}}</p>
-                                <p class="card-text">Dado que {{statementRule.given}}</p>
-                                <p class="card-text">Quando {{printWhenConditions(statementRule.when)}}</p>
-                                <p class="card-text">Então {{statementRule.then}}</p>
-                                <p class="card-text">Senão {{statementRule.otherwise}}</p>
+                                <p class="card-text">Eu, {{statementRuleRequest.me}}</p>
+                                <p class="card-text">Para {{statementRuleRequest.to}}</p>
+                                <p class="card-text">Dado que {{statementRuleRequest.given}}</p>
+                                <p class="card-text">Quando {{printWhenConditions(statementRuleRequest.when)}}</p>
+                                <p class="card-text">Então {{statementRuleRequest.then}}</p>
+                                <p class="card-text">Senão {{statementRuleRequest.otherwise}}</p>
                             </div>
                         </div>
                     </div>

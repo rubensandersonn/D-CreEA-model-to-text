@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DragNDropToolComponent } from 'src/app/components/drag-n-drop-tool/drag-n-drop-tool.component';
 import { GameDescriptionFormComponent } from 'src/app/components/game-description-form/game-description-form.component';
+import { GameplayComponent } from 'src/app/components/gameplay/gameplay.component';
 import { AppService } from 'src/app/services/app.service';
 import { GameCreationServiceService } from 'src/app/services/game-creation-service.service';
 
@@ -12,7 +12,7 @@ import { GameCreationServiceService } from 'src/app/services/game-creation-servi
   
 })
 export class CreateComponent implements OnInit {
-
+  
   innerHeight: number;
   // @ViewChild(GameDescriptionFormComponent)
   showGDDForm: boolean;
@@ -71,6 +71,5 @@ export class CreateComponent implements OnInit {
     this.showDecksForm = false;
     this.showGameplayForm = false;
   }
-  
   
 }

@@ -11,10 +11,11 @@ export interface GDDViewModel{
 
 export interface Effect{
     id:number;
+    turns: number;
     // targetActor: number;// - Ator alvo
     description: string;// - Descrição? / Lore?
-    pros: string;// - [dev] pros? quão benéfico é usar esse efeito?
-    cons: string;// - [dev] contras? quão maléfico é usar esse efeito?
+    pros: string[];// - [dev] pros? quão benéfico é usar esse efeito?
+    cons: string[];// - [dev] contras? quão maléfico é usar esse efeito?
     counters: string;// - [dev] counters?[] (lista opcional de regras ou efeitos que poderiam counterar esse efeito de alguma forma)
 }
 
@@ -75,6 +76,7 @@ export interface Statement {
 export interface Rule {
     id:number;
     label: string;
+    fromState: State; // selected state
 }
 
 export interface StatementRule extends Rule {
@@ -86,7 +88,7 @@ export interface StatementRule extends Rule {
     //     - *a carta desafio contem nas respostas o tipo de carta X*
     then: Statement[];// - então: *eu venci o desafio*
     otherwise: Statement[];// - senão: *eu perdi o desafio*
-    simpleDescription: string;
+    simplerDescription: string;
     gotoState: State; // state to go when this is used
 }
 
@@ -95,6 +97,7 @@ export interface TransitionRule extends Rule {
 }
 
 export interface EffectRule extends Rule {
+    
     gotoState: State; // state to go when this is used
     effects: Effect[];
 }
@@ -129,4 +132,9 @@ export interface Deck {
 
 export interface Card {
     title:string;
+}
+
+export interface Project {
+    name: string;
+    
 }

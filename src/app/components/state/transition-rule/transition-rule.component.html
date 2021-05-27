@@ -11,21 +11,30 @@
         <div class="clr-col-12">
             <form clrForm>
                 <div class="clr-row">
-                    <div class="clr-col-6">
+                    <div class="clr-col-12">
                         <clr-input-container>
                             <label>Label</label>
                             <input clrInput name="label" type="text" 
                                 placeholder="Label..." 
-                                value="transitionRule.label" 
-                                [(ngModel)]="transitionRule.label" required/>
+                                [(ngValue)]="transitionRuleRequest.label" 
+                                [(ngModel)]="transitionRuleRequest.label" required/>
                             <clr-control-error>item necessário!</clr-control-error>
                         </clr-input-container>
                     </div>
                     <div class="clr-col-6">
                         <clr-select-container>
+                            <label>From State</label>
+                            <select clrSelect name="fromState" [(ngModel)]="transitionRuleRequest.fromState">
+                                <option *ngFor="let st of states" [ngValue]="st.id">{{st.label}}</option>
+                            </select>
+                            <clr-control-error>item necessário!</clr-control-error>
+                        </clr-select-container>
+                    </div>
+                    <div class="clr-col-6">
+                        <clr-select-container>
                             <label>Go To State</label>
-                            <select clrSelect name="gotoState" [(ngModel)]="transitionRule.gotoState">
-                                <option *ngFor="let st of states" [value]="st">{{st.label}}</option>
+                            <select clrSelect name="toState" [(ngModel)]="transitionRuleRequest.toState">
+                                <option *ngFor="let st of states" [ngValue]="st.id">{{st.label}}</option>
                             </select>
                             <clr-control-error>item necessário!</clr-control-error>
                         </clr-select-container>
@@ -40,7 +49,7 @@
                 
             </div>
             <div class="clr-col-2">
-                <button class="btn btn-primary float-items-right" (click)="saveRuleState()">Salvar</button>
+                <button class="btn btn-primary float-items-right" (click)="saveRule()">Salvar</button>
             </div>
         </div>
     </div>

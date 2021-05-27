@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppService } from 'src/app/services/app.service';
+import { AppAlert, AppService } from 'src/app/services/app.service';
+import { RulesService } from 'src/app/services/rules.service';
+import { StatesService } from 'src/app/services/states.service';
+import { getErrors } from 'src/app/shared/helpers/get-message-errors';
 import { State, TransitionRule } from 'src/app/shared/models/api';
 import { AppEnvironment } from 'src/app/shared/models/app.environment';
+import { CreateTransitionRuleRequest } from 'src/app/shared/models/requests-api';
 
 @Component({
   selector: 'app-transition-rule',
@@ -11,28 +15,72 @@ import { AppEnvironment } from 'src/app/shared/models/app.environment';
 })
 export class TransitionRuleComponent implements OnInit {
 
-  transitionRule: TransitionRule;
+  transitionRuleRequest: CreateTransitionRuleRequest;
   states: State[];
+  
   constructor(
     private appService: AppService, 
+    private stateService: StatesService,
+    private ruleService: RulesService,
     private appEnvironment: AppEnvironment, 
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.transitionRule = {
-      id: 0,
-      gotoState: null,
-      label: ""
+    this.clear();
+  }
+
+  clear(){
+    this.clearRequest();
+    this.clearStates();
+  }
+
+  clearStates(){
+    this.states = [];
+  }
+
+  clearRequest(){
+    this.transitionRuleRequest = {
+      toState: 0,
+      label: "",
+      fromState: 0
     }
   }
 
-  saveRuleState(){
-
+  loadStates(){
+    this.stateService.getStates().subscribe(states => {
+      this.states = states;
+    }, (errors: Object) => {
+      var msg: string[] = getErrors(errors);
+      this.appService.setAppAlerts(msg.map(error => ({message: error, type: "danger"})))
+    });
   }
 
-  addSub(){
+  saveRule(){
+    var err = this.isValid();
+    if(err){
+      this.appService.setAppAlerts(err.map(error => ({message: error, type: "danger"})))
+      return;
+    }
+    this.ruleService.setTransitionRules(this.transitionRuleRequest).subscribe(() => {
+      this.appService.setAppAlerts([{message: "Success", type: "danger"}])
+    }, (errors: Object) => {
+      var msg: string[] = getErrors(errors);
+      this.appService.setAppAlerts(msg.map(error => ({message: error, type: "danger"})))
+    });
+  }
 
+  isValid():string[]{
+    var errors:string[] = [];
+    if(!this.transitionRuleRequest.label || this.transitionRuleRequest.label === ""){
+      errors.push("Label inválida");
+    }
+    
+    if(!this.transitionRuleRequest.toState){
+      errors.push("Estado destino não selecionado");
+    }
+
+    return errors.length > 0? errors: null;
   }
 
 }

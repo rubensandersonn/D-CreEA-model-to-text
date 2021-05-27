@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 import { RulesService } from 'src/app/services/rules.service';
@@ -12,9 +12,8 @@ import { AppEnvironment } from 'src/app/shared/models/app.environment';
   styleUrls: ['./conditional-rule.component.css']
 })
 export class ConditionalRuleComponent implements OnInit {
-  conditionalRule: ConditionalRule;
-  states: State[];
-  selectedState: State;
+  conditionalRuleRequest: ConditionalRule;
+  
   constructor(
     private appService: AppService, 
     private stateService: StatesService,
@@ -24,35 +23,45 @@ export class ConditionalRuleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.conditionalRule = {
+    this.conditionalRuleRequest = {
       id: 0,
       otherwise: null,
       label: "",
       conditions: null,
+      fromState: null
     }
 
-    this.setSelectedState();
-    this.loadStates();
   }
 
-  loadStates(){
-    this.stateService.getStates().subscribe(states => {
-      this.states = states;
-    },(erros: string[])=>{
-      this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
-    })
-  }
+  // loadStates(){
+  //   this.stateService.getStates().subscribe(states => {
+  //     this.states = states;
+  //   },(erros: string[])=>{
+  //     this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
+  //   })
+  // }
 
-  setSelectedState(){
-    this.stateService.getSelectedState().subscribe(state => {
-      this.selectedState = state;
-    },(erros: string[])=>{
-      this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
-    })
-  }
+  // setSelectedState(){
+  //   this.stateService.setSelectedState({
+  //     id: 0,
+  //     label: null,
+  //     conditionalRules: [],
+  //     effectRules: [],
+  //     statementRules: [],
+  //     transitionRules: []
+  //   });
+  // }
+  
+  // getSelectedState(){
+  //   this.stateService.getSelectedState().subscribe(state => {
+  //     this.selectedState = state;
+  //   },(erros: string[])=>{
+  //     this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
+  //   })
+  // }
 
   saveRuleState(){
-
+    
   }
 
   addSub(){
