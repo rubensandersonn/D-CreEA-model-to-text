@@ -76,7 +76,7 @@ export class TransitionRuleComponent implements OnInit {
       errors.push("Label inválida");
     }
     
-    if(!this.transitionRuleRequest.toState){
+    if(!this.transitionRuleRequest.toState || this.transitionRuleRequest.toState <= 0){
       errors.push("Estado destino não selecionado");
     }
 

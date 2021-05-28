@@ -18,10 +18,11 @@
                                 <label>Label</label>
                                 <input clrInput name="label" type="text" 
                                     placeholder="Label..." 
-                                    value="statementRuleRequest.label" 
+                                    [(ngValue)]="statementRuleRequest.label" 
                                     [(ngModel)]="statementRuleRequest.label" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
+                            
                             <clr-input-container>
                                 <label>Eu, </label>
                                 <input clrInput name="me" type="text" 
@@ -30,6 +31,8 @@
                                     [(ngModel)]="statementRuleRequest.me" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
+
+
                             <clr-input-container>
                                 <label>Para</label>
                                 <input clrInput name="to" type="text" 
@@ -38,6 +41,8 @@
                                     [(ngModel)]="statementRuleRequest.to" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
+
+                            
                             <clr-input-container>
                                 <label>Dado que</label>
                                 <input clrInput name="given" type="text" 
@@ -46,6 +51,7 @@
                                     [(ngModel)]="statementRuleRequest.given" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
+
                             <clr-input-container>
                                 <label>Quando</label>
                                 <input clrInput name="when" type="text" 
@@ -54,6 +60,7 @@
                                     [(ngModel)]="statementRuleRequest.when" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
+
                             <clr-input-container>
                                 <label>Então</label>
                                 <input clrInput name="then" type="text" 
@@ -62,6 +69,7 @@
                                     [(ngModel)]="statementRuleRequest.then" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
+
                             <clr-input-container>
                                 <label>Senão</label>
                                 <input clrInput name="otherwise" type="text" 
@@ -70,6 +78,7 @@
                                     [(ngModel)]="statementRuleRequest.otherwise" required/>
                                 <clr-control-error>item necessário!</clr-control-error>
                             </clr-input-container>
+                            
                         </form>
                     </div>
                     <div class="clr-col-6">

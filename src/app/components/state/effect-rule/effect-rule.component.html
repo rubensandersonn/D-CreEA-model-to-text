@@ -1,81 +1,100 @@
 <div class="card">
-    <div class="card-header">
+  <div class="card-header">
+    <div class="clr-row">
+      <div class="clr-col-10">Regra Efeito</div>
+      <div class="clr-col-2">
+        <button
+          class="btn btn-primary float-items-right"
+          (click)="saveRuleState()"
+        >
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-block">
+    <div class="clr-col-12">
+      <form clrForm>
         <div class="clr-row">
-            <div class="clr-col-10">
-                Regra Efeito
-            </div>
-            <div class="clr-col-2">
-                <button class="btn btn-primary float-items-right" (click)="saveRuleState()">Salvar</button>
-            </div>
+          <div class="clr-col-6">
+            <clr-input-container>
+              <label>Label</label>
+              <input
+                clrInput
+                name="label"
+                type="text"
+                placeholder="Label..."
+                value="effectRule.label"
+                [(ngModel)]="effectRule.label"
+                required
+              />
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+          </div>
+          <div class="clr-col-6">
+            <clr-select-container>
+              <label>Go To State</label>
+              <select
+                clrSelect
+                name="gotoState"
+                [(ngModel)]="effectRule.gotoState"
+              >
+                <option *ngFor="let st of states" [value]="st">
+                  {{ st.label }}
+                </option>
+              </select>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-select-container>
+          </div>
         </div>
+      </form>
     </div>
-    <div class="card-block">
-        <div class="clr-col-12">
-            <form clrForm>
-                <div class="clr-row">
-                    
-                    <div class="clr-col-6">
-                        <clr-input-container>
-                            <label>Label</label>
-                            <input clrInput name="label" type="text" 
-                                placeholder="Label..." 
-                                value="effectRule.label" 
-                                [(ngModel)]="effectRule.label" required/>
-                            <clr-control-error>item necessário!</clr-control-error>
-                            
-                        </clr-input-container>
-                    </div>
-                    <div class="clr-col-6">
-                        <clr-select-container>
-                            <label>Go To State</label>
-                            <select clrSelect name="gotoState" [(ngModel)]="effectRule.gotoState">
-                                <option *ngFor="let st of states" [value]="st">{{st.label}}</option>
-                            </select>
-                            <clr-control-error>item necessário!</clr-control-error>
-                        </clr-select-container>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+  </div>
 
-    <div class="card-block">
-        <div class="card">
-            <div class="card-header">
-                <div class="clr-row">
-                    <div class="clr-col-10">
-                        Efeitos
-                    </div>
-                    <div class="clr-col-2">
-                        <button class="btn btn-primary float-items-right" (click)="addSub()">+</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card-block">
-                <clr-datagrid>
-                    <clr-dg-column>Tipo</clr-dg-column>
-                    <clr-dg-column>Descrição</clr-dg-column>
-                    <clr-dg-column>Pros</clr-dg-column>
-                    <clr-dg-column>Cons</clr-dg-column>
-                    <clr-dg-column>Counters</clr-dg-column>
-                    <clr-dg-column></clr-dg-column>
-                  
-                    <clr-dg-row *ngFor="let c of effectRule.effects">
-                      <clr-dg-cell>{{c.type}}</clr-dg-cell>
-                      <clr-dg-cell>{{c.description}}</clr-dg-cell>
-                      <clr-dg-cell>{{c.pros}}</clr-dg-cell>
-                      <clr-dg-cell>{{c.cons}}</clr-dg-cell>
-                      <clr-dg-cell>{{c.counters}}</clr-dg-cell>
-                      <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
-                    </clr-dg-row>
-                  
-                    <!-- <clr-dg-footer>{{effectRule.conditions.length}} conditions</clr-dg-footer> -->
-                </clr-datagrid>
-            </div>
+  <div class="card-block">
+    <div class="card">
+      <div class="card-header">
+        <div class="clr-row">
+          <div class="clr-col-10">Efeitos</div>
+          <div class="clr-col-2">
+            <button
+              class="btn btn-primary float-items-right"
+              (click)="onAddEffect()"
+            >
+              +
+            </button>
+          </div>
         </div>
-        
+      </div>
+      <div class="card-block">
+        <clr-datagrid>
+          <clr-dg-column>Tipo</clr-dg-column>
+          <clr-dg-column>Descrição</clr-dg-column>
+          <clr-dg-column>Pros</clr-dg-column>
+          <clr-dg-column>Cons</clr-dg-column>
+          <clr-dg-column>Counters</clr-dg-column>
+          <clr-dg-column></clr-dg-column>
+
+          <clr-dg-row *ngFor="let c of effectRule.effects">
+            <clr-dg-cell>{{ c.type }}</clr-dg-cell>
+            <clr-dg-cell>{{ c.description }}</clr-dg-cell>
+            <clr-dg-cell>{{ c.pros }}</clr-dg-cell>
+            <clr-dg-cell>{{ c.cons }}</clr-dg-cell>
+            <clr-dg-cell>{{ c.counters }}</clr-dg-cell>
+            <clr-dg-cell
+              ><button
+                class="btn btn-primary float-items-right"
+                (click)="seeMore(c)"
+              >
+                Ver
+              </button></clr-dg-cell
+            >
+          </clr-dg-row>
+
+          <!-- <clr-dg-footer>{{effectRule.conditions.length}} conditions</clr-dg-footer> -->
+        </clr-datagrid>
+      </div>
     </div>
-    <div class="card-footer">
-        
-    </div>
+  </div>
+  <div class="card-footer"></div>
 </div>
