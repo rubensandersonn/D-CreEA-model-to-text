@@ -13,37 +13,42 @@ import { AppEnvironment } from './shared/models/app.environment';
 import { HomeService } from './services/home.service';
 import { FormsModule } from '@angular/forms';
 
-export function init_app(homeService: HomeService, appEnvironment: AppEnvironment) {
+export function init_app(
+  homeService: HomeService,
+  appEnvironment: AppEnvironment
+) {
   return async () => {
-      await delay(1);
-  }
+    await delay(1);
+  };
 }
 
 function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
     MainModule,
     FormsModule,
-    AppRouting
+    AppRouting,
   ],
   exports: [ClarityModule],
   bootstrap: [AppComponent],
   providers: [
     AppService,
     AppEnvironment,
-    { provide: APP_INITIALIZER, useFactory: init_app, deps: [HomeService, AppEnvironment], multi: true },
-  ]
+    {
+      provide: APP_INITIALIZER,
+      useFactory: init_app,
+      deps: [HomeService, AppEnvironment],
+      multi: true,
+    },
+  ],
 })
-export class AppModule { 
-  constructor(){}
+export class AppModule {
+  constructor() {}
 }

@@ -10,6 +10,8 @@ import { EffectRuleComponent } from './components/state/effect-rule/effect-rule.
 import { GameplayComponent } from './components/gameplay/gameplay.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { statementRuleComponent } from './components/state/statement-rule/statement-rule.component';
+import { SummaryComponent } from './pages/summary/summary.component';
+import { DeckComponent } from './pages/deck/deck.component';
 
 export const PageComponents = {
   CreateComponent,
@@ -22,6 +24,8 @@ export const PageComponents = {
   EffectRuleComponent,
   statementRuleComponent,
   LobbyComponent,
+  SummaryComponent,
+  DeckComponent,
 };
 
 export const Pipes = {};
@@ -38,6 +42,8 @@ export const flattenPageComponents = [
   EffectRuleComponent,
   statementRuleComponent,
   LobbyComponent,
+  SummaryComponent,
+  DeckComponent,
 ];
 
 export const commonComponents = [];

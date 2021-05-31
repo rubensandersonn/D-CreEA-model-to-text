@@ -8,11 +8,9 @@ import { GameCreationServiceService } from 'src/app/services/game-creation-servi
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css'],
-  
+  styleUrls: ['./create.component.css', '../../../shared/styles/style.css'],
 })
 export class CreateComponent implements OnInit {
-  
   innerHeight: number;
   // @ViewChild(GameDescriptionFormComponent)
   showGDDForm: boolean;
@@ -24,9 +22,10 @@ export class CreateComponent implements OnInit {
   game: any;
 
   constructor(
-    private gamesService: GameCreationServiceService, 
-    private appService: AppService, 
-    private router: Router) { }
+    private gamesService: GameCreationServiceService,
+    private appService: AppService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.onHideAll();
@@ -35,41 +34,40 @@ export class CreateComponent implements OnInit {
       states: {
         initialState: null,
       },
-      cards: []
-    }
+      cards: [],
+    };
   }
 
-  onShowGDDForm(){
+  onShowGDDForm() {
     this.onHideAll();
     this.showGDDForm = true;
   }
 
-  onShowGameplayForm(){
+  onShowGameplayForm() {
     this.onHideAll();
     this.showGameplayForm = true;
   }
-  
-  onShowDecksForm(){
+
+  onShowDecksForm() {
     this.onHideAll();
     this.showDecksForm = true;
   }
-  
-  onShowOverviewForm(){
+
+  onShowOverviewForm() {
     this.onHideAll();
     this.showOverviewForm = true;
   }
-  
-  onShowCardsForm(){
+
+  onShowCardsForm() {
     this.onHideAll();
     this.showCardsForm = true;
   }
-  
-  onHideAll(){
+
+  onHideAll() {
     this.showOverviewForm = false;
     this.showGDDForm = false;
     this.showCardsForm = false;
     this.showDecksForm = false;
     this.showGameplayForm = false;
   }
-  
 }

@@ -1,29 +1,30 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppAlert, AppService } from 'src/app/services/app.service';
-import { RulesService } from 'src/app/services/rules.service';
+import { AppService } from 'src/app/services/app.service';
+import { CardsService } from 'src/app/services/cards.service';
 import { StatesService } from 'src/app/services/states.service';
 import { getErrors } from 'src/app/shared/helpers/get-message-errors';
-import { State, Statement } from 'src/app/shared/models/api';
+import { State } from 'src/app/shared/models/api';
 import { AppEnvironment } from 'src/app/shared/models/app.environment';
-import { CreateStatementRuleRequest } from 'src/app/shared/models/requests-api';
+import { SaveCardRequest } from 'src/app/shared/models/requests-api';
 
 @Component({
-  selector: 'app-statement-rule',
-  templateUrl: './statement-rule.component.html',
+  selector: 'app-deck',
+  templateUrl: './deck.component.html',
   styleUrls: [
-    './statement-rule.component.css',
-    '../../../shared/styles/style.css',
+    './deck.component.css',
+    '../../shared/styles/style.css',
+    '../../shared/styles/cardsAndDecks.css',
   ],
 })
-export class statementRuleComponent implements OnInit {
-  statementRuleRequest: CreateStatementRuleRequest;
+export class DeckComponent implements OnInit {
+  cardRequest: SaveCardRequest;
   states: State[];
 
   constructor(
     private appService: AppService,
     private stateService: StatesService,
-    private ruleService: RulesService,
+    private cardService: CardsService,
     private appEnvironment: AppEnvironment,
     private router: Router
   ) {}
@@ -42,17 +43,12 @@ export class statementRuleComponent implements OnInit {
   }
 
   clearRequest() {
-    this.statementRuleRequest = {
-      gotoState: null,
-      label: '',
-      me: null,
-      to: null,
-      given: null,
-      otherwise: null,
-      simplerDescription: null,
-      when: null,
-      then: null,
-      fromState: null,
+    this.cardRequest = {
+      title: '',
+      earning: 0,
+      cost: 0,
+      level: 0,
+      description: '',
     };
   }
 
@@ -70,7 +66,7 @@ export class statementRuleComponent implements OnInit {
     );
   }
 
-  saveRule() {
+  saveCard() {
     var err = this.isValid();
     if (err) {
       this.appService.setAppAlerts(
@@ -78,7 +74,7 @@ export class statementRuleComponent implements OnInit {
       );
       return;
     }
-    this.ruleService.setStatementRules(this.statementRuleRequest).subscribe(
+    this.cardService.saveCard(this.cardRequest).subscribe(
       () => {
         this.appService.setAppAlerts([{ message: 'Success', type: 'danger' }]);
       },
@@ -93,24 +89,10 @@ export class statementRuleComponent implements OnInit {
 
   isValid(): string[] {
     var errors: string[] = [];
-    if (
-      !this.statementRuleRequest.label ||
-      this.statementRuleRequest.label === ''
-    ) {
-      errors.push('Label inválida');
-    }
-
-    if (
-      !this.statementRuleRequest.gotoState ||
-      this.statementRuleRequest.gotoState === 0
-    ) {
-      errors.push('Estado destino não selecionado');
+    if (!this.cardRequest.title || this.cardRequest.title === '') {
+      errors.push('Título inválido');
     }
 
     return errors.length > 0 ? errors : null;
-  }
-
-  printWhenConditions(when: Statement[]): string {
-    return '';
   }
 }

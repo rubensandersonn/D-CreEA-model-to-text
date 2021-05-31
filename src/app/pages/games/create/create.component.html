@@ -8,7 +8,7 @@
         <div class="card-block">
           <clr-tabs>
             <clr-tab>
-              <button clrTabLink>Game Details</button>
+              <button class="btn-tab-details" clrTabLink>Game Details</button>
               <clr-tab-content *clrIfActive="true">
                 <!-- game details -->
                 <app-game-description-form></app-game-description-form>
@@ -23,11 +23,15 @@
             </clr-tab>
             <clr-tab>
               <button clrTabLink>Decks</button>
-              <clr-tab-content *clrIfActive> </clr-tab-content>
+              <clr-tab-content *clrIfActive>
+                <app-deck></app-deck>
+              </clr-tab-content>
             </clr-tab>
             <clr-tab>
               <button clrTabLink>Resumo</button>
-              <clr-tab-content *clrIfActive> </clr-tab-content>
+              <clr-tab-content *clrIfActive>
+                <app-summary></app-summary>
+              </clr-tab-content>
             </clr-tab>
           </clr-tabs>
         </div>

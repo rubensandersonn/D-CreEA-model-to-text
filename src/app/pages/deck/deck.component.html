@@ -1,0 +1,162 @@
+<div class="clr-col-12">
+  <div class="content-area">
+    <div class="card">
+      <div class="card-block">
+        <div class="clr-row">
+          <div class="clr-col-5">
+            <div class="card">
+              <div class="card-header">Select a Deck</div>
+              <div class="card-block">...</div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">Edit Info</div>
+              <div class="card-block">
+                <form clrForm></form>
+              </div>
+            </div>
+          </div>
+          <!-- cards! -->
+          <div class="clr-col-7" style="border: 1px solid #dedede">
+            <form clrForm>
+              <div
+                class="card-game red-card"
+                style="
+                  padding: 5px;
+                  margin: 5px 0px 5px 0px;
+                  border-radius: 0.5rem;
+                "
+              >
+                <div
+                  class="clr-row card-game-header"
+                  style="
+                    padding: 0px;
+                    margin: 5px 0px 5px 0px;
+                    border-radius: 0px;
+                  "
+                >
+                  <!-- title -->
+                  <clr-input-container
+                    style="
+                      margin: auto auto;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width: 100%;
+                    "
+                  >
+                    <input
+                      clrInput
+                      class="card-input-title"
+                      style="
+                        padding: 0px;
+                        width: 100%;
+                        margin: auto auto auto -16%;
+                      "
+                      name="title"
+                      type="text"
+                      placeholder="title..."
+                      [(value)]="cardRequest.title"
+                      [(ngModel)]="cardRequest.title"
+                      required
+                    />
+                    <clr-control-error>item necessário!</clr-control-error>
+                  </clr-input-container>
+                </div>
+                <!-- body -->
+
+                <div
+                  class="clr-row card-game-block"
+                  style="
+                    padding: 0px;
+                    margin: 5px 0px 5px 0px;
+                    border-radius: 0px;
+                    width: 100%;
+                  "
+                >
+                  <clr-textarea-container
+                    style="
+                      padding: 0px;
+                      margin: 5px 0px 5px 0px;
+                      border-radius: 0px;
+                      width: 100%;
+                      height: 50%;
+                    "
+                  >
+                    <textarea
+                      style="
+                        padding: 0px;
+                        margin: 5px 0px 5px 0px;
+                        border-radius: 0px;
+                        width: 100%;
+                      "
+                      clrTextarea
+                      placeholder="description"
+                      [(ngModel)]="cardRequest.description"
+                      name="cardRequest.description"
+                      required
+                    ></textarea>
+                    <clr-control-error>item necessário!</clr-control-error>
+                  </clr-textarea-container>
+                </div>
+                <!-- footer -->
+                <div
+                  class="clr-row"
+                  style="
+                    padding: 0px;
+                    margin: 5px 0px 5px 0px;
+                    border-radius: 0px;
+                  "
+                >
+                  <clr-input-container class="clr-col-4 vertical-center-input">
+                    <input
+                      clrInput
+                      class="card-input-footer"
+                      name="title"
+                      type="text"
+                      placeholder="cost..."
+                      [(value)]="cardRequest.cost"
+                      [(ngModel)]="cardRequest.cost"
+                      required
+                    />
+                    <clr-control-error>item necessário!</clr-control-error>
+                  </clr-input-container>
+                  <clr-input-container class="clr-col-4 vertical-center-input">
+                    <input
+                      clrInput
+                      class="card-input-footer"
+                      name="title"
+                      type="text"
+                      placeholder="level..."
+                      [(value)]="cardRequest.level"
+                      [(ngModel)]="cardRequest.level"
+                      required
+                    />
+                    <clr-control-error>item necessário!</clr-control-error>
+                  </clr-input-container>
+                  <clr-input-container class="clr-col-4 vertical-center-input">
+                    <input
+                      clrInput
+                      class="card-input-footer"
+                      name="title"
+                      type="text"
+                      placeholder="earning..."
+                      [(value)]="cardRequest.earning"
+                      [(ngModel)]="cardRequest.earning"
+                      required
+                    />
+                    <clr-control-error>item necessário!</clr-control-error>
+                  </clr-input-container>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn btn-primary float-items-right">Save Deck</button>
+      </div>
+    </div>
+  </div>
+</div>

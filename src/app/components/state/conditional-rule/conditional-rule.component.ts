@@ -11,7 +11,10 @@ import { CreateConditionalRuleRequest } from 'src/app/shared/models/requests-api
 @Component({
   selector: 'app-conditional-rule',
   templateUrl: './conditional-rule.component.html',
-  styleUrls: ['./conditional-rule.component.css'],
+  styleUrls: [
+    './conditional-rule.component.css',
+    '../../../shared/styles/style.css',
+  ],
 })
 export class ConditionalRuleComponent implements OnInit {
   conditionalRuleRequest: CreateConditionalRuleRequest;

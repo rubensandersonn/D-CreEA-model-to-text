@@ -11,7 +11,10 @@ import { CreateTransitionRuleRequest } from 'src/app/shared/models/requests-api'
 @Component({
   selector: 'app-transition-rule',
   templateUrl: './transition-rule.component.html',
-  styleUrls: ['./transition-rule.component.css'],
+  styleUrls: [
+    './transition-rule.component.css',
+    '../../../shared/styles/style.css',
+  ],
 })
 export class TransitionRuleComponent implements OnInit {
   transitionRuleRequest: CreateTransitionRuleRequest;

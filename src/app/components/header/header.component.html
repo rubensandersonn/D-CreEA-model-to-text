@@ -6,8 +6,8 @@
       (click)="closeHamburger()"
       [routerLink]="['/home']"
     >
-      <clr-icon shape="eye" size="md"></clr-icon>
-      <span class="header-logo-separator"></span>
+      <!-- <clr-icon shape="eye" size="md"></clr-icon>
+      <span class="header-logo-separator"></span> -->
       <span class="title">D-CreAE Card Games</span>
     </a>
   </div>
@@ -19,7 +19,7 @@
       >
         <button
           type="button"
-          class="btn btn-outline-primary"
+          class="btn btn-nav"
           clrDropdownTrigger
           (click)="activeMenu = 1"
         >
@@ -43,11 +43,11 @@
       >
         <button
           type="button"
-          class="btn btn-outline-primary"
+          class="btn btn-nav"
           clrDropdownTrigger
           (click)="activeMenu = 2"
         >
-          Other <clr-icon shape="caret down"></clr-icon>
+          Help <clr-icon shape="caret down"></clr-icon>
         </button>
       </span>
       <clr-dropdown-menu *clrIfOpen>
@@ -56,7 +56,7 @@
           [routerLink]="['/games/create']"
           (click)="closeHamburger()"
           clrDropdownItem
-          >Create</a
+          >How to Create a Game</a
         >
       </clr-dropdown-menu>
     </clr-dropdown>
@@ -67,11 +67,11 @@
       >
         <button
           type="button"
-          class="btn btn-outline-primary"
+          class="btn btn-nav"
           clrDropdownTrigger
           (click)="activeMenu = 2"
         >
-          Other <clr-icon shape="caret down"></clr-icon>
+          About <clr-icon shape="caret down"></clr-icon>
         </button>
       </span>
       <clr-dropdown-menu *clrIfOpen>
@@ -80,31 +80,7 @@
           [routerLink]="['/games/create']"
           (click)="closeHamburger()"
           clrDropdownItem
-          >Create</a
-        >
-      </clr-dropdown-menu>
-    </clr-dropdown>
-    <clr-dropdown class="dropdown-nav">
-      <span
-        class="dropdown-trigger-wrapper"
-        [ngClass]="{ active: activeMenu === 2 }"
-      >
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          clrDropdownTrigger
-          (click)="activeMenu = 2"
-        >
-          Other <clr-icon shape="caret down"></clr-icon>
-        </button>
-      </span>
-      <clr-dropdown-menu *clrIfOpen>
-        <a
-          href="#"
-          [routerLink]="['/games/create']"
-          (click)="closeHamburger()"
-          clrDropdownItem
-          >Create</a
+          >Disclaimer</a
         >
       </clr-dropdown-menu>
     </clr-dropdown>

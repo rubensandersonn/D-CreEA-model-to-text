@@ -14,7 +14,7 @@ import { AppEnvironment } from 'src/app/shared/models/app.environment';
 @Component({
   selector: 'app-state',
   templateUrl: './state.component.html',
-  styleUrls: ['./state.component.css'],
+  styleUrls: ['./state.component.css', '../../shared/styles/style.css'],
 })
 export class StateComponent implements OnInit {
   showStatementForm: boolean;

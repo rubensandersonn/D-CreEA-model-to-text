@@ -1,0 +1,62 @@
+/*BUTTONS*/
+
+.btn-primary {
+  background-color: #83aaa3;
+  color: white;
+  border-color: white;
+}
+
+.btn-primary:hover {
+  background-color: #546c68;
+  color: white;
+  border-color: white;
+}
+
+.btn:active,
+.btn-link:active,
+.btn-primary:active {
+  background-color: #546c68;
+  color: white;
+  box-shadow: 0 0.15rem 0 #83aaa3 inset;
+}
+
+.btn-tab-details:active {
+  box-shadow: 0 -0.15rem 0 #83aaa3 inset;
+}
+
+.card-header {
+  color: #707070;
+}
+
+.title {
+  color: #707070;
+  background-color: #546c68;
+  padding-right: 3rem;
+  padding-left: 1rem;
+  margin-left: 0rem;
+}
+
+/*NAV-BAR*/
+
+.btn-nav,
+.dropdown-toggle {
+  color: #546c68;
+  border: 0px;
+  border-radius: 0px;
+  min-height: 100% !important;
+  padding: 0rem 1rem 0rem 1rem;
+  margin: 0px;
+  transition-duration: 0.2s;
+}
+
+.btn-nav:hover,
+.btn-nav:active {
+  background-color: #546c68; /* Green */
+  color: white;
+}
+
+.dropdown-nav,
+.dropdown-trigger-wrapper {
+  margin: 0px;
+  padding: 0px;
+}

@@ -11,7 +11,10 @@ import { CreateEffectRuleRequest } from 'src/app/shared/models/requests-api';
 @Component({
   selector: 'app-effect-rule',
   templateUrl: './effect-rule.component.html',
-  styleUrls: ['./effect-rule.component.css'],
+  styleUrls: [
+    './effect-rule.component.css',
+    '../../../shared/styles/style.css',
+  ],
 })
 export class EffectRuleComponent implements OnInit {
   effectRuleRequest: CreateEffectRuleRequest;

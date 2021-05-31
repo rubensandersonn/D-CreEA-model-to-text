@@ -8,46 +8,58 @@ import { AppEnvironment } from 'src/app/shared/models/app.environment';
 @Component({
   selector: 'app-game-description-form',
   templateUrl: './game-description-form.component.html',
-  styleUrls: ['./game-description-form.component.css']
+  styleUrls: [
+    './game-description-form.component.css',
+    '../../shared/styles/style.css',
+  ],
 })
 export class GameDescriptionFormComponent implements OnInit {
-
   gdd: GDDViewModel;
 
   constructor(
-    private gddService: GddService, 
-    private appService: AppService, 
-    private appEnvironment: AppEnvironment, 
-    private router: Router) { }
+    private gddService: GddService,
+    private appService: AppService,
+    private appEnvironment: AppEnvironment,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initGDD();
   }
 
-  initGDD(){
+  initGDD() {
     this.gdd = {
-      name: "",
-      description: "",
-      targetAudience: "",
-      knowledgeField: "",
-      requirements: "",
+      name: '',
+      description: '',
+      targetAudience: '',
+      knowledgeField: '',
+      requirements: '',
       minNumberPlayers: 0,
       maxNumberPlayers: 0,
-    }
+    };
 
-    this.gddService.getGDD().subscribe(result => {
-      this.gdd = result;
-    }, (erros: string[])=>{
-      this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
-    });
+    this.gddService.getGDD().subscribe(
+      (result) => {
+        this.gdd = result;
+      },
+      (erros: string[]) => {
+        this.appService.setAppAlerts(
+          erros.map((error) => ({ message: error, type: 'danger' }))
+        );
+      }
+    );
   }
 
-  createGDDForm(){
-    this.gddService.setGDD(this.gdd).subscribe(()=>{
-      this.appService.setAppAlerts([{message:"Saved", type: "success"}]);
-    },(erros: string[])=>{
-      this.appService.setAppAlerts(erros.map(error=> ({message: error, type: "danger"})));
-    });
+  createGDDForm() {
+    this.gddService.setGDD(this.gdd).subscribe(
+      () => {
+        this.appService.setAppAlerts([{ message: 'Saved', type: 'success' }]);
+      },
+      (erros: string[]) => {
+        this.appService.setAppAlerts(
+          erros.map((error) => ({ message: error, type: 'danger' }))
+        );
+      }
+    );
   }
-
 }

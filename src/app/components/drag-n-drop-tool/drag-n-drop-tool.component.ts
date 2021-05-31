@@ -8,7 +8,10 @@ import { State } from 'src/app/shared/models/api';
 @Component({
   selector: 'app-drag-n-drop-tool',
   templateUrl: './drag-n-drop-tool.component.html',
-  styleUrls: ['./drag-n-drop-tool.component.css'],
+  styleUrls: [
+    './drag-n-drop-tool.component.css',
+    '../../shared/styles/style.css',
+  ],
 })
 export class DragNDropToolComponent implements OnInit {
   editRule: boolean;

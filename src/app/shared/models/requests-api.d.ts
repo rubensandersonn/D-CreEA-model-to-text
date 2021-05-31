@@ -32,3 +32,19 @@ export interface CreateStatementRuleRequest {
   then: string; // statements
   fromState: number;
 }
+
+export interface SaveCardRequest {
+  title: string;
+  earning: number;
+  cost: number;
+  level: number;
+  description: string;
+}
+
+export interface SaveDeckRequest {
+  title: string;
+  earning: number;
+  cost: number;
+  level: number;
+  description: string;
+}
