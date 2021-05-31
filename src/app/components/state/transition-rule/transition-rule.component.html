@@ -1,56 +1,72 @@
 <div class="card">
-    <div class="card-header">
+  <div class="card-header">
+    <div class="clr-row">
+      <div class="clr-col-10">Regra Transição</div>
+    </div>
+  </div>
+  <div class="card-block">
+    <div class="clr-col-12">
+      <form clrForm>
         <div class="clr-row">
-            <div class="clr-col-10">
-                Regra Transição
-            </div>
-            
+          <div class="clr-col-4">
+            <clr-input-container>
+              <label>Label</label>
+              <input
+                clrInput
+                name="label"
+                type="text"
+                placeholder="Label..."
+                [(value)]="transitionRuleRequest.label"
+                [(ngModel)]="transitionRuleRequest.label"
+                required
+              />
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+          </div>
+          <div class="clr-col-4">
+            <clr-select-container>
+              <label>From State</label>
+              <select
+                clrSelect
+                name="fromState"
+                [(ngModel)]="transitionRuleRequest.fromState"
+              >
+                <option [ngValue]="" disabled selected>select state</option>
+                <option *ngFor="let st of states" [ngValue]="st.id">
+                  {{ st.label }}
+                </option>
+              </select>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-4">
+            <clr-select-container>
+              <label>To State</label>
+              <select
+                clrSelect
+                name="toState"
+                [(ngModel)]="transitionRuleRequest.toState"
+              >
+                <option [ngValue]="" disabled selected>select state</option>
+                <option *ngFor="let st of states" [ngValue]="st.label">
+                  {{ st.label }}
+                </option>
+              </select>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-select-container>
+          </div>
         </div>
+      </form>
     </div>
-    <div class="card-block">
-        <div class="clr-col-12">
-            <form clrForm>
-                <div class="clr-row">
-                    <div class="clr-col-12">
-                        <clr-input-container>
-                            <label>Label</label>
-                            <input clrInput name="label" type="text" 
-                                placeholder="Label..." 
-                                [(ngValue)]="transitionRuleRequest.label" 
-                                [(ngModel)]="transitionRuleRequest.label" required/>
-                            <clr-control-error>item necessário!</clr-control-error>
-                        </clr-input-container>
-                    </div>
-                    <div class="clr-col-6">
-                        <clr-select-container>
-                            <label>From State</label>
-                            <select clrSelect name="fromState" [(ngModel)]="transitionRuleRequest.fromState">
-                                <option *ngFor="let st of states" [ngValue]="st.id">{{st.label}}</option>
-                            </select>
-                            <clr-control-error>item necessário!</clr-control-error>
-                        </clr-select-container>
-                    </div>
-                    <div class="clr-col-6">
-                        <clr-select-container>
-                            <label>Go To State</label>
-                            <select clrSelect name="toState" [(ngModel)]="transitionRuleRequest.toState">
-                                <option *ngFor="let st of states" [ngValue]="st.id">{{st.label}}</option>
-                            </select>
-                            <clr-control-error>item necessário!</clr-control-error>
-                        </clr-select-container>
-                    </div>
-                </div>
-            </form>
-        </div>
+  </div>
+  <div class="card-footer">
+    <div class="clr-row">
+      <div class="clr-col-10"></div>
+      <div class="clr-col-2">
+        <button class="btn btn-primary float-items-right" (click)="saveRule()">
+          Salvar
+        </button>
+      </div>
     </div>
-    <div class="card-footer">
-        <div class="clr-row">
-            <div class="clr-col-10">
-                
-            </div>
-            <div class="clr-col-2">
-                <button class="btn btn-primary float-items-right" (click)="saveRule()">Salvar</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

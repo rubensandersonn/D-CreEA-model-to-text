@@ -1,107 +1,207 @@
 <div class="card">
-    <div class="card-header">
+  <div class="card-header">
+    <div class="clr-row">
+      <div class="clr-col-8">Regra Statement</div>
+      <div class="clr-col-4"></div>
+    </div>
+  </div>
+  <div class="card-block">
+    <div class="clr-col-12">
+      <form clrForm>
         <div class="clr-row">
-            <div class="clr-col-8">
-                Regra Statement
+          <!-- frente do cartão -->
+
+          <div class="clr-col-6">
+            <clr-input-container>
+              <label>Label</label>
+              <input
+                clrInput
+                name="label"
+                type="text"
+                placeholder="Label..."
+                [(value)]="statementRuleRequest.label"
+                [(ngModel)]="statementRuleRequest.label"
+                required
+              />
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+
+            <clr-textarea-container>
+              <label>Descrição Simplificada</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="statementRuleRequest.simplerDescription"
+                name="statementRuleRequest.simplerDescription"
+                required
+              ></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
+          </div>
+
+          <div class="clr-col-6">
+            <div class="card">
+              <div class="card-header">
+                Regra {{ statementRuleRequest.label }} (frente)
+              </div>
+              <div class="card-block">
+                <clr-textarea-container>
+                  <label>Descrição Simplificada</label>
+                  <textarea
+                    clrTextarea
+                    style="border: 0px"
+                    [(ngModel)]="statementRuleRequest.simplerDescription"
+                    name="statementRuleRequest.simplerDescription"
+                    readonly
+                  ></textarea>
+                </clr-textarea-container>
+              </div>
             </div>
-            <div class="clr-col-4">
+          </div>
+
+          <!-- trás do cartão -->
+
+          <div class="clr-col-6">
+            <clr-input-container>
+              <label>Eu, </label>
+              <input
+                clrInput
+                name="me"
+                type="text"
+                placeholder="me..."
+                value="statementRuleRequest.me"
+                [(ngModel)]="statementRuleRequest.me"
+                required
+              />
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+
+            <clr-textarea-container>
+              <label>Para</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="statementRuleRequest.to"
+                name="statementRuleRequest.to"
+                required
+              ></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
+            <clr-textarea-container>
+              <label>Dado que</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="statementRuleRequest.given"
+                name="statementRuleRequest.given"
+              ></textarea>
+            </clr-textarea-container>
+            <clr-textarea-container>
+              <label>Quando</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="statementRuleRequest.when"
+                name="statementRuleRequest.when"
+                required
+              ></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
+            <clr-textarea-container>
+              <label>Então</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="statementRuleRequest.then"
+                name="statementRuleRequest.then"
+                required
+              ></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
+            <clr-textarea-container>
+              <label>Senão</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="statementRuleRequest.otherwise"
+                name="statementRuleRequest.otherwise"
+              ></textarea>
+            </clr-textarea-container>
+          </div>
+
+          <div class="clr-col-6">
+            <div class="card">
+              <div class="card-header">
+                Regra {{ statementRuleRequest.label }} (trás)
+              </div>
+              <div class="card-block">
+                <clr-input-container>
+                  <label>Me,</label>
+                  <input
+                    clrInput
+                    name="me"
+                    type="text"
+                    style="border: 0px"
+                    [(value)]="statementRuleRequest.me"
+                    [(ngModel)]="statementRuleRequest.me"
+                    readonly
+                  />
+                </clr-input-container>
+                <clr-textarea-container>
+                  <label>Para</label>
+                  <textarea
+                    clrTextarea
+                    style="border: 0px"
+                    [(ngModel)]="statementRuleRequest.to"
+                    name="statementRuleRequest.to"
+                    readonly
+                  ></textarea>
+                </clr-textarea-container>
+                <clr-textarea-container>
+                  <label>Dado que</label>
+                  <textarea
+                    clrTextarea
+                    style="border: 0px"
+                    [(ngModel)]="statementRuleRequest.given"
+                    name="statementRuleRequest.given"
+                    readonly
+                  ></textarea>
+                </clr-textarea-container>
+                <clr-textarea-container>
+                  <label>Quando</label>
+                  <textarea
+                    clrTextarea
+                    style="border: 0px"
+                    [(ngModel)]="statementRuleRequest.when"
+                    name="statementRuleRequest.when"
+                    readonly
+                  ></textarea>
+                </clr-textarea-container>
+                <clr-textarea-container>
+                  <label>Então</label>
+                  <textarea
+                    clrTextarea
+                    style="border: 0px"
+                    [(ngModel)]="statementRuleRequest.then"
+                    name="statementRuleRequest.then"
+                    readonly
+                  ></textarea>
+                </clr-textarea-container>
+                <clr-textarea-container>
+                  <label>Senão</label>
+                  <textarea
+                    clrTextarea
+                    style="border: 0px"
+                    [(ngModel)]="statementRuleRequest.otherwise"
+                    name="statementRuleRequest.otherwise"
+                    readonly
+                  ></textarea>
+                </clr-textarea-container>
+              </div>
             </div>
+          </div>
         </div>
+      </form>
     </div>
-    <div class="card-block">
-        <div class="clr-col-12">
-            <form clrForm>
-                <div class="clr-row">
-                    <div class="clr-col-6">
-                        <form>
-                            <clr-input-container>
-                                <label>Label</label>
-                                <input clrInput name="label" type="text" 
-                                    placeholder="Label..." 
-                                    [(ngValue)]="statementRuleRequest.label" 
-                                    [(ngModel)]="statementRuleRequest.label" required/>
-                                <clr-control-error>item necessário!</clr-control-error>
-                            </clr-input-container>
-                            
-                            <clr-input-container>
-                                <label>Eu, </label>
-                                <input clrInput name="me" type="text" 
-                                    placeholder="me..." 
-                                    value="statementRuleRequest.me" 
-                                    [(ngModel)]="statementRuleRequest.me" required/>
-                                <clr-control-error>item necessário!</clr-control-error>
-                            </clr-input-container>
+  </div>
 
-
-                            <clr-input-container>
-                                <label>Para</label>
-                                <input clrInput name="to" type="text" 
-                                    placeholder="to..." 
-                                    value="statementRuleRequest.to" 
-                                    [(ngModel)]="statementRuleRequest.to" required/>
-                                <clr-control-error>item necessário!</clr-control-error>
-                            </clr-input-container>
-
-                            
-                            <clr-input-container>
-                                <label>Dado que</label>
-                                <input clrInput name="given" type="text" 
-                                    placeholder="given..." 
-                                    value="statementRuleRequest.given" 
-                                    [(ngModel)]="statementRuleRequest.given" required/>
-                                <clr-control-error>item necessário!</clr-control-error>
-                            </clr-input-container>
-
-                            <clr-input-container>
-                                <label>Quando</label>
-                                <input clrInput name="when" type="text" 
-                                    placeholder="when..." 
-                                    value="statementRuleRequest.when" 
-                                    [(ngModel)]="statementRuleRequest.when" required/>
-                                <clr-control-error>item necessário!</clr-control-error>
-                            </clr-input-container>
-
-                            <clr-input-container>
-                                <label>Então</label>
-                                <input clrInput name="then" type="text" 
-                                    placeholder="then..." 
-                                    value="statementRuleRequest.then" 
-                                    [(ngModel)]="statementRuleRequest.then" required/>
-                                <clr-control-error>item necessário!</clr-control-error>
-                            </clr-input-container>
-
-                            <clr-input-container>
-                                <label>Senão</label>
-                                <input clrInput name="otherwise" type="text" 
-                                    placeholder="otherwise..." 
-                                    value="statementRuleRequest.otherwise" 
-                                    [(ngModel)]="statementRuleRequest.otherwise" required/>
-                                <clr-control-error>item necessário!</clr-control-error>
-                            </clr-input-container>
-                            
-                        </form>
-                    </div>
-                    <div class="clr-col-6">
-                        <div class="card">
-                            <div class="card-header">
-                                Regra
-                            </div>
-                            <div class="card-block">
-                                <p class="card-text">Eu, {{statementRuleRequest.me}}</p>
-                                <p class="card-text">Para {{statementRuleRequest.to}}</p>
-                                <p class="card-text">Dado que {{statementRuleRequest.given}}</p>
-                                <p class="card-text">Quando {{printWhenConditions(statementRuleRequest.when)}}</p>
-                                <p class="card-text">Então {{statementRuleRequest.then}}</p>
-                                <p class="card-text">Senão {{statementRuleRequest.otherwise}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="card-footer">
-        <button class="btn btn-primary float-items-right" (click)="saveRuleState()">Salvar</button>
-    </div>
+  <div class="card-footer">
+    <button class="btn btn-primary float-items-right" (click)="saveRule()">
+      Salvar
+    </button>
+  </div>
 </div>

@@ -133,3 +133,38 @@ export interface Card {
 export interface Project {
   name: string;
 }
+
+// ================================
+
+export interface RuleViewModel {
+  id: number;
+  label: string;
+  fromState: string; // selected state
+}
+
+export interface StatementRuleViewModel extends RuleViewModel {
+  me: string; // - eu: *jogador testador*
+  to?: string; // - para que: *eu cumpra um desafio*
+  given: Statement[]; // - dado que: *dado que eu tenho um carta de jogo na mão cujo tipo é X*
+  when?: Statement[]; // - quando: (condição -> and, or, not)
+  //     - *eu combinar a minha carta do tipo X a uma carta desafio na mesa*
+  //     - *a carta desafio contem nas respostas o tipo de carta X*
+  then: Statement[]; // - então: *eu venci o desafio*
+  otherwise: Statement[]; // - senão: *eu perdi o desafio*
+  simplerDescription: string;
+  gotoState: State; // state to go when this is used
+}
+
+export interface TransitionRuleViewModel extends RuleViewModel {
+  toState: string; // state to go when this is used
+}
+
+export interface EffectRuleViewModel extends RuleViewModel {
+  gotoState: State; // state to go when this is used
+  effects: Effect[];
+}
+
+export interface ConditionalRuleViewModel extends RuleViewModel {
+  conditions: Condition[]; // state to go when the condition is true
+  otherwise: State;
+}

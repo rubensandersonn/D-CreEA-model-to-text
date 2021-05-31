@@ -21,8 +21,8 @@
                 name="label"
                 type="text"
                 placeholder="Label..."
-                value="conditionalRule.label"
-                [(ngModel)]="conditionalRule.label"
+                value="conditionalRuleRequest.label"
+                [(ngModel)]="conditionalRuleRequest.label"
                 required
               />
 
@@ -36,6 +36,7 @@
                 name="fromState"
                 [(ngModel)]="conditionalRuleRequest.fromState"
               >
+                <option [ngValue]="" disabled selected>select state</option>
                 <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
                 </option>
@@ -50,6 +51,7 @@
                 name="otherwise"
                 [(ngModel)]="conditionalRuleRequest.otherwise"
               >
+                <option [ngValue]="" disabled selected>select state</option>
                 <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
                 </option>
@@ -73,7 +75,7 @@
               class="btn btn-primary float-items-right"
               (click)="onAddCondition()"
             >
-              Add
+              Add Condition
             </button>
           </div>
         </div>
@@ -110,109 +112,108 @@
   <div class="card-footer"></div>
 </div>
 
-<clr-modal [(clrModalOpen)]="openCreateCondition" [clrModalSize]="xl">
-  <modal-header> Create a Condition </modal-header>
-  <modal-body>
-    <div class="card-block">
-      <div class="clr-col-12">
-        <form clrForm>
-          <div class="clr-row">
-            <div class="clr-col-6">
-              <!-- state if true -->
-              <clr-select-container>
-                <label>Go To State</label>
-                <select
-                  clrSelect
-                  name="stateIfTrue"
-                  [(ngModel)]="condition.stateIfTrue"
-                >
-                  <option *ngFor="let st of states" [value]="st.label">
-                    {{ st.label }}
-                  </option>
-                </select>
-                <clr-control-error>item necessário!</clr-control-error>
-              </clr-select-container>
+<clr-modal [(clrModalOpen)]="openCreateCondition">
+  <h3 class="modal-title">Create a Condition</h3>
+  <div
+    class="modal-body"
+    style="border-top: 1px solid #dedede; border-bottom: 1px solid #dedede"
+  >
+    <div class="card-block clr-col-12">
+      <form clrForm>
+        <div class="card clr-row">
+          <div class="card-header">Test</div>
+          <div class="card-block">
+            <clr-textarea-container>
+              <label>Condition to Test</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="condition.test"
+                name="condition.test"
+                placeholder="What will be tested?"
+                required
+              ></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
 
-              <!-- test:statement -->
-              <clr-input-container>
-                <label>Statement for test</label>
-                <input
-                  clrInput
-                  name="test"
-                  type="text"
-                  placeholder="test..."
-                  value="condition.test"
-                  [(ngModel)]="condition.test"
-                  required
-                />
-                <clr-control-error>item necessário!</clr-control-error>
-              </clr-input-container>
-            </div>
-            <div class="clr-col-6">
-              <!-- effectIfTrue -->
-              <div class="card">
-                <div class="card-header">Effect if Condition is True</div>
-                <div class="card-block">
-                  <clr-input-container>
-                    <label>Effect</label>
-                    <input
-                      clrInput
-                      name="effect"
-                      type="text"
-                      placeholder="effect..."
-                      value="condition.effect"
-                      [(ngModel)]="condition.effect"
-                      required
-                    />
-                    <clr-control-error>item necessário!</clr-control-error>
-                  </clr-input-container>
-                  <clr-input-container>
-                    <label>Turns</label>
-                    <input
-                      clrInput
-                      name="turns"
-                      type="number"
-                      placeholder="turns..."
-                      value="condition.turns"
-                      [(ngModel)]="condition.turns"
-                      min="1"
-                      required
-                    />
-                    <clr-control-error>item necessário!</clr-control-error>
-                  </clr-input-container>
-                  <clr-input-container>
-                    <label>Pros</label>
-                    <input
-                      clrInput
-                      name="pros"
-                      type="text"
-                      placeholder="pros..."
-                      value="condition.pros"
-                      [(ngModel)]="condition.pros"
-                    />
-                  </clr-input-container>
-                  <clr-input-container>
-                    <label>Cons</label>
-                    <input
-                      clrInput
-                      name="cons"
-                      type="text"
-                      placeholder="cons..."
-                      value="condition.cons"
-                      [(ngModel)]="condition.cons"
-                    />
-                  </clr-input-container>
-                </div>
-              </div>
-            </div>
+            <!-- state if true -->
+            <clr-select-container>
+              <label>Go to State If Test True</label>
+              <select
+                clrSelect
+                name="stateIfTrue"
+                [(ngModel)]="condition.stateIfTrue"
+              >
+                <option [ngValue]="" disabled selected>select state</option>
+                <option *ngFor="let st of states" [value]="st.label">
+                  {{ st.label }}
+                </option>
+              </select>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-select-container>
           </div>
-        </form>
-      </div>
+        </div>
+
+        <!-- effectIfTrue -->
+        <div class="card clr-row">
+          <div class="card-header">Effect if Condition is True</div>
+          <div class="card-block">
+            <clr-textarea-container>
+              <label>Effect *</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="condition.effectIfTrue.effect"
+                name="condition.effectIfTrue.effect"
+                placeholder="What happens If Tests true?"
+                required
+              ></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
+
+            <clr-input-container>
+              <label>Turns *</label>
+              <input
+                clrInput
+                name="turns"
+                type="number"
+                placeholder="How long this effect lasts"
+                value="condition.effectIfTrue.turns"
+                [(ngModel)]="condition.effectIfTrue.turns"
+                min="1"
+                required
+              />
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+
+            <clr-input-container>
+              <label>Pros</label>
+              <input
+                clrInput
+                name="pros"
+                type="text"
+                placeholder="What this is good for?"
+                value="condition.effectIfTrue.pros"
+                [(ngModel)]="condition.effectIfTrue.pros"
+              />
+            </clr-input-container>
+            <clr-input-container>
+              <label>Cons</label>
+              <input
+                clrInput
+                name="cons"
+                type="text"
+                placeholder="What are the drawbacks?"
+                value="condition.effectIfTrue.cons"
+                [(ngModel)]="condition.effectIfTrue.cons"
+              />
+            </clr-input-container>
+          </div>
+        </div>
+      </form>
     </div>
-  </modal-body>
-  <modal-footer>
+  </div>
+  <div class="modal-footer">
     <button class="btn btn-primary float-items-right" (click)="addCondition()">
       Add
     </button>
-  </modal-footer>
+  </div>
 </clr-modal>

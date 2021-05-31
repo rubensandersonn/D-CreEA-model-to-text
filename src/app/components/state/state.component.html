@@ -1,30 +1,36 @@
 <div>
-    <div class="card">
-        <div class="card-header">
-                <div class="clr-row">
-                    <div class="clr-col-10">
-                        Estado {{selectedState? selectedState.label: null}}
-                    </div>
-                    <div class="clr-col-2">
-                        <button class="btn btn-primary float-items-right" (click)="saveState()">Salvar Estado</button>
-                    </div>
-                </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="clr-row">
+        <div class="clr-col-10">Estado</div>
+        <div class="clr-col-2">
+          <button
+            class="btn btn-primary float-items-right"
+            (click)="saveState()"
+          >
+            Salvar Estado
+          </button>
         </div>
+      </div>
+    </div>
 
-        <div class="card-block" >
-            <div class="card" style="margin-top: 0%;">
-                <div class="card-header">
-                    
-                    <div class="clr-row">
-                        <div class="clr-col-10">
-                            Regras deste Estado
-                        </div>
-                        <div class="clr-col-2">
-                            <button class="btn btn-primary float-items-right" (click)="addRule()">Nova Regra</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-block">
+    <div class="card-block">
+      <div class="card" style="margin-top: 0%">
+        <div class="card-header">
+          <div class="clr-row">
+            <div class="clr-col-10">Regras deste Estado</div>
+            <div class="clr-col-2">
+              <button
+                class="btn btn-primary float-items-right"
+                (click)="addRule()"
+                [disabled]="showRuleForm"
+              >
+                Nova Regra
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card-block">
                     <clr-datagrid>
                         <clr-dg-column>Label</clr-dg-column>
                         <clr-dg-column></clr-dg-column>
@@ -46,33 +52,43 @@
                         <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
                         </clr-dg-row>
                     
-                        <!-- <clr-dg-footer>{{selectedState.rules.length}} regras</clr-dg-footer> -->
                     </clr-datagrid>
-                </div>
-            </div>
-        </div>
+                </div> -->
+      </div>
     </div>
+  </div>
 
-    <div *ngIf="showRuleForm" class="card">
-        <div class="card-header">Nova Regra</div>
-        <div class="card-block">
-            <div class="card-block">
-                <div class="clr-row">
-                    <button class="btn btn-primary float-items-right" (click)="showStatementRule()">Regra Statement</button>
-                    <button class="btn btn-primary float-items-right" (click)="showEffectRule()">Regra Efeito</button>
-                    <button class="btn btn-primary float-items-right" (click)="showConditionalRule()">Regra Condição</button>
-                    <button class="btn btn-primary float-items-right" (click)="showTransitionRule()">Regra Transição</button>
-                </div>
-                <div class="clr-row">
-                    <div class="clr-col-12">
-                        <app-statement-rule *ngIf="showStatementForm"></app-statement-rule>
-                        <app-effect-rule *ngIf="showEffectForm"></app-effect-rule>
-                        <app-conditional-rule *ngIf="showConditionalForm"></app-conditional-rule>
-                        <app-transition-rule *ngIf="showTransitionForm"></app-transition-rule>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div *ngIf="showRuleForm" class="card">
+    <div class="card-header">Nova Regra</div>
+    <div class="card-block">
+      <div class="card-block">
+        <clr-tabs>
+          <clr-tab>
+            <button clrTabLink>Statement Rule</button>
+            <clr-tab-content *clrIfActive="true">
+              <app-statement-rule></app-statement-rule>
+            </clr-tab-content>
+          </clr-tab>
+          <clr-tab>
+            <button clrTabLink>Effect Rule</button>
+            <clr-tab-content *clrIfActive>
+              <app-effect-rule></app-effect-rule>
+            </clr-tab-content>
+          </clr-tab>
+          <clr-tab>
+            <button clrTabLink>Conditional Rule</button>
+            <clr-tab-content *clrIfActive>
+              <app-conditional-rule></app-conditional-rule>
+            </clr-tab-content>
+          </clr-tab>
+          <clr-tab>
+            <button clrTabLink>Transition Rule</button>
+            <clr-tab-content *clrIfActive>
+              <app-transition-rule></app-transition-rule>
+            </clr-tab-content>
+          </clr-tab>
+        </clr-tabs>
+      </div>
     </div>
-
+  </div>
 </div>

@@ -3,10 +3,7 @@
     <div class="clr-row">
       <div class="clr-col-10">Regra Efeito</div>
       <div class="clr-col-2">
-        <button
-          class="btn btn-primary float-items-right"
-          (click)="saveRuleState()"
-        >
+        <button class="btn btn-primary float-items-right" (click)="saveRule()">
           Salvar
         </button>
       </div>
@@ -24,8 +21,8 @@
                 name="label"
                 type="text"
                 placeholder="Label..."
-                value="effectRule.label"
-                [(ngModel)]="effectRule.label"
+                value="effectRuleRequest.label"
+                [(ngModel)]="effectRuleRequest.label"
                 required
               />
               <clr-control-error>item necessário!</clr-control-error>
@@ -37,9 +34,10 @@
               <select
                 clrSelect
                 name="gotoState"
-                [(ngModel)]="effectRule.gotoState"
+                [(ngModel)]="effectRuleRequest.toState"
               >
-                <option *ngFor="let st of states" [value]="st">
+                <option [ngValue]="" disabled selected>select state</option>
+                <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
                 </option>
               </select>
@@ -61,12 +59,12 @@
               class="btn btn-primary float-items-right"
               (click)="onAddEffect()"
             >
-              +
+              Add Effect
             </button>
           </div>
         </div>
       </div>
-      <div class="card-block">
+      <!-- <div class="card-block">
         <clr-datagrid>
           <clr-dg-column>Tipo</clr-dg-column>
           <clr-dg-column>Descrição</clr-dg-column>
@@ -81,20 +79,85 @@
             <clr-dg-cell>{{ c.pros }}</clr-dg-cell>
             <clr-dg-cell>{{ c.cons }}</clr-dg-cell>
             <clr-dg-cell>{{ c.counters }}</clr-dg-cell>
-            <clr-dg-cell
-              ><button
-                class="btn btn-primary float-items-right"
-                (click)="seeMore(c)"
-              >
+            <clr-dg-cell>
+              <button class="btn btn-primary float-items-right" (click)="#">
                 Ver
-              </button></clr-dg-cell
-            >
+              </button>
+            </clr-dg-cell>
           </clr-dg-row>
 
-          <!-- <clr-dg-footer>{{effectRule.conditions.length}} conditions</clr-dg-footer> -->
         </clr-datagrid>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="card-footer"></div>
 </div>
+
+<clr-modal [(clrModalOpen)]="openCreateEffect">
+  <h3 class="modal-title">Create a Effect</h3>
+  <div class="modal-body" style="border-top: 1px solid #dedede">
+    <div class="card-block">
+      <form clrForm>
+        <!-- effectIfTrue -->
+        <div class="clr-row">
+          <div class="card-block clr-col-12">
+            <clr-textarea-container>
+              <label>Effect *</label>
+              <textarea
+                clrTextarea
+                [(ngModel)]="effect.effect"
+                name="effect.effect"
+                placeholder="What happens If Tests true?"
+                required
+              ></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
+
+            <clr-input-container>
+              <label>Turns *</label>
+              <input
+                clrInput
+                name="turns"
+                type="number"
+                placeholder="How long this effect lasts"
+                value="effect.turns"
+                [(ngModel)]="effect.turns"
+                min="1"
+                required
+              />
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+
+            <clr-input-container>
+              <label>Pros</label>
+              <input
+                clrInput
+                name="pros"
+                type="text"
+                placeholder="What this is good for?"
+                value="effect.pros"
+                [(ngModel)]="effect.pros"
+              />
+            </clr-input-container>
+            <clr-input-container>
+              <label>Cons</label>
+              <input
+                clrInput
+                name="cons"
+                type="text"
+                placeholder="What are the drawbacks?"
+                value="effect.cons"
+                [(ngModel)]="effect.cons"
+              />
+            </clr-input-container>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary float-items-right" (click)="addEffect()">
+      Add
+    </button>
+  </div>
+</clr-modal>

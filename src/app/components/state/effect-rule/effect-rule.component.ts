@@ -1,10 +1,10 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 import { RulesService } from 'src/app/services/rules.service';
 import { StatesService } from 'src/app/services/states.service';
 import { getErrors } from 'src/app/shared/helpers/get-message-errors';
-import { Effect, EffectRule, State } from 'src/app/shared/models/api';
+import { Effect, State } from 'src/app/shared/models/api';
 import { AppEnvironment } from 'src/app/shared/models/app.environment';
 import { CreateEffectRuleRequest } from 'src/app/shared/models/requests-api';
 

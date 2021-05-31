@@ -1,38 +1,40 @@
 <div class="content-area">
-    <div class="clr-row">
-        <div class="clr-col-10">
-            <div class="card">
-                <div class="card-header">
-                    <div class="clr-row">
-                        <div class="clr-col-6">
-                            Create a Game
-                        </div>
-                        
-                        <div class="clr-col-6">
-                            <button class="btn btn-primary float-items-right" (click)="onShowGDDForm()">Game Description</button>
-                            <button class="btn btn-primary float-items-right" (click)="onShowGameplayForm()">Gameplay</button>
-                            <button class="btn btn-primary float-items-right" (click)="onShowDecksForm()">Decks</button>
-                            <button class="btn btn-primary float-items-right" (click)="onShowCardsForm()">Cards</button>
-                            <button class="btn btn-primary float-items-right" (click)="onShowOverviewForm()">Overview</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-block">
-                    <div class="clr-col-12" >
-                        <!-- game details -->
-                        <app-game-description-form *ngIf="showGDDForm"></app-game-description-form>
-                        
-                        <!-- Gameplay edit -->
-                        <app-gameplay *ngIf="showGameplayForm" ></app-gameplay>
-                    
-                    </div>
-                </div>
-            </div>
+  <div class="clr-row">
+    <div class="clr-col-10">
+      <div class="card">
+        <div class="card-header">
+          <div>Create a Game</div>
         </div>
-        <div class="clr-col-2">
-            <div class="card">
-
-            </div>
+        <div class="card-block">
+          <clr-tabs>
+            <clr-tab>
+              <button clrTabLink>Game Details</button>
+              <clr-tab-content *clrIfActive="true">
+                <!-- game details -->
+                <app-game-description-form></app-game-description-form>
+              </clr-tab-content>
+            </clr-tab>
+            <clr-tab>
+              <button clrTabLink>Gameplay</button>
+              <clr-tab-content *clrIfActive>
+                <!-- Gameplay edit -->
+                <app-gameplay></app-gameplay>
+              </clr-tab-content>
+            </clr-tab>
+            <clr-tab>
+              <button clrTabLink>Decks</button>
+              <clr-tab-content *clrIfActive> </clr-tab-content>
+            </clr-tab>
+            <clr-tab>
+              <button clrTabLink>Resumo</button>
+              <clr-tab-content *clrIfActive> </clr-tab-content>
+            </clr-tab>
+          </clr-tabs>
         </div>
+      </div>
     </div>
+    <div class="clr-col-2">
+      <div class="card"></div>
+    </div>
+  </div>
 </div>

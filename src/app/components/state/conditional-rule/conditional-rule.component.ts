@@ -4,7 +4,7 @@ import { AppService } from 'src/app/services/app.service';
 import { RulesService } from 'src/app/services/rules.service';
 import { StatesService } from 'src/app/services/states.service';
 import { getErrors } from 'src/app/shared/helpers/get-message-errors';
-import { Condition, ConditionalRule, State } from 'src/app/shared/models/api';
+import { Condition, State } from 'src/app/shared/models/api';
 import { AppEnvironment } from 'src/app/shared/models/app.environment';
 import { CreateConditionalRuleRequest } from 'src/app/shared/models/requests-api';
 
@@ -69,9 +69,11 @@ export class ConditionalRuleComponent implements OnInit {
   loadStates() {
     this.stateService.getStates().subscribe(
       (states) => {
+        console.log('states', states);
         this.states = states;
       },
       (errors: Object) => {
+        console.log('errou', errors);
         var msg: string[] = getErrors(errors);
         this.appService.setAppAlerts(
           msg.map((error) => ({ message: error, type: 'danger' }))

@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { handleError } from '../shared/helpers/http-response-handler';
 import {
   ConditionalRule,
   EffectRule,
-  Rule,
   StatementRule,
   TransitionRule,
 } from '../shared/models/api';
@@ -21,33 +20,35 @@ import {
   providedIn: 'root',
 })
 export class RulesService {
-  private rules = new Subject<Rule[]>();
-  private transitionRules = new Subject<TransitionRule[]>();
-  private conditionalRules = new Subject<ConditionalRule[]>();
-  private statementRules = new Subject<StatementRule[]>();
-  private effectRules = new Subject<EffectRule[]>();
-
   constructor(private http: HttpClient) {}
 
   getConditionalRules(): Observable<ConditionalRule[]> {
-    return this.conditionalRules.asObservable();
+    return this.http
+      .get<ConditionalRule[]>(`/Rule/GetConditionalRules`)
+      .pipe(catchError(handleError));
   }
 
   getTransitionRules(): Observable<TransitionRule[]> {
-    return this.transitionRules.asObservable();
+    return this.http
+      .get<TransitionRule[]>(`/Rule/GetTransitionRules`)
+      .pipe(catchError(handleError));
   }
 
   getEffectRules(): Observable<EffectRule[]> {
-    return this.effectRules.asObservable();
+    return this.http
+      .get<EffectRule[]>(`/Rule/GetEffectRules`)
+      .pipe(catchError(handleError));
   }
 
   getStatementRules(): Observable<StatementRule[]> {
-    return this.statementRules.asObservable();
+    return this.http
+      .get<StatementRule[]>(`/Rule/GetStatementRules`)
+      .pipe(catchError(handleError));
   }
 
   setConditionalRules(rule: CreateConditionalRuleRequest) {
     return this.http
-      .post(`api/Rules/CreateConditionalRule`, rule)
+      .post(`/Rule/CreateConditionalRule`, rule)
       .pipe(catchError(handleError));
   }
 
@@ -55,19 +56,19 @@ export class RulesService {
     // this.transitionRules.next(rule);
     // return true;
     return this.http
-      .post(`api/Rules/CreateTransitionRule`, rule)
+      .post(`/Rule/CreateTransitionRule`, rule)
       .pipe(catchError(handleError));
   }
 
   setStatementRules(rule: CreateStatementRuleRequest) {
     return this.http
-      .post(`api/Rules/CreateStatementRule`, rule)
+      .post(`/Rule/CreateStatementRule`, rule)
       .pipe(catchError(handleError));
   }
 
   setEffectRules(rule: CreateEffectRuleRequest) {
     return this.http
-      .post(`api/Rules/CreateEffectRule`, rule)
+      .post(`/Rule/CreateEffectRule`, rule)
       .pipe(catchError(handleError));
   }
 }
