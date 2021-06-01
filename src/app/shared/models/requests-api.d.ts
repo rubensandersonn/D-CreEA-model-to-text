@@ -1,4 +1,4 @@
-import { Condition, Effect } from './api';
+import { Card, Condition, DeckField, Effect } from './api';
 
 export interface CreateTransitionRuleRequest {
   label: string;
@@ -42,9 +42,17 @@ export interface SaveCardRequest {
 }
 
 export interface SaveDeckRequest {
-  title: string;
-  earning: number;
-  cost: number;
-  level: number;
+  name: string;
   description: string;
+  cards: Card[];
+  color: string;
+  selectableFrontFields: clickableField[];
+  selectableBackFields: clickableField[];
+}
+
+export class clickableField {
+  name: string;
+  checked: boolean;
+  type: string;
+  cardSide: string;
 }

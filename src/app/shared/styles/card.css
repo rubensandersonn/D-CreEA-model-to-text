@@ -1,0 +1,108 @@
+/*
+card poker size: 6.985 x 12.065 cm = 1.72 ratio 
+*/
+
+.card-wrapper {
+  height: 24.178rem;
+  width: 14rem;
+  border-radius: 0.5rem;
+  background-color: #dedede;
+  border: 1px solid white;
+  color: white;
+}
+
+.card-margins {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+
+.card-game-header {
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid #942929;
+  background-color: rgba(222, 222, 222, 0.2);
+  margin-bottom: 1%;
+  border: 1px solid white;
+  /* //// */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-game-body {
+  width: 100%;
+  height: 78%;
+  min-height: 78%;
+  background-color: rgba(222, 222, 222, 0.2);
+  margin-bottom: 1%;
+}
+
+.card-art {
+  width: 100%;
+  height: 50%;
+  border: 1px solid white;
+  /* centering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-description {
+  width: 100%;
+  height: 50%;
+  border: 1px solid white;
+  /* centering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-game-footer {
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid #dedede;
+  background-color: rgba(222, 222, 222, 0.2);
+  margin-bottom: 1%;
+  border: 1px solid white;
+  /* centering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* images */
+
+.card-img {
+  width: auto;
+  height: 100%;
+}
+
+/* colors */
+
+.red-card {
+  background-color: #663030;
+}
+
+.green-card {
+  background-color: #30665d;
+}
+
+/* inputs */
+
+.card-input-title {
+  border: 0px;
+  background-color: #dedede;
+  align-self: center;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 1px;
+}
+
+.card-input-footer {
+  border: 0px;
+  background-color: #dedede;
+  align-self: center;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  border-radius: 1px;
+}

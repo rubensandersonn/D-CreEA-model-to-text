@@ -1,13 +1,19 @@
+/* clarity */
+
+.card-block {
+  margin-top: 0px;
+}
+
 /*BUTTONS*/
 
 .btn-primary {
-  background-color: #83aaa3;
+  background-color: #30665d;
   color: white;
   border-color: white;
 }
 
 .btn-primary:hover {
-  background-color: #546c68;
+  background-color: #52a798;
   color: white;
   border-color: white;
 }
@@ -15,7 +21,7 @@
 .btn:active,
 .btn-link:active,
 .btn-primary:active {
-  background-color: #546c68;
+  background-color: #52a798;
   color: white;
   box-shadow: 0 0.15rem 0 #83aaa3 inset;
 }
@@ -30,7 +36,7 @@
 
 .title {
   color: #707070;
-  background-color: #546c68;
+  background-color: #30665d;
   padding-right: 3rem;
   padding-left: 1rem;
   margin-left: 0rem;
@@ -40,7 +46,7 @@
 
 .btn-nav,
 .dropdown-toggle {
-  color: #546c68;
+  color: #52a798;
   border: 0px;
   border-radius: 0px;
   min-height: 100% !important;
@@ -51,7 +57,7 @@
 
 .btn-nav:hover,
 .btn-nav:active {
-  background-color: #546c68; /* Green */
+  background-color: #52a798; /* Green */
   color: white;
 }
 

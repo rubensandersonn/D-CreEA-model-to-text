@@ -1,3 +1,5 @@
+import { clickableField } from './requests-api';
+
 export interface GDDViewModel {
   name: string;
   description: string;
@@ -124,6 +126,7 @@ export interface Deck {
   type: string; // - Tipo
   description: string; // - Descrição?
   cartas: Card[]; // - [dev] cartas[]
+  fields: DeckField[];
 }
 
 export interface Card {
@@ -167,4 +170,20 @@ export interface EffectRuleViewModel extends RuleViewModel {
 export interface ConditionalRuleViewModel extends RuleViewModel {
   conditions: Condition[]; // state to go when the condition is true
   otherwise: State;
+}
+
+export interface DeckViewModel {
+  id: number;
+  name: string; // - Nome
+  type: string; // - Tipo
+  description: string; // - Descrição?
+  cards: Card[]; // - [dev] cartas[]
+  color: string;
+  selectableFrontFields: clickableField[];
+  selectableBackFields: clickableField[];
+}
+
+export interface DeckField {
+  name: string;
+  type: string;
 }
