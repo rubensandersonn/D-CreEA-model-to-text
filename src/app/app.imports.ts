@@ -12,6 +12,7 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { statementRuleComponent } from './components/state/statement-rule/statement-rule.component';
 import { SummaryComponent } from './pages/summary/summary.component';
 import { DeckComponent } from './pages/deck/deck.component';
+import { CardsComponent } from './pages/cards/cards.component';
 
 export const PageComponents = {
   CreateComponent,
@@ -26,6 +27,7 @@ export const PageComponents = {
   LobbyComponent,
   SummaryComponent,
   DeckComponent,
+  CardsComponent,
 };
 
 export const Pipes = {};
@@ -44,6 +46,7 @@ export const flattenPageComponents = [
   LobbyComponent,
   SummaryComponent,
   DeckComponent,
+  CardsComponent,
 ];
 
 export const commonComponents = [];

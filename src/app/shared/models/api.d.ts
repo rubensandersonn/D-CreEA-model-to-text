@@ -1,4 +1,8 @@
-import { clickableField } from './requests-api';
+import {
+  cardBackFields,
+  cardFrontFields,
+  clickableField,
+} from './requests-api';
 
 export interface GDDViewModel {
   name: string;
@@ -130,7 +134,27 @@ export interface Deck {
 }
 
 export interface Card {
+  cardFront: cardFrontFieldsViewModel;
+  cardBack: cardBackFieldsViewModel;
+}
+
+export class cardFrontFieldsViewModel {
   title: string;
+  art: string;
+  description: string;
+  effect: string;
+  cost: number;
+  level: number;
+  earning: number;
+}
+
+export class cardBackFieldsViewModel {
+  title: string;
+  answers: string;
+  cost: string;
+  level: number;
+  earning: number;
+  effect: number;
 }
 
 export interface Project {
@@ -179,8 +203,8 @@ export interface DeckViewModel {
   description: string; // - Descrição?
   cards: Card[]; // - [dev] cartas[]
   color: string;
-  selectableFrontFields: clickableField[];
-  selectableBackFields: clickableField[];
+  cardFrontFields: cardFrontFields;
+  cardBackFields: cardBackFields;
 }
 
 export interface DeckField {

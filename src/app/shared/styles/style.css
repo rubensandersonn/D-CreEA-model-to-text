@@ -21,7 +21,7 @@
 .btn:active,
 .btn-link:active,
 .btn-primary:active {
-  background-color: #52a798;
+  background-color: #30665d;
   color: white;
   box-shadow: 0 0.15rem 0 #83aaa3 inset;
 }

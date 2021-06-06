@@ -46,8 +46,8 @@ export interface SaveDeckRequest {
   description: string;
   cards: Card[];
   color: string;
-  selectableFrontFields: clickableField[];
-  selectableBackFields: clickableField[];
+  cardFrontFields: cardFrontFields;
+  cardBackFields: cardBackFields;
 }
 
 export class clickableField {
@@ -55,4 +55,42 @@ export class clickableField {
   checked: boolean;
   type: string;
   cardSide: string;
+}
+
+export class cardFrontFields {
+  title: clickableField;
+  art: clickableField;
+  description: clickableField;
+  effect: clickableField;
+  cost: clickableField;
+  level: clickableField;
+  earning: clickableField;
+}
+
+export class cardBackFields {
+  title: clickableField;
+  answers: clickableField;
+  cost: clickableField;
+  level: clickableField;
+  earning: clickableField;
+  effect: clickableField;
+}
+
+export class cardFrontFieldsRequest {
+  title: string;
+  art: string;
+  description: string;
+  effect: string;
+  cost: number;
+  level: number;
+  earning: number;
+}
+
+export class cardBackFieldsRequest {
+  title: string;
+  answers: string;
+  cost: number;
+  level: number;
+  earning: number;
+  effect: string;
 }

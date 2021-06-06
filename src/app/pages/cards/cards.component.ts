@@ -3,45 +3,48 @@ import { Router } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 import { CardsService } from 'src/app/services/cards.service';
 import { DecksService } from 'src/app/services/deck.service';
-import { StatesService } from 'src/app/services/states.service';
 import { getErrors } from 'src/app/shared/helpers/get-message-errors';
-import { DeckViewModel, State } from 'src/app/shared/models/api';
+import { DeckViewModel } from 'src/app/shared/models/api';
 import { AppEnvironment } from 'src/app/shared/models/app.environment';
-import { ColorPickerModule } from 'ngx-color-picker';
 import {
   cardBackFields,
+  cardBackFieldsRequest,
   cardFrontFields,
+  cardFrontFieldsRequest,
   SaveCardRequest,
   SaveDeckRequest,
 } from 'src/app/shared/models/requests-api';
 
 @Component({
-  selector: 'app-deck',
-  templateUrl: './deck.component.html',
+  selector: 'app-cards',
+  templateUrl: './cards.component.html',
   styleUrls: [
-    './deck.component.css',
+    './cards.component.css',
     '../../shared/styles/style.css',
     '../../shared/styles/cardsAndDecks.css',
     '../../shared/styles/card.css',
   ],
 })
-export class DeckComponent implements OnInit {
+export class CardsComponent implements OnInit {
   cardRequest: SaveCardRequest;
   deckRequest: SaveDeckRequest;
 
-  states: State[];
   frontFields: cardFrontFields;
   backFields: cardBackFields;
   // restrição: para cada valor de pontuação, este só pode aparecer em um deck
   // mock testing
 
+  frontRequest: cardFrontFieldsRequest;
+  backRequest: cardBackFieldsRequest;
+
   decks: DeckViewModel[];
+
+  enableCardBack: boolean;
 
   typesOfFields: string[] = ['removable', 'required', 'inexistent'];
 
   constructor(
     private appService: AppService,
-    private stateService: StatesService,
     private cardService: CardsService,
     private deckService: DecksService,
     private appEnvironment: AppEnvironment,
@@ -59,6 +62,16 @@ export class DeckComponent implements OnInit {
 
     console.log('deck request', this.deckRequest);
     console.log('decks', this.decks[0]);
+
+    this.enableCardBack =
+      this.deckRequest.cardBackFields['title'].checked ||
+      this.deckRequest.cardBackFields['answers'].checked ||
+      this.deckRequest.cardBackFields['effect'].checked ||
+      this.deckRequest.cardBackFields['cost'].checked ||
+      this.deckRequest.cardBackFields['level'].checked ||
+      this.deckRequest.cardBackFields['earning'].checked;
+
+    console.log('any checked?', this.enableCardBack);
   }
 
   setCheckboxes() {
@@ -106,14 +119,14 @@ export class DeckComponent implements OnInit {
       title: {
         name: 'title',
         cardSide: 'back',
-        checked: true,
+        checked: false,
         type: 'removable',
       },
       answers: {
         name: 'answers',
         cardSide: 'back',
         checked: true,
-        type: 'required',
+        type: 'removable',
       },
       cost: {
         name: 'cost',
@@ -170,14 +183,29 @@ export class DeckComponent implements OnInit {
 
   clear() {
     this.clearRequest();
-    this.clearStates();
-  }
-
-  clearStates() {
-    this.states = [];
   }
 
   clearRequest() {
+    this.frontRequest = {
+      art: '',
+      cost: 0,
+      description: '',
+      earning: 0,
+      effect: '',
+      level: 0,
+      title: '',
+    };
+
+    this.backRequest = {
+      answers: '',
+      cost: 0,
+      earning: 0,
+      effect: '',
+      level: 0,
+      title: '',
+    };
+
+    /////////////////////////
     this.cardRequest = {
       title: '',
       earning: 0,
@@ -255,9 +283,12 @@ export class DeckComponent implements OnInit {
       cardBackFields: this.decks[deck].cardBackFields,
     };
 
-    for (var i = 0; i < this.decks.length; i++) {
-      document.getElementById('deck-' + i).style.borderWidth = '0px';
+    // if any of the deck fields are enabled
+    if (this.enableCardBack) {
+      for (var i = 0; i < this.decks.length; i++) {
+        document.getElementById('deck-' + i).style.borderWidth = '0px';
+      }
+      document.getElementById('deck-' + deck).style.borderWidth = '5px';
     }
-    document.getElementById('deck-' + deck).style.borderWidth = '5px';
   }
 }
