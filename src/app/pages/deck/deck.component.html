@@ -36,12 +36,7 @@
                   </clr-textarea-container>
                   <clr-input-container>
                     <label>Deck Color</label>
-                    <input
-                      clrInput
-                      class="color-picker"
-                      [(colorPicker)]="deckRequest.color"
-                      [style.background]="deckRequest.color"
-                    />
+                    <input clrInput class="color-picker" [(colorPicker)]="deckRequest.color" [style.background]="deckRequest.color" />
                   </clr-input-container>
                 </form>
               </div>
@@ -53,11 +48,7 @@
               <div class="card-header">Select a Deck</div>
               <div class="card-block">
                 <div class="clr-row">
-                  <div
-                    *ngFor="let d of decks; let i = index"
-                    id="{{ 'deck-' + i }}"
-                    class="clr-col-2 btn-deck-wrapper"
-                  >
+                  <div *ngFor="let d of decks; let i = index" id="{{ 'deck-' + i }}" class="clr-col-2 btn-deck-wrapper">
                     <button
                       [ngStyle]="{ 'background-color': decks[i].color }"
                       class="btn btn-primary btn-deck horizontal-center-input"
@@ -87,9 +78,7 @@
                     <clr-dg-cell>{{ card.earning }}</clr-dg-cell>
                   </clr-dg-row>
 
-                  <clr-dg-footer
-                    >{{ deckRequest.cards.length }} cards</clr-dg-footer
-                  >
+                  <clr-dg-footer>{{ deckRequest.cards.length }} cards</clr-dg-footer>
                 </clr-datagrid>
               </div>
             </div>
@@ -100,34 +89,18 @@
             <div class="card" style="height: 98%">
               <div class="card-header">Card's Front</div>
               <div class="card-block">
-                <div
-                  class="card-wrapper"
-                  [ngStyle]="{ 'background-color': deckRequest.color }"
-                >
+                <div class="card-wrapper" [ngStyle]="{ 'background-color': deckRequest.color }">
                   <div class="card-margins">
                     <div class="card-game-header">card title</div>
                     <div class="card-game-body">
-                      <div
-                        class="card-art"
-                        *ngIf="deckRequest.cardFrontFields['art'].checked"
-                      >
-                        card art
-                      </div>
+                      <div class="card-art" *ngIf="deckRequest.cardFrontFields['art'].checked">card art</div>
                       <div class="card-description">card description</div>
-                      <div class="card-effect">card effect</div>
+                      <div class="card-effect" *ngIf="deckRequest.cardFrontFields['effect'].checked">card effect</div>
                     </div>
                     <div class="card-game-footer">
                       <!-- cost -->
-                      <div
-                        class="float-items-right clr-col-4"
-                        *ngIf="deckRequest.cardFrontFields['cost'].checked"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="26.87"
-                          height="26.87"
-                          viewBox="0 0 26.87 26.87"
-                        >
+                      <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardFrontFields['cost'].checked">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26.87" height="26.87" viewBox="0 0 26.87 26.87">
                           <g
                             id="Retângulo_28"
                             data-name="Retângulo 28"
@@ -137,13 +110,7 @@
                             stroke-width="3"
                           >
                             <rect width="19" height="19" stroke="none" />
-                            <rect
-                              x="1.5"
-                              y="1.5"
-                              width="16"
-                              height="16"
-                              fill="none"
-                            />
+                            <rect x="1.5" y="1.5" width="16" height="16" fill="none" />
                           </g>
                         </svg>
                       </div>
@@ -152,24 +119,10 @@
                       <div
                         class="float-items-right clr-col-4"
                         *ngIf="deckRequest.cardFrontFields['level'].checked"
-                        style="
-                          border-left: 1px solid #707070;
-                          border-right: 1px solid #707070;
-                        "
+                        style="border-left: 1px solid #707070; border-right: 1px solid #707070"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                        >
-                          <g
-                            id="Elipse_5"
-                            data-name="Elipse 5"
-                            fill="#956aea"
-                            stroke="#707070"
-                            stroke-width="3"
-                          >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <g id="Elipse_5" data-name="Elipse 5" fill="#956aea" stroke="#707070" stroke-width="3">
                             <circle cx="12" cy="12" r="12" stroke="none" />
                             <circle cx="12" cy="12" r="10.5" fill="none" />
                           </g>
@@ -177,21 +130,9 @@
                       </div>
 
                       <!-- earning -->
-                      <div
-                        class="float-items-right clr-col-4"
-                        *ngIf="deckRequest.cardFrontFields['earning'].checked"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="28"
-                          height="24"
-                          viewBox="0 0 28 24"
-                        >
-                          <g
-                            id="Polígono_4"
-                            data-name="Polígono 4"
-                            fill="#66f9be"
-                          >
+                      <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardFrontFields['earning'].checked">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
+                          <g id="Polígono_4" data-name="Polígono 4" fill="#66f9be">
                             <path
                               d="M 25.38844108581543 22.5 L 2.611559152603149 22.5 L 14 2.976958513259888 L 25.38844108581543 22.5 Z"
                               stroke="none"
@@ -214,11 +155,7 @@
                   <div class="clr-col-6">
                     <clr-checkbox-container>
                       <label>Front Options</label>
-                      <clr-checkbox-wrapper
-                        *ngFor="
-                          let field of deckRequest.cardFrontFields | keyvalue
-                        "
-                      >
+                      <clr-checkbox-wrapper *ngFor="let field of deckRequest.cardFrontFields | keyvalue">
                         <input
                           type="checkbox"
                           clrCheckbox
@@ -227,12 +164,7 @@
                           [(ngModel)]="field.value.checked"
                           [disabled]="field.value.type === 'required'"
                         />
-                        <label
-                          >{{ field.value.name }}
-                          {{
-                            field.value.type === "required" ? "(Required)" : ""
-                          }}</label
-                        >
+                        <label>{{ field.value.name }} {{ field.value.type === "required" ? "(Required)" : "" }}</label>
                       </clr-checkbox-wrapper>
                     </clr-checkbox-container>
                   </div>
@@ -244,43 +176,17 @@
             <div class="card" style="height: 98%">
               <div class="card-header">Card's Back</div>
               <div class="card-block">
-                <div
-                  class="card-wrapper"
-                  [ngStyle]="{ 'background-color': deckRequest.color }"
-                >
+                <div class="card-wrapper" [ngStyle]="{ 'background-color': deckRequest.color }">
                   <div class="card-margins">
-                    <div
-                      class="card-game-header"
-                      *ngIf="deckRequest.cardBackFields['title'].checked"
-                    >
-                      card title
-                    </div>
+                    <div class="card-game-header" *ngIf="deckRequest.cardBackFields['title'].checked">card title</div>
                     <div class="card-game-body">
-                      <div
-                        class="card-answers"
-                        *ngIf="deckRequest.cardBackFields['answers'].checked"
-                      >
-                        answers
-                      </div>
-                      <div
-                        class="card-description"
-                        *ngIf="deckRequest.cardBackFields['effect'].checked"
-                      >
-                        effects
-                      </div>
+                      <div class="card-answers" *ngIf="deckRequest.cardBackFields['answers'].checked">answers</div>
+                      <div class="card-effect" *ngIf="deckRequest.cardBackFields['effect'].checked">effects</div>
                     </div>
                     <div class="card-game-footer">
                       <!-- cost -->
-                      <div
-                        class="float-items-right clr-col-4"
-                        *ngIf="deckRequest.cardBackFields['cost'].checked"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="26.87"
-                          height="26.87"
-                          viewBox="0 0 26.87 26.87"
-                        >
+                      <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardBackFields['cost'].checked">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26.87" height="26.87" viewBox="0 0 26.87 26.87">
                           <g
                             id="Retângulo_28"
                             data-name="Retângulo 28"
@@ -290,13 +196,7 @@
                             stroke-width="3"
                           >
                             <rect width="19" height="19" stroke="none" />
-                            <rect
-                              x="1.5"
-                              y="1.5"
-                              width="16"
-                              height="16"
-                              fill="none"
-                            />
+                            <rect x="1.5" y="1.5" width="16" height="16" fill="none" />
                           </g>
                         </svg>
                       </div>
@@ -305,24 +205,10 @@
                       <div
                         class="float-items-right clr-col-4"
                         *ngIf="deckRequest.cardBackFields['level'].checked"
-                        style="
-                          border-left: 1px solid #707070;
-                          border-right: 1px solid #707070;
-                        "
+                        style="border-left: 1px solid #707070; border-right: 1px solid #707070"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                        >
-                          <g
-                            id="Elipse_5"
-                            data-name="Elipse 5"
-                            fill="#956aea"
-                            stroke="#707070"
-                            stroke-width="3"
-                          >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <g id="Elipse_5" data-name="Elipse 5" fill="#956aea" stroke="#707070" stroke-width="3">
                             <circle cx="12" cy="12" r="12" stroke="none" />
                             <circle cx="12" cy="12" r="10.5" fill="none" />
                           </g>
@@ -330,21 +216,9 @@
                       </div>
 
                       <!-- earning -->
-                      <div
-                        class="float-items-right clr-col-4"
-                        *ngIf="deckRequest.cardBackFields['earning'].checked"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="28"
-                          height="24"
-                          viewBox="0 0 28 24"
-                        >
-                          <g
-                            id="Polígono_4"
-                            data-name="Polígono 4"
-                            fill="#66f9be"
-                          >
+                      <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardBackFields['earning'].checked">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
+                          <g id="Polígono_4" data-name="Polígono 4" fill="#66f9be">
                             <path
                               d="M 25.38844108581543 22.5 L 2.611559152603149 22.5 L 14 2.976958513259888 L 25.38844108581543 22.5 Z"
                               stroke="none"
@@ -367,11 +241,7 @@
                   <div class="clr-col-6">
                     <clr-checkbox-container>
                       <label>Back Options</label>
-                      <clr-checkbox-wrapper
-                        *ngFor="
-                          let field of deckRequest.cardBackFields | keyvalue
-                        "
-                      >
+                      <clr-checkbox-wrapper *ngFor="let field of deckRequest.cardBackFields | keyvalue">
                         <input
                           type="checkbox"
                           clrCheckbox
@@ -380,12 +250,7 @@
                           [(ngModel)]="field.value.checked"
                           [disabled]="field.value.type === 'required'"
                         />
-                        <label
-                          >{{ field.value.name }}
-                          {{
-                            field.value.type === "required" ? " (Required)" : ""
-                          }}</label
-                        >
+                        <label>{{ field.value.name }} {{ field.value.type === "required" ? " (Required)" : "" }}</label>
                       </clr-checkbox-wrapper>
                     </clr-checkbox-container>
                   </div>
