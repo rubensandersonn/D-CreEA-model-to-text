@@ -1,52 +1,64 @@
+<!-- <div class="card">
+  <div class="card-header">Game Description</div>
+  <div class="card-block">
+    <div class="clr-col-12">
+      <form clrForm>
+        <div class="clr-row">
+          <div class="clr-col-6">
+            <clr-input-container>
+              <label>Nome do Jogo</label>
+              <input placeholder="Nome do Jogo..." clrInput name="name" value="game.name" [(ngModel)]="game.name" type="text" required />
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+            <clr-textarea-container>
+              <label>Descrição</label>
+              <textarea clrTextarea name="description" [(ngModel)]="game.description" placeholder="Descrição..." required></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
 
-
-<div class="card">
-    <div class="card-header">Game Description</div>
-    <div class="card-block">
-        <div class="clr-col-12">
-            <form clrForm>
-                <div class="clr-row">
-                    <div class="clr-col-6">
-                        <clr-input-container>
-                            <label>Nome do Jogo</label>
-                            <input placeholder="Nome do Jogo..." clrInput name="name" value="gdd.name" [(ngModel)]="gdd.name" type="text" required/>
-                            <clr-control-error>item necessário!</clr-control-error>
-                        </clr-input-container>
-                        <clr-textarea-container>
-                            <label>Descrição</label>
-                            <textarea clrTextarea name="description" [(ngModel)]="gdd.description" placeholder="Descrição..." required></textarea>
-                            <clr-control-error>item necessário!</clr-control-error>
-                        </clr-textarea-container>
-                        
-                        <clr-textarea-container>
-                            <label>Público Alvo</label>
-                            <textarea clrTextarea name="targetAudience" placeholder="Público-alvo..." [(ngModel)]="gdd.targetAudience" required></textarea>
-                            <clr-control-error>item necessário!</clr-control-error>
-                        </clr-textarea-container>
-                    </div>
-                    <div class="clr-col-6">
-                        <clr-input-container>
-                            <label>Campo de Conhecimento</label>
-                            <input clrInput name="knowledgeField" [(ngModel)]="gdd.knowledgeField" type="text" placeholder="Engenharia de Software" required/>
-                        </clr-input-container>
-                        <clr-input-container>
-                            <label>Conhecimento Necessários</label>
-                            <input clrInput name="requirements" [(ngModel)]="gdd.requirements" type="text" placeholder="UML, lógica de programação" required/>
-                        </clr-input-container>
-                        <clr-input-container>
-                            <label>Mínimo de Jogadores</label>;
-                            <input clrInput name="minNumberPlayers" [(ngModel)]="gdd.minNumberPlayers" type="number" min="0" required/>
-                        </clr-input-container>
-                        <clr-input-container>
-                            <label>Máximo de Jogadores</label>
-                            <input clrInput name="maxNumberPlayers" [(ngModel)]="gdd.maxNumberPlayers" type="number" min="0" required/>
-                        </clr-input-container>
-                    </div>
-                </div>
-            </form>
+            <clr-textarea-container>
+              <label>Público Alvo</label>
+              <textarea clrTextarea name="audience" placeholder="Público-alvo..." [(ngModel)]="game.audience" required></textarea>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-textarea-container>
+          </div>
+          <div class="clr-col-6">
+            <clr-input-container>
+              <label>Campo de Conhecimento</label>
+              <input
+                clrInput
+                name="knowledgeField"
+                [(ngModel)]="game.knowledgeField"
+                type="text"
+                placeholder="Engenharia de Software"
+                required
+              />
+            </clr-input-container>
+            <clr-input-container>
+              <label>Conhecimento Necessários</label>
+              <input
+                clrInput
+                name="requirements"
+                [(ngModel)]="game.requirements"
+                type="text"
+                placeholder="UML, lógica de programação"
+                required
+              />
+            </clr-input-container>
+            <clr-input-container>
+              <label>Mínimo de Jogadores</label>;
+              <input clrInput name="minNumberPlayers" [(ngModel)]="game.minNumberPlayers" type="number" min="0" required />
+            </clr-input-container>
+            <clr-input-container>
+              <label>Máximo de Jogadores</label>
+              <input clrInput name="maxNumberPlayers" [(ngModel)]="game.maxNumberPlayers" type="number" min="0" required />
+            </clr-input-container>
+          </div>
         </div>
+      </form>
     </div>
-    <div class="card-footer">
-        <button class="btn btn-primary float-items-right" (click)="createGDDForm()">Salvar</button>
-    </div>
-</div> 
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary float-items-right" (click)="saveGame()">Salvar</button>
+  </div>
+</div> -->

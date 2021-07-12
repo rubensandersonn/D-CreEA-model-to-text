@@ -1,32 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppService } from 'src/app/services/app.service';
-import { RulesService } from 'src/app/services/rules.service';
-import { StatesService } from 'src/app/services/states.service';
-import { getErrors } from 'src/app/shared/helpers/get-message-errors';
-import { Effect, State } from 'src/app/shared/models/api';
-import { AppEnvironment } from 'src/app/shared/models/app.environment';
-import { CreateEffectRuleRequest } from 'src/app/shared/models/requests-api';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AppService } from "src/app/services/app.service";
+import { EffectRuleService } from "src/app/services/effectRule.service";
+import { StateService } from "src/app/services/states.service";
+import { getErrors } from "src/app/shared/helpers/get-message-errors";
+import { Effect, EffectRule, State } from "src/app/shared/models/api";
+import { AppEnvironment } from "src/app/shared/models/app.environment";
+import { CreateEffectRuleRequest } from "src/app/shared/models/requests-api";
 
 @Component({
-  selector: 'app-effect-rule',
-  templateUrl: './effect-rule.component.html',
-  styleUrls: [
-    './effect-rule.component.css',
-    '../../../shared/styles/style.css',
-  ],
+  selector: "app-effect-rule",
+  templateUrl: "./effect-rule.component.html",
+  styleUrls: ["./effect-rule.component.css", "../../../shared/styles/style.css"],
 })
 export class EffectRuleComponent implements OnInit {
-  effectRuleRequest: CreateEffectRuleRequest;
+  rule: EffectRule;
   effect: Effect;
   states: State[];
-  xl: string = 'xl';
+  xl: string = "xl";
   openCreateEffect: boolean;
+
+  gameId: string;
+  stateId: string;
 
   constructor(
     private appService: AppService,
-    private stateService: StatesService,
-    private ruleService: RulesService,
+    private stateService: StateService,
+    private ruleService: EffectRuleService,
     private appEnvironment: AppEnvironment,
     private router: Router
   ) {}
@@ -48,65 +48,56 @@ export class EffectRuleComponent implements OnInit {
   }
 
   clearRequest() {
-    this.effectRuleRequest = {
-      label: '',
-      fromState: '',
-      toState: '',
+    this.rule = {
+      id: null,
+      label: null,
       effects: [],
     };
   }
 
   clearEffect() {
     this.effect = {
-      cons: '',
-      pros: '',
-      turns: 1,
-      effect: '',
+      simpleEffect: null,
+      forever: false,
+      statusChange: null,
+      toSelf: false,
+      toSpecific: null,
+      turns: 0,
     };
   }
 
   loadStates() {
-    this.stateService.getStates().subscribe(
+    this.stateService.getStates(this.gameId).subscribe(
       (states) => {
+        console.log("states", states);
         this.states = states;
       },
       (errors: Object) => {
+        console.log("errou", errors);
         var msg: string[] = getErrors(errors);
-        this.appService.setAppAlerts(
-          msg.map((error) => ({ message: error, type: 'danger' }))
-        );
+        this.appService.setAppAlerts(msg.map((error) => ({ message: error, type: "danger" })));
       }
     );
   }
 
   saveRule() {
-    var err = this.isValid();
-    if (err) {
-      this.appService.setAppAlerts(
-        err.map((error) => ({ message: error, type: 'danger' }))
-      );
-      return;
-    }
-    this.ruleService.setEffectRules(this.effectRuleRequest).subscribe(
-      () => {
-        this.appService.setAppAlerts([{ message: 'Success', type: 'success' }]);
+    const service = this.rule.id ? this.ruleService.updateEffectRule : this.ruleService.createEffectRule;
+
+    service(this.stateId, this.rule).subscribe(
+      (result) => {
+        console.log("rule", result);
+        this.rule = result.effectRule;
+        this.appService.setAppAlerts([{ message: "Saved", type: "success" }]);
       },
-      (errors: Object) => {
-        var msg: string[] = getErrors(errors);
-        this.appService.setAppAlerts(
-          msg.map((error) => ({ message: error, type: 'danger' }))
-        );
+      (erros: string[]) => {
+        console.log("errors", erros);
+        this.appService.setAppAlerts(erros.map((error) => ({ message: error, type: "danger" })));
       }
     );
   }
 
   isValid(): string[] {
-    var errors: string[] = [];
-    if (!this.effectRuleRequest.label || this.effectRuleRequest.label === '') {
-      errors.push('Label inválida');
-    }
-
-    return errors.length > 0 ? errors : null;
+    return null;
   }
 
   onAddEffect() {
@@ -120,15 +111,13 @@ export class EffectRuleComponent implements OnInit {
 
   addEffect() {
     if (this.isEffectValid()) {
-      this.effectRuleRequest.effects.push(this.effect);
+      this.rule.effects.push(this.effect);
     } else {
-      this.appService.setAppAlerts([
-        { message: 'The Effect of this Rule is required', type: 'danger' },
-      ]);
+      this.appService.setAppAlerts([{ message: "The Effect of this Rule is invalid", type: "danger" }]);
     }
   }
 
   isEffectValid() {
-    return this.effect.effect !== '' && this.effect.turns > 0;
+    return true;
   }
 }

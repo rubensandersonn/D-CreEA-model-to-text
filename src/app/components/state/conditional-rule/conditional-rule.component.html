@@ -1,11 +1,9 @@
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
     <div class="clr-row">
       <div class="clr-col-10">Regra Condicional</div>
       <div class="clr-col-2">
-        <button class="btn btn-primary float-items-right" (click)="saveRule()">
-          Salvar
-        </button>
+        <*-- <button class="btn btn-primary float-items-right" (click)="saveRule()">Salvar</button> --*
       </div>
     </div>
   </div>
@@ -28,14 +26,11 @@
 
               <clr-control-error>item necessário!</clr-control-error>
             </clr-input-container>
-
+          </div>
+          <div class="clr-col-3">
             <clr-select-container>
               <label>From State</label>
-              <select
-                clrSelect
-                name="fromState"
-                [(ngModel)]="conditionalRuleRequest.fromState"
-              >
+              <select clrSelect name="fromState" [(ngModel)]="conditionalRuleRequest.fromState">
                 <option [ngValue]="" disabled selected>select state</option>
                 <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
@@ -43,14 +38,11 @@
               </select>
               <clr-control-error>item necessário!</clr-control-error>
             </clr-select-container>
-
+          </div>
+          <div class="clr-col-3">
             <clr-select-container>
               <label>Otherwise State</label>
-              <select
-                clrSelect
-                name="otherwise"
-                [(ngModel)]="conditionalRuleRequest.otherwise"
-              >
+              <select clrSelect name="otherwise" [(ngModel)]="conditionalRuleRequest.otherwise">
                 <option [ngValue]="" disabled selected>select state</option>
                 <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
@@ -64,60 +56,51 @@
     </div>
   </div>
 
-  <!-- conditions grid -->
+  <*-- conditions grid --*
   <div class="card-block">
     <div class="card">
       <div class="card-header">
         <div class="clr-row">
           <div class="clr-col-10">Condições</div>
           <div class="clr-col-2">
-            <button
-              class="btn btn-primary float-items-right"
-              (click)="onAddCondition()"
-            >
-              Add Condition
-            </button>
+            <button class="btn btn-primary float-items-right" (click)="onAddCondition()">Add Condition</button>
           </div>
         </div>
       </div>
       <div class="card-block">
         <clr-datagrid>
-          <!-- <clr-dg-column>User ID</clr-dg-column>
+          <*-- <clr-dg-column>User ID</clr-dg-column>
                     <clr-dg-column>Name</clr-dg-column>
                     <clr-dg-column>Creation date</clr-dg-column>
-                    <clr-dg-column>Favorite color</clr-dg-column> -->
+                    <clr-dg-column>Favorite color</clr-dg-column> --*
 
           <clr-dg-row *ngFor="let c of conditionalRuleRequest.conditions">
             <clr-dg-cell>IF</clr-dg-cell>
             <clr-dg-cell>{{ c.test }}</clr-dg-cell>
             <clr-dg-cell>DO</clr-dg-cell>
-            <clr-dg-cell
-              >{{ c.effectIfTrue.effect }}; lasts
-              {{ c.effectIfTrue.turns }}</clr-dg-cell
-            >
+            <clr-dg-cell>{{ c.effectIfTrue.effect }}; lasts {{ c.effectIfTrue.turns }}</clr-dg-cell>
             <clr-dg-cell>THEN GO TO STATE</clr-dg-cell>
             <clr-dg-cell>{{ c.stateIfTrue }}</clr-dg-cell>
           </clr-dg-row>
 
-          <clr-dg-footer
-            >{{
-              conditionalRuleRequest.conditions.length
-            }}
-            conditions</clr-dg-footer
-          >
+          <clr-dg-footer>{{ conditionalRuleRequest.conditions.length }} conditions</clr-dg-footer>
         </clr-datagrid>
       </div>
     </div>
   </div>
-  <div class="card-footer"></div>
+  <div class="card-footer">
+    <div class="clr-row">
+      <div class="clr-col-10"></div>
+      <div class="clr-col-2">
+        <button class="btn btn-primary float-items-right" (click)="saveRule()">Save Rule</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <clr-modal [(clrModalOpen)]="openCreateCondition">
   <h3 class="modal-title">Create a Condition</h3>
-  <div
-    class="modal-body"
-    style="border-top: 1px solid #dedede; border-bottom: 1px solid #dedede"
-  >
+  <div class="modal-body" style="border-top: 1px solid #dedede; border-bottom: 1px solid #dedede">
     <div class="card-block clr-col-12">
       <form clrForm>
         <div class="card clr-row">
@@ -135,14 +118,10 @@
               <clr-control-error>item necessário!</clr-control-error>
             </clr-textarea-container>
 
-            <!-- state if true -->
+            <*-- state if true --*
             <clr-select-container>
               <label>Go to State If Test True</label>
-              <select
-                clrSelect
-                name="stateIfTrue"
-                [(ngModel)]="condition.stateIfTrue"
-              >
+              <select clrSelect name="stateIfTrue" [(ngModel)]="condition.stateIfTrue">
                 <option [ngValue]="" disabled selected>select state</option>
                 <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
@@ -153,7 +132,7 @@
           </div>
         </div>
 
-        <!-- effectIfTrue -->
+        <*-- effectIfTrue --*
         <div class="card clr-row">
           <div class="card-header">Effect if Condition is True</div>
           <div class="card-block">
@@ -161,8 +140,8 @@
               <label>Effect *</label>
               <textarea
                 clrTextarea
-                [(ngModel)]="condition.effectIfTrue.effect"
-                name="condition.effectIfTrue.effect"
+                [(ngModel)]="condition.effectIfTrue.effectDescription"
+                name="condition.effectIfTrue.effectDescription"
                 placeholder="What happens If Tests true?"
                 required
               ></textarea>
@@ -212,8 +191,6 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary float-items-right" (click)="addCondition()">
-      Add
-    </button>
+    <button class="btn btn-primary float-items-right" (click)="addCondition()">Add</button>
   </div>
-</clr-modal>
+</clr-modal> -->

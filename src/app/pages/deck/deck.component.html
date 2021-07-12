@@ -1,4 +1,4 @@
-<div class="clr-col-12">
+<!-- <*--<div class="clr-col-12">
   <div class="content-area">
     <div class="card">
       <div class="card-block">
@@ -59,7 +59,7 @@
                 </div>
               </div>
             </div>
-            <!-- cards! -->
+            <*-- cards! --*
             <div class="card">
               <div class="card-header">Cards From This Deck</div>
               <div class="card-clock">
@@ -98,7 +98,7 @@
                       <div class="card-effect" *ngIf="deckRequest.cardFrontFields['effect'].checked">card effect</div>
                     </div>
                     <div class="card-game-footer">
-                      <!-- cost -->
+                      <*-- cost --*
                       <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardFrontFields['cost'].checked">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26.87" height="26.87" viewBox="0 0 26.87 26.87">
                           <g
@@ -115,7 +115,7 @@
                         </svg>
                       </div>
 
-                      <!-- level -->
+                      <*-- level --*
                       <div
                         class="float-items-right clr-col-4"
                         *ngIf="deckRequest.cardFrontFields['level'].checked"
@@ -129,7 +129,7 @@
                         </svg>
                       </div>
 
-                      <!-- earning -->
+                      <*-- earning --*
                       <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardFrontFields['earning'].checked">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
                           <g id="Polígono_4" data-name="Polígono 4" fill="#66f9be">
@@ -150,7 +150,7 @@
                 </div>
               </div>
               <div class="card-footer">
-                <!-- choose the fields of this deck -->
+                <*-- choose the fields of this deck --*
                 <div class="clr-row">
                   <div class="clr-col-6">
                     <clr-checkbox-container>
@@ -184,7 +184,7 @@
                       <div class="card-effect" *ngIf="deckRequest.cardBackFields['effect'].checked">effects</div>
                     </div>
                     <div class="card-game-footer">
-                      <!-- cost -->
+                      <*-- cost --*
                       <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardBackFields['cost'].checked">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26.87" height="26.87" viewBox="0 0 26.87 26.87">
                           <g
@@ -201,7 +201,7 @@
                         </svg>
                       </div>
 
-                      <!-- level -->
+                      <*-- level --*
                       <div
                         class="float-items-right clr-col-4"
                         *ngIf="deckRequest.cardBackFields['level'].checked"
@@ -215,7 +215,7 @@
                         </svg>
                       </div>
 
-                      <!-- earning -->
+                      <*-- earning --*
                       <div class="float-items-right clr-col-4" *ngIf="deckRequest.cardBackFields['earning'].checked">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
                           <g id="Polígono_4" data-name="Polígono 4" fill="#66f9be">
@@ -236,7 +236,7 @@
                 </div>
               </div>
               <div class="card-footer">
-                <!-- choose the fields of this deck -->
+                <*-- choose the fields of this deck --*
                 <div class="clr-row">
                   <div class="clr-col-6">
                     <clr-checkbox-container>
@@ -262,8 +262,13 @@
       </div>
 
       <div class="card-footer">
-        <button class="btn btn-primary float-items-right">Save Deck</button>
+        <div class="clr-row">
+          <div class="clr-col-10"></div>
+          <div class="clr-col-2">
+            <button class="btn btn-primary float-items-right">Save Deck</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->

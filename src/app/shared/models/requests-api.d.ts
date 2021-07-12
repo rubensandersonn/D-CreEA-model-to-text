@@ -1,4 +1,4 @@
-import { Card, Condition, DeckField, Effect } from './api';
+import { Card, Condition, Effect } from "./api";
 
 export interface CreateTransitionRuleRequest {
   label: string;
@@ -11,6 +11,7 @@ export interface CreateConditionalRuleRequest {
   label: string;
   conditions: Condition[];
   fromState: string;
+  description: string; // serve para dizer para que esta regra serve
 }
 
 export interface CreateEffectRuleRequest {
@@ -21,7 +22,7 @@ export interface CreateEffectRuleRequest {
 }
 
 export interface CreateStatementRuleRequest {
-  gotoState: number;
+  gotoState: string;
   label: string;
   me: number; // actor
   to?: string;
@@ -30,7 +31,7 @@ export interface CreateStatementRuleRequest {
   simplerDescription: string; // statements
   when: string; // statements
   then: string; // statements
-  fromState: number;
+  fromState: string;
 }
 
 export interface SaveCardRequest {
@@ -44,7 +45,6 @@ export interface SaveCardRequest {
 export interface SaveDeckRequest {
   name: string;
   description: string;
-  cards: Card[];
   color: string;
   cardFrontFields: cardFrontFields;
   cardBackFields: cardBackFields;

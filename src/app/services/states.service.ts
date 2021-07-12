@@ -1,94 +1,43 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, Subject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { handleError } from '../shared/helpers/http-response-handler';
-import {
-  ConditionalRule,
-  EffectRule,
-  State,
-  StatementRule,
-  TransitionRule,
-} from '../shared/models/api';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { handleError } from "../shared/helpers/http-response-handler";
+import { State } from "../shared/models/api";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
-export class StatesService {
-  private states = new Subject<State[]>();
-  private selectedState = new Subject<State>();
-
+export class StateService {
   constructor(private http: HttpClient) {}
 
-  getStates(): Observable<State[]> {
-    return this.http.get<State[]>(`/State/Get`).pipe(catchError(handleError));
+  private stateId = new Subject<string>();
+
+  setStateId(id: string) {
+    this.stateId.next(id);
   }
 
-  setStates(state: State[]) {
-    this.states.next(state);
-    // return this.http.post(`api/States/setStates`, States).pipe(
-    //   catchError(handleError)
-    // );
+  getStateId() {
+    return this.stateId.asObservable();
   }
 
-  getSelectedState(): Observable<State> {
-    return this.selectedState.asObservable();
+  getStates(gameId: string): Observable<State[]> {
+    return this.http.get<State[]>(`/State/all/${gameId}`).pipe(catchError(handleError));
   }
 
-  setSelectedState(state: State) {
-    this.selectedState.next(state);
-    this.getStates().subscribe((states) => {
-      const index = states.findIndex((r) => r.label === state.label);
-
-      if (index <= 0) {
-        state.id = states.length + 1;
-        states.push(state);
-      } else {
-        states[index] = state;
-      }
-
-      this.setStates(states);
-    });
-    // return this.http.post(`api/States/setStates`, States).pipe(
-    //   catchError(handleError)
-    // );
+  getState(stateId: string): Observable<State> {
+    return this.http.get<State>(`/State/${stateId}`).pipe(catchError(handleError));
   }
 
-  ///////////////////////////////////////////
-
-  addConditionalRule(
-    selectedState: State,
-    rule: ConditionalRule
-  ): Observable<State> {
-    selectedState.conditionalRules.push(rule);
-    this.setSelectedState(selectedState);
-    return this.selectedState.asObservable();
+  createState(gameId: string, rule: State): Observable<State> {
+    return this.http.post<State>(`/State/${gameId}`, rule).pipe(catchError(handleError));
   }
 
-  addEffectRule(selectedState: State, rule: EffectRule): Observable<State> {
-    selectedState.effectRules.push(rule);
-    this.setSelectedState(selectedState);
-    return this.selectedState.asObservable();
+  updateState(gameId: string, rule: State): Observable<State> {
+    return this.http.patch<State>(`/State/${gameId}`, rule).pipe(catchError(handleError));
   }
 
-  addStatementRule(
-    selectedState: State,
-    rule: StatementRule
-  ): Observable<State> {
-    selectedState.statementRules.push(rule);
-    this.setSelectedState(selectedState);
-    return this.selectedState.asObservable();
-  }
-
-  addTransitionRule(
-    selectedState: State,
-    rule: TransitionRule
-  ): Observable<State> {
-    if (!selectedState || !selectedState.label || selectedState.label === '') {
-      throwError('Nenhum estado selecionado');
-    }
-    selectedState.transitionRules.push(rule);
-    this.setSelectedState(selectedState);
-    return this.selectedState.asObservable();
+  deleteState(gameId: string, rule: State): Observable<State> {
+    return this.http.delete<State>(`/State/${gameId}`).pipe(catchError(handleError));
   }
 }

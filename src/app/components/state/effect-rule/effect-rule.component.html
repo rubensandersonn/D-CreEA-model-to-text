@@ -1,12 +1,8 @@
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
     <div class="clr-row">
       <div class="clr-col-10">Regra Efeito</div>
-      <div class="clr-col-2">
-        <button class="btn btn-primary float-items-right" (click)="saveRule()">
-          Salvar
-        </button>
-      </div>
+      <div class="clr-col-2"></div>
     </div>
   </div>
   <div class="card-block">
@@ -28,14 +24,22 @@
               <clr-control-error>item necessário!</clr-control-error>
             </clr-input-container>
           </div>
-          <div class="clr-col-6">
+          <div class="clr-col-3">
+            <clr-select-container>
+              <label>from State</label>
+              <select clrSelect name="fromState" [(ngModel)]="effectRuleRequest.fromState">
+                <option [ngValue]="" disabled selected>select state</option>
+                <option *ngFor="let st of states" [value]="st.label">
+                  {{ st.label }}
+                </option>
+              </select>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-3">
             <clr-select-container>
               <label>Go To State</label>
-              <select
-                clrSelect
-                name="gotoState"
-                [(ngModel)]="effectRuleRequest.toState"
-              >
+              <select clrSelect name="gotoState" [(ngModel)]="effectRuleRequest.toState">
                 <option [ngValue]="" disabled selected>select state</option>
                 <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
@@ -55,42 +59,35 @@
         <div class="clr-row">
           <div class="clr-col-10">Efeitos</div>
           <div class="clr-col-2">
-            <button
-              class="btn btn-primary float-items-right"
-              (click)="onAddEffect()"
-            >
-              Add Effect
-            </button>
+            <button class="btn btn-primary float-items-right" (click)="onAddEffect()">Add Effect</button>
           </div>
         </div>
       </div>
-      <!-- <div class="card-block">
+      <div class="card-block">
         <clr-datagrid>
-          <clr-dg-column>Tipo</clr-dg-column>
-          <clr-dg-column>Descrição</clr-dg-column>
+          <clr-dg-column>Effect</clr-dg-column>
           <clr-dg-column>Pros</clr-dg-column>
           <clr-dg-column>Cons</clr-dg-column>
-          <clr-dg-column>Counters</clr-dg-column>
-          <clr-dg-column></clr-dg-column>
+          <clr-dg-column>Turns</clr-dg-column>
 
-          <clr-dg-row *ngFor="let c of effectRule.effects">
-            <clr-dg-cell>{{ c.type }}</clr-dg-cell>
-            <clr-dg-cell>{{ c.description }}</clr-dg-cell>
+          <clr-dg-row *ngFor="let c of effectRuleRequest.effects">
+            <clr-dg-cell>{{ c.effectDescription }}</clr-dg-cell>
             <clr-dg-cell>{{ c.pros }}</clr-dg-cell>
             <clr-dg-cell>{{ c.cons }}</clr-dg-cell>
-            <clr-dg-cell>{{ c.counters }}</clr-dg-cell>
-            <clr-dg-cell>
-              <button class="btn btn-primary float-items-right" (click)="#">
-                Ver
-              </button>
-            </clr-dg-cell>
+            <clr-dg-cell>{{ c.turns }}</clr-dg-cell>
           </clr-dg-row>
-
         </clr-datagrid>
-      </div> -->
+      </div>
     </div>
   </div>
-  <div class="card-footer"></div>
+  <div class="card-footer">
+    <div class="clr-row">
+      <div class="clr-col-10"></div>
+      <div class="clr-col-2">
+        <button class="btn btn-primary float-items-right" (click)="saveRule()">Save Rule</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <clr-modal [(clrModalOpen)]="openCreateEffect">
@@ -98,15 +95,15 @@
   <div class="modal-body" style="border-top: 1px solid #dedede">
     <div class="card-block">
       <form clrForm>
-        <!-- effectIfTrue -->
+        <*-- effectIfTrue --*
         <div class="clr-row">
           <div class="card-block clr-col-12">
             <clr-textarea-container>
               <label>Effect *</label>
               <textarea
                 clrTextarea
-                [(ngModel)]="effect.effect"
-                name="effect.effect"
+                [(ngModel)]="effect.effectDescription"
+                name="effect.effectDescription"
                 placeholder="What happens If Tests true?"
                 required
               ></textarea>
@@ -130,25 +127,11 @@
 
             <clr-input-container>
               <label>Pros</label>
-              <input
-                clrInput
-                name="pros"
-                type="text"
-                placeholder="What this is good for?"
-                value="effect.pros"
-                [(ngModel)]="effect.pros"
-              />
+              <input clrInput name="pros" type="text" placeholder="What this is good for?" value="effect.pros" [(ngModel)]="effect.pros" />
             </clr-input-container>
             <clr-input-container>
               <label>Cons</label>
-              <input
-                clrInput
-                name="cons"
-                type="text"
-                placeholder="What are the drawbacks?"
-                value="effect.cons"
-                [(ngModel)]="effect.cons"
-              />
+              <input clrInput name="cons" type="text" placeholder="What are the drawbacks?" value="effect.cons" [(ngModel)]="effect.cons" />
             </clr-input-container>
           </div>
         </div>
@@ -156,8 +139,6 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary float-items-right" (click)="addEffect()">
-      Add
-    </button>
+    <button class="btn btn-primary float-items-right" (click)="addEffect()">Add</button>
   </div>
-</clr-modal>
+</clr-modal> -->

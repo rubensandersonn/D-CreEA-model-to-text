@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppService } from 'src/app/services/app.service';
-import { StatesService } from 'src/app/services/states.service';
-import { AppEnvironment } from 'src/app/shared/models/app.environment';
-import { State } from 'src/app/shared/models/api';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AppService } from "src/app/services/app.service";
+import { StateService } from "src/app/services/states.service";
+import { AppEnvironment } from "src/app/shared/models/app.environment";
+import { State } from "src/app/shared/models/api";
 
 @Component({
-  selector: 'app-drag-n-drop-tool',
-  templateUrl: './drag-n-drop-tool.component.html',
-  styleUrls: [
-    './drag-n-drop-tool.component.css',
-    '../../shared/styles/style.css',
-  ],
+  selector: "app-drag-n-drop-tool",
+  templateUrl: "./drag-n-drop-tool.component.html",
+  styleUrls: ["./drag-n-drop-tool.component.css", "../../shared/styles/style.css"],
 })
 export class DragNDropToolComponent implements OnInit {
   editRule: boolean;
@@ -20,7 +17,7 @@ export class DragNDropToolComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private stateService: StatesService,
+    private stateService: StateService,
     private appEnvironment: AppEnvironment,
     private router: Router
   ) {}

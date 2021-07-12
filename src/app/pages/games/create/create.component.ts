@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { GameDescriptionFormComponent } from 'src/app/components/game-description-form/game-description-form.component';
-import { GameplayComponent } from 'src/app/components/gameplay/gameplay.component';
-import { AppService } from 'src/app/services/app.service';
-import { GameCreationServiceService } from 'src/app/services/game-creation-service.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { GameDescriptionFormComponent } from "src/app/components/game-description-form/game-description-form.component";
+import { GameplayComponent } from "src/app/components/gameplay/gameplay.component";
+import { AppService } from "src/app/services/app.service";
+import { GameService } from "src/app/services/game.service";
+import { Game } from "src/app/shared/models/api";
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css', '../../../shared/styles/style.css'],
+  selector: "app-create",
+  templateUrl: "./create.component.html",
+  styleUrls: ["./create.component.css", "../../../shared/styles/style.css"],
 })
 export class CreateComponent implements OnInit {
   innerHeight: number;
@@ -19,22 +20,28 @@ export class CreateComponent implements OnInit {
   showCardsForm: boolean;
   showOverviewForm: boolean;
 
-  game: any;
+  game: Game;
 
-  constructor(
-    private gamesService: GameCreationServiceService,
-    private appService: AppService,
-    private router: Router
-  ) {}
+  constructor(private gamesService: GameService, private appService: AppService, private router: Router) {}
 
   ngOnInit(): void {
     this.onHideAll();
+    this.clear();
+  }
+
+  clear() {
     this.game = {
-      gdd: null,
-      states: {
-        initialState: null,
-      },
-      cards: [],
+      id: null,
+      audience: null,
+      authors: [],
+      decks: [],
+      description: null,
+      knowledgeField: null,
+      maxNumberPlayers: 0,
+      minNumberPlayers: 0,
+      name: null,
+      requirements: null,
+      states: [],
     };
   }
 

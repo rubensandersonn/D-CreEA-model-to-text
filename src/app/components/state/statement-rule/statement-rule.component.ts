@@ -1,29 +1,29 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppAlert, AppService } from 'src/app/services/app.service';
-import { RulesService } from 'src/app/services/rules.service';
-import { StatesService } from 'src/app/services/states.service';
-import { getErrors } from 'src/app/shared/helpers/get-message-errors';
-import { State, Statement } from 'src/app/shared/models/api';
-import { AppEnvironment } from 'src/app/shared/models/app.environment';
-import { CreateStatementRuleRequest } from 'src/app/shared/models/requests-api';
+import { Component, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
+import { AppAlert, AppService } from "src/app/services/app.service";
+import { StatementRuleService } from "src/app/services/statementRule.service";
+import { StateService } from "src/app/services/states.service";
+import { getErrors } from "src/app/shared/helpers/get-message-errors";
+import { State, StatementRule } from "src/app/shared/models/api";
+import { AppEnvironment } from "src/app/shared/models/app.environment";
 
 @Component({
-  selector: 'app-statement-rule',
-  templateUrl: './statement-rule.component.html',
-  styleUrls: [
-    './statement-rule.component.css',
-    '../../../shared/styles/style.css',
-  ],
+  selector: "app-statement-rule",
+  templateUrl: "./statement-rule.component.html",
+  styleUrls: ["./statement-rule.component.css", "../../../shared/styles/style.css"],
 })
 export class statementRuleComponent implements OnInit {
-  statementRuleRequest: CreateStatementRuleRequest;
+  rule: StatementRule;
+  rules: StatementRule[];
   states: State[];
+
+  gameId: string;
+  stateId: string;
 
   constructor(
     private appService: AppService,
-    private stateService: StatesService,
-    private ruleService: RulesService,
+    private stateService: StateService,
+    private ruleService: StatementRuleService,
     private appEnvironment: AppEnvironment,
     private router: Router
   ) {}
@@ -42,75 +42,53 @@ export class statementRuleComponent implements OnInit {
   }
 
   clearRequest() {
-    this.statementRuleRequest = {
-      gotoState: null,
-      label: '',
-      me: null,
-      to: null,
-      given: null,
-      otherwise: null,
+    this.rule = {
+      id: null,
+      label: null,
       simplerDescription: null,
-      when: null,
-      then: null,
-      fromState: null,
     };
   }
 
   loadStates() {
-    this.stateService.getStates().subscribe(
+    this.stateService.getStates(this.gameId).subscribe(
       (states) => {
+        console.log("states", states);
         this.states = states;
       },
       (errors: Object) => {
+        console.log("errou", errors);
         var msg: string[] = getErrors(errors);
-        this.appService.setAppAlerts(
-          msg.map((error) => ({ message: error, type: 'danger' }))
-        );
+        this.appService.setAppAlerts(msg.map((error) => ({ message: error, type: "danger" })));
       }
     );
   }
 
   saveRule() {
-    var err = this.isValid();
-    if (err) {
-      this.appService.setAppAlerts(
-        err.map((error) => ({ message: error, type: 'danger' }))
-      );
-      return;
-    }
-    this.ruleService.setStatementRules(this.statementRuleRequest).subscribe(
-      () => {
-        this.appService.setAppAlerts([{ message: 'Success', type: 'danger' }]);
+    const service = this.rule.id ? this.ruleService.updateStatementRule : this.ruleService.createStatementRule;
+
+    service(this.stateId, this.rule).subscribe(
+      (result) => {
+        console.log("rule", result);
+        this.rules = result.statementRules;
+        this.appService.setAppAlerts([{ message: "Saved", type: "success" }]);
       },
-      (errors: Object) => {
-        var msg: string[] = getErrors(errors);
-        this.appService.setAppAlerts(
-          msg.map((error) => ({ message: error, type: 'danger' }))
-        );
+      (erros: string[]) => {
+        console.log("errors", erros);
+        this.appService.setAppAlerts(erros.map((error) => ({ message: error, type: "danger" })));
       }
     );
   }
 
   isValid(): string[] {
     var errors: string[] = [];
-    if (
-      !this.statementRuleRequest.label ||
-      this.statementRuleRequest.label === ''
-    ) {
-      errors.push('Label inválida');
-    }
-
-    if (
-      !this.statementRuleRequest.gotoState ||
-      this.statementRuleRequest.gotoState === 0
-    ) {
-      errors.push('Estado destino não selecionado');
+    if (!this.rule.label || this.rule.label === "") {
+      errors.push("Label inválida");
     }
 
     return errors.length > 0 ? errors : null;
   }
 
-  printWhenConditions(when: Statement[]): string {
-    return '';
+  printWhenConditions(when: any[]): string {
+    return "";
   }
 }

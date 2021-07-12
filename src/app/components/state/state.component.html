@@ -1,15 +1,10 @@
-<div>
+<!-- <div>
   <div class="card">
     <div class="card-header">
       <div class="clr-row">
-        <div class="clr-col-10">Estado</div>
+        <div class="clr-col-10">Selected State</div>
         <div class="clr-col-2">
-          <button
-            class="btn btn-primary float-items-right"
-            (click)="saveState()"
-          >
-            Salvar Estado
-          </button>
+          <button class="btn btn-primary float-items-right" (click)="addRule()" [disabled]="showRuleForm">Create Rule</button>
         </div>
       </div>
     </div>
@@ -18,48 +13,39 @@
       <div class="card" style="margin-top: 0%">
         <div class="card-header">
           <div class="clr-row">
-            <div class="clr-col-10">Regras deste Estado</div>
-            <div class="clr-col-2">
-              <button
-                class="btn btn-primary float-items-right"
-                (click)="addRule()"
-                [disabled]="showRuleForm"
-              >
-                Nova Regra
-              </button>
-            </div>
+            <div class="clr-col-10">Rules From This State</div>
+            <div class="clr-col-2"></div>
           </div>
         </div>
-        <!-- <div class="card-block">
-                    <clr-datagrid>
-                        <clr-dg-column>Label</clr-dg-column>
-                        <clr-dg-column></clr-dg-column>
-                    
-                        <clr-dg-row *ngFor="let c of selectedState.statementRules">
-                        <clr-dg-cell>{{c.label}}: regra statement</clr-dg-cell>
-                        <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
-                        </clr-dg-row>
-                        <clr-dg-row *ngFor="let c of selectedState.conditionalRules">
-                        <clr-dg-cell>{{c.label}}: regra condicional</clr-dg-cell>
-                        <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
-                        </clr-dg-row>
-                        <clr-dg-row *ngFor="let c of selectedState.effectRules">
-                        <clr-dg-cell>{{c.label}}: regra efeito</clr-dg-cell>
-                        <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
-                        </clr-dg-row>
-                        <clr-dg-row *ngFor="let c of selectedState.transitionRules">
-                        <clr-dg-cell>{{c.label}}: regra de transição</clr-dg-cell>
-                        <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
-                        </clr-dg-row>
-                    
-                    </clr-datagrid>
-                </div> -->
+        <div class="card-block">
+          <clr-datagrid>
+            <clr-dg-column>Label</clr-dg-column>
+            <clr-dg-column></clr-dg-column>
+
+            <clr-dg-row *ngFor="let c of selectedState.statementRules">
+              <clr-dg-cell>{{ c.label }}: regra statement</clr-dg-cell>
+              <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-row *ngFor="let c of selectedState.conditionalRules">
+              <clr-dg-cell>{{ c.label }}: regra condicional</clr-dg-cell>
+              <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-row *ngFor="let c of selectedState.effectRules">
+              <clr-dg-cell>{{ c.label }}: regra efeito</clr-dg-cell>
+              <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-row *ngFor="let c of selectedState.transitionRules">
+              <clr-dg-cell>{{ c.label }}: regra de transição</clr-dg-cell>
+              <clr-dg-cell><button class="btn btn-primary float-items-right" (click)="seeMore(c)">Ver</button></clr-dg-cell>
+            </clr-dg-row>
+          </clr-datagrid>
+        </div>
       </div>
     </div>
   </div>
 
   <div *ngIf="showRuleForm" class="card">
-    <div class="card-header">Nova Regra</div>
+    <div class="card-header">Create Rule</div>
     <div class="card-block">
       <div class="card-block">
         <clr-tabs>
@@ -81,14 +67,8 @@
               <app-conditional-rule></app-conditional-rule>
             </clr-tab-content>
           </clr-tab>
-          <clr-tab>
-            <button clrTabLink>Transition Rule</button>
-            <clr-tab-content *clrIfActive>
-              <app-transition-rule></app-transition-rule>
-            </clr-tab-content>
-          </clr-tab>
         </clr-tabs>
       </div>
     </div>
   </div>
-</div>
+</div> -->

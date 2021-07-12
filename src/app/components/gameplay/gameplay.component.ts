@@ -3,7 +3,8 @@ import { Router } from "@angular/router";
 // import { TweenLite, Draggable, TimelineMax } from "gsap/all";
 import { TimelineMax } from "gsap";
 import { AppService } from "src/app/services/app.service";
-import { StatesService } from "src/app/services/states.service";
+import { GameService } from "src/app/services/game.service";
+import { StateService } from "src/app/services/states.service";
 import { getErrors } from "src/app/shared/helpers/get-message-errors";
 import { State } from "src/app/shared/models/api";
 import { AppEnvironment } from "src/app/shared/models/app.environment";
@@ -26,6 +27,8 @@ export class GameplayComponent implements OnInit {
   mouseY: number;
   isMouseDown = false;
 
+  gameId: string;
+
   rules = [
     [1, 2],
     [0, 2],
@@ -41,7 +44,8 @@ export class GameplayComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private stateService: StatesService,
+    private stateService: StateService,
+    private gameService: GameService,
     private appEnvironment: AppEnvironment,
     private router: Router
   ) {}
@@ -57,6 +61,10 @@ export class GameplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupDragNDrop();
+
+    this.gameService.getGameId().subscribe((id) => {
+      this.gameId = id;
+    });
 
     /////////////////
     this.innerHeight = window.innerHeight * 0.6;
@@ -149,7 +157,7 @@ export class GameplayComponent implements OnInit {
   }
 
   loadStates() {
-    this.stateService.getStates().subscribe(
+    this.stateService.getStates(this.gameId).subscribe(
       (states) => {
         console.log("states", states);
         this.states = states;
@@ -234,6 +242,12 @@ class Rectangle extends GeoForm {
   draw = () => {
     this.ctx.fillStyle = this.backgroundColor != null ? this.backgroundColor : "#52a798";
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
+
+    // text in state
+    this.ctx.fillStyle = "white";
+    this.ctx.textAlign = "center";
+    this.ctx.font = "15px Metropolis";
+    this.ctx.fillText(this.text, this.cx, this.cy);
   };
 
   isTouching(x: number, y: number) {

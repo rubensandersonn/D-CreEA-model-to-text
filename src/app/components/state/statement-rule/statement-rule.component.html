@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
     <div class="clr-row">
       <div class="clr-col-8">Regra Statement</div>
@@ -8,8 +8,8 @@
   <div class="card-block">
     <div class="clr-col-12">
       <form clrForm>
-        <div class="clr-row">
-          <!-- frente do cartão -->
+        <div class="clr-row" style="border-bottom: 1px solid #dedede; padding-bottom: 2.5rem; margin-bottom: 2rem">
+          <*-- frente do cartão --*
 
           <div class="clr-col-6">
             <clr-input-container>
@@ -26,6 +26,35 @@
               <clr-control-error>item necessário!</clr-control-error>
             </clr-input-container>
 
+            <*-- from and to state --*
+            <div class="clr-row" style="margin-top: 1rem">
+              <div class="clr-col-2"></div>
+              <div class="clr-col-5">
+                <clr-select-container>
+                  <label>From State</label>
+                  <select clrSelect name="fromState" [(ngModel)]="statementRuleRequest.fromState">
+                    <option [ngValue]="" disabled selected>select state</option>
+                    <option *ngFor="let st of states" [value]="st.label">
+                      {{ st.label }}
+                    </option>
+                  </select>
+                  <clr-control-error>item necessário!</clr-control-error>
+                </clr-select-container>
+              </div>
+              <div class="clr-col-5">
+                <clr-select-container>
+                  <label>Go To State</label>
+                  <select clrSelect name="gotoState" [(ngModel)]="statementRuleRequest.gotoState">
+                    <option [ngValue]="" disabled selected>select state</option>
+                    <option *ngFor="let st of states" [value]="st.label">
+                      {{ st.label }}
+                    </option>
+                  </select>
+                  <clr-control-error>item necessário!</clr-control-error>
+                </clr-select-container>
+              </div>
+            </div>
+
             <clr-textarea-container>
               <label>Descrição Simplificada</label>
               <textarea
@@ -37,12 +66,10 @@
               <clr-control-error>item necessário!</clr-control-error>
             </clr-textarea-container>
           </div>
-
+          <*-- saida frente --*
           <div class="clr-col-6">
-            <div class="card">
-              <div class="card-header">
-                Regra {{ statementRuleRequest.label }} (frente)
-              </div>
+            <div class="card" style="height: 80%">
+              <div class="card-header">Regra {{ statementRuleRequest.label }} (frente)</div>
               <div class="card-block">
                 <clr-textarea-container>
                   <label>Descrição Simplificada</label>
@@ -57,8 +84,9 @@
               </div>
             </div>
           </div>
-
-          <!-- trás do cartão -->
+        </div>
+        <div class="clr-row">
+          <*-- trás do cartão --*
 
           <div class="clr-col-6">
             <clr-input-container>
@@ -77,57 +105,32 @@
 
             <clr-textarea-container>
               <label>Para</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="statementRuleRequest.to"
-                name="statementRuleRequest.to"
-                required
-              ></textarea>
+              <textarea clrTextarea [(ngModel)]="statementRuleRequest.to" name="statementRuleRequest.to" required></textarea>
               <clr-control-error>item necessário!</clr-control-error>
             </clr-textarea-container>
             <clr-textarea-container>
               <label>Dado que</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="statementRuleRequest.given"
-                name="statementRuleRequest.given"
-              ></textarea>
+              <textarea clrTextarea [(ngModel)]="statementRuleRequest.given" name="statementRuleRequest.given"></textarea>
             </clr-textarea-container>
             <clr-textarea-container>
               <label>Quando</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="statementRuleRequest.when"
-                name="statementRuleRequest.when"
-                required
-              ></textarea>
+              <textarea clrTextarea [(ngModel)]="statementRuleRequest.when" name="statementRuleRequest.when" required></textarea>
               <clr-control-error>item necessário!</clr-control-error>
             </clr-textarea-container>
             <clr-textarea-container>
               <label>Então</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="statementRuleRequest.then"
-                name="statementRuleRequest.then"
-                required
-              ></textarea>
+              <textarea clrTextarea [(ngModel)]="statementRuleRequest.then" name="statementRuleRequest.then" required></textarea>
               <clr-control-error>item necessário!</clr-control-error>
             </clr-textarea-container>
             <clr-textarea-container>
               <label>Senão</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="statementRuleRequest.otherwise"
-                name="statementRuleRequest.otherwise"
-              ></textarea>
+              <textarea clrTextarea [(ngModel)]="statementRuleRequest.otherwise" name="statementRuleRequest.otherwise"></textarea>
             </clr-textarea-container>
           </div>
 
           <div class="clr-col-6">
             <div class="card">
-              <div class="card-header">
-                Regra {{ statementRuleRequest.label }} (trás)
-              </div>
+              <div class="card-header">Regra {{ statementRuleRequest.label }} (trás)</div>
               <div class="card-block">
                 <clr-input-container>
                   <label>Me,</label>
@@ -200,8 +203,11 @@
   </div>
 
   <div class="card-footer">
-    <button class="btn btn-primary float-items-right" (click)="saveRule()">
-      Salvar
-    </button>
+    <div class="clr-row">
+      <div class="clr-col-10"></div>
+      <div class="clr-col-2">
+        <button class="btn btn-primary float-items-right" (click)="saveRule()">Save Rule</button>
+      </div>
+    </div>
   </div>
-</div>
+</div> -->

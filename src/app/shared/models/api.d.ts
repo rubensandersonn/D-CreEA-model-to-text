@@ -1,112 +1,15 @@
-import {
-  cardBackFields,
-  cardFrontFields,
-  clickableField,
-} from './requests-api';
-
-export interface GDDViewModel {
-  name: string;
-  description: string;
-  targetAudience: string;
-  knowledgeField: string;
-  requirements: string;
-  minNumberPlayers: number;
-  maxNumberPlayers: number;
-}
+import { cardBackFields, cardFrontFields, clickableField } from "./requests-api";
 
 export interface Effect {
-  // id:number;
-  turns: number;
-  // targetActor: number;// - Ator alvo
-  effect: string; // - Descrição? / Lore?
-  pros: string; // - [dev] pros? quão benéfico é usar esse efeito?
-  cons: string; // - [dev] contras? quão maléfico é usar esse efeito?
+  simpleEffect: string;
+  toSelf?: boolean;
+  toSpecific?: string;
+  forever?: boolean;
+  turns?: number;
+  statusChange?: string; // - Descrição? / Lore?
+  // pros: string; // - [dev] pros? quão benéfico é usar esse efeito?
+  // cons: string; // - [dev] contras? quão maléfico é usar esse efeito?
   // counters: string;// - [dev] counters?[] (lista opcional de regras ou efeitos que poderiam counterar esse efeito de alguma forma)
-}
-
-export interface EffectGameTurnPoints extends Effect {
-  change: number;
-}
-
-export interface EffectGameResourcesPoints extends Effect {
-  change: number; // positive or negative
-}
-
-export interface EffectCanPlay extends Effect {
-  can: boolean;
-  turns: number;
-}
-
-export interface Role {
-  id: number;
-  actor: Actor; // - Ator (tipo)
-  pros: Effect; // - Pros (Efeito)
-  cons: Effect; // - Contras (Efeito)
-  counters: string; // - [dev] counters[]
-}
-
-export interface EffectChangeRole extends Effect {
-  role: Role; // id
-}
-
-export interface EffectCanRole extends Effect {
-  can: boolean;
-  turns: number;
-}
-
-export interface Token {
-  id: number;
-}
-
-export interface EffectChangeToken extends Effect {
-  token: Token;
-  turns: number;
-}
-
-export interface EffectCanToken extends Effect {
-  can: boolean;
-  turns: number;
-}
-
-export interface Actor {
-  id: number;
-}
-
-export interface Statement {
-  fact: string;
-}
-
-export interface Rule {
-  id: number;
-  label: string;
-  fromState: State; // selected state
-}
-
-export interface StatementRule extends Rule {
-  me: Actor; // - eu: *jogador testador*
-  to?: string; // - para que: *eu cumpra um desafio*
-  given: Statement[]; // - dado que: *dado que eu tenho um carta de jogo na mão cujo tipo é X*
-  when?: Statement[]; // - quando: (condição -> and, or, not)
-  //     - *eu combinar a minha carta do tipo X a uma carta desafio na mesa*
-  //     - *a carta desafio contem nas respostas o tipo de carta X*
-  then: Statement[]; // - então: *eu venci o desafio*
-  otherwise: Statement[]; // - senão: *eu perdi o desafio*
-  simplerDescription: string;
-  gotoState: State; // state to go when this is used
-}
-
-export interface TransitionRule extends Rule {
-  gotoState: State; // state to go when this is used
-}
-
-export interface EffectRule extends Rule {
-  gotoState: State; // state to go when this is used
-  effects: Effect[];
-}
-
-export interface ConditionalRule extends Rule {
-  conditions: Condition[]; // state to go when the condition is true
-  otherwise: State;
 }
 
 export interface Condition {
@@ -115,30 +18,49 @@ export interface Condition {
   stateIfTrue: string; // states name
 }
 
-export interface State {
-  id: number;
+export interface ConditionalRule {
+  id: string;
   label: string;
-  conditionalRules: ConditionalRule[];
-  transitionRules: TransitionRule[];
-  effectRules: EffectRule[];
+  conditions: Condition[]; // state to go when the condition is true
+  failureCondition: Condition;
+}
+
+export interface EffectRule {
+  id: string;
+  label: string;
+  effects: Effect[];
+}
+
+export interface StatementRule {
+  id: string;
+  label: string;
+  simplerDescription: string;
+  me?: string;
+  to?: string;
+  given?: string;
+  when?: string;
+  then?: string;
+  otherwise?: string;
+}
+
+export interface State {
+  id: string;
+  label: string;
+  conditionalRule: ConditionalRule;
+  transition: string;
+  effectRule: EffectRule;
   statementRules: StatementRule[];
 }
 
-export interface Deck {
-  id: number;
-  nome: string; // - Nome
-  type: string; // - Tipo
-  description: string; // - Descrição?
-  cartas: Card[]; // - [dev] cartas[]
-  fields: DeckField[];
-}
+//=====================
 
 export interface Card {
-  cardFront: cardFrontFieldsViewModel;
-  cardBack: cardBackFieldsViewModel;
+  id: string;
+  cardFront: CardFront;
+  cardBack: CardBack;
 }
 
-export class cardFrontFieldsViewModel {
+export class CardFront {
   title: string;
   art: string;
   description: string;
@@ -148,66 +70,54 @@ export class cardFrontFieldsViewModel {
   earning: number;
 }
 
-export class cardBackFieldsViewModel {
+export class CardBack {
   title: string;
   answers: string;
-  cost: string;
+  effect: string;
+  cost: number;
   level: number;
   earning: number;
-  effect: number;
 }
 
-export interface Project {
+export interface Deck {
+  id: string;
   name: string;
-}
-
-// ================================
-
-export interface RuleViewModel {
-  id: number;
-  label: string;
-  fromState: string; // selected state
-}
-
-export interface StatementRuleViewModel extends RuleViewModel {
-  me: string; // - eu: *jogador testador*
-  to?: string; // - para que: *eu cumpra um desafio*
-  given: Statement[]; // - dado que: *dado que eu tenho um carta de jogo na mão cujo tipo é X*
-  when?: Statement[]; // - quando: (condição -> and, or, not)
-  //     - *eu combinar a minha carta do tipo X a uma carta desafio na mesa*
-  //     - *a carta desafio contem nas respostas o tipo de carta X*
-  then: Statement[]; // - então: *eu venci o desafio*
-  otherwise: Statement[]; // - senão: *eu perdi o desafio*
-  simplerDescription: string;
-  gotoState: State; // state to go when this is used
-}
-
-export interface TransitionRuleViewModel extends RuleViewModel {
-  toState: string; // state to go when this is used
-}
-
-export interface EffectRuleViewModel extends RuleViewModel {
-  gotoState: State; // state to go when this is used
-  effects: Effect[];
-}
-
-export interface ConditionalRuleViewModel extends RuleViewModel {
-  conditions: Condition[]; // state to go when the condition is true
-  otherwise: State;
-}
-
-export interface DeckViewModel {
-  id: number;
-  name: string; // - Nome
-  type: string; // - Tipo
-  description: string; // - Descrição?
-  cards: Card[]; // - [dev] cartas[]
+  description: string;
   color: string;
-  cardFrontFields: cardFrontFields;
-  cardBackFields: cardBackFields;
+  cards: Card[];
+  deckFront: DeckFront;
+  deckBack: DeckBack;
 }
 
-export interface DeckField {
+export class DeckFront {
+  title: boolean;
+  art: boolean;
+  description: boolean;
+  effect: boolean;
+  cost: boolean;
+  level: boolean;
+  earning: boolean;
+}
+
+export class DeckBack {
+  title: boolean;
+  answers: boolean;
+  cost: boolean;
+  level: boolean;
+  earning: boolean;
+  effect: boolean;
+}
+
+export interface Game {
+  id: string;
   name: string;
-  type: string;
+  description: string;
+  audience: string;
+  knowledgeField: string;
+  requirements: string;
+  authors: string[];
+  minNumberPlayers: number;
+  maxNumberPlayers: number;
+  decks: Deck[];
+  states: State[];
 }

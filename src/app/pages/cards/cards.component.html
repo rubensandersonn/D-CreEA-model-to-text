@@ -1,9 +1,9 @@
-<div class="clr-col-12">
+<!-- <div class="clr-col-12">
   <div class="content-area">
     <div class="card">
       <div class="card-block">
         <div class="clr-row">
-          <!-- select a deck  -->
+          <*-- select a deck  --*
           <div class="clr-col-12">
             <div class="clr-col-6">
               <div class="card">
@@ -23,17 +23,17 @@
               </div>
             </div>
           </div>
-          <!-- cards -->
+          <*-- cards --*
           <div class="clr-col-12">
             <div class="clr-row">
-              <!-- card front container  -->
+              <*-- card front container  --*
               <div class="clr-col-6">
                 <div class="card" style="height: 98%">
                   <div class="card-header">Card's Front</div>
-                  <div class="card-block">
+                  <div class="card-block" style="height: 83%">
                     <div class="clr-row">
                       <div class="clr-col-6" style="margin-top: 1.5rem">
-                        <!-- card front  -->
+                        <*-- card front  --*
                         <div
                           class="card-wrapper"
                           [ngStyle]="{
@@ -54,7 +54,7 @@
                               </div>
                             </div>
                             <div class="card-game-footer">
-                              <!-- cost -->
+                              <*-- cost --*
                               <div
                                 class="float-items-right clr-col-4 vertical-center-input"
                                 *ngIf="deckRequest.cardFrontFields['cost'].checked"
@@ -75,7 +75,7 @@
                                 <label class="card-point-label">{{ frontRequest.cost }}</label>
                               </div>
 
-                              <!-- level -->
+                              <*-- level --*
                               <div
                                 class="float-items-right clr-col-4 vertical-center-input"
                                 *ngIf="deckRequest.cardFrontFields['level'].checked"
@@ -90,7 +90,7 @@
                                 <label class="card-point-label">{{ frontRequest.level }}</label>
                               </div>
 
-                              <!-- earning -->
+                              <*-- earning --*
                               <div
                                 class="float-items-right clr-col-4 vertical-center-input"
                                 *ngIf="deckRequest.cardFrontFields['earning'].checked"
@@ -114,16 +114,16 @@
                           </div>
                         </div>
                       </div>
-                      <!-- form  -->
+                      <*-- form  --*
                       <div class="clr-col-6">
-                        <!-- 
+                        <*-- 
                         title: string;
                         art: string;
                         description: string;
                         effect: string;
                         cost: number;
                         level: number;
-                        earning: number; -->
+                        earning: number; --*
                         <div class="card">
                           <div class="card-block">
                             <form clrForm clrLayout="vertical">
@@ -226,15 +226,20 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                    <button type="button" class="btn btn-primary float-items-right">Save Card's Front</button>
+                    <div class="clr-row">
+                      <div class="clr-col-7"></div>
+                      <div class="clr-col-5">
+                        <button type="button" class="btn btn-primary float-items-right">Save Card's Front</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="clr-col-6">
-                <!-- card back  -->
+                <*-- card back  --*
                 <div class="card" style="height: 98%">
                   <div class="card-header">Card's Back</div>
-                  <div class="card-block">
+                  <div class="card-block" style="height: 83%">
                     <div class="clr-row">
                       <div class="clr-col-6" style="margin-top: 1.5rem">
                         <div class="card-wrapper" [ngStyle]="{ 'background-color': deckRequest.color }">
@@ -263,7 +268,7 @@
                                 deckRequest.cardBackFields['earning'].checked
                               "
                             >
-                              <!-- cost -->
+                              <*-- cost --*
                               <div
                                 class="float-items-right clr-col-4 vertical-center-input"
                                 *ngIf="deckRequest.cardBackFields['cost'].checked"
@@ -284,7 +289,7 @@
                                 <label class="card-point-label">{{ frontRequest.cost === 0 ? backRequest.cost : frontRequest.cost }}</label>
                               </div>
 
-                              <!-- level -->
+                              <*-- level --*
                               <div
                                 class="float-items-right clr-col-4 vertical-center-input"
                                 *ngIf="deckRequest.cardBackFields['level'].checked"
@@ -301,7 +306,7 @@
                                 }}</label>
                               </div>
 
-                              <!-- earning -->
+                              <*-- earning --*
                               <div
                                 class="float-items-right clr-col-4 vertical-center-input"
                                 *ngIf="deckRequest.cardBackFields['earning'].checked"
@@ -327,7 +332,7 @@
                           </div>
                         </div>
                       </div>
-                      <!-- back form  -->
+                      <*-- back form  --*
                       <div class="clr-col-6" *ngIf="enableCardBack">
                         <div class="card">
                           <div class="card-block">
@@ -426,7 +431,12 @@
                     </div>
                   </div>
                   <div class="card-footer">
-                    <button type="button" class="btn btn-primary float-items-right">Save Card's Back</button>
+                    <div class="clr-row">
+                      <div class="clr-col-7"></div>
+                      <div class="clr-col-5">
+                        <button type="button" class="btn btn-primary float-items-right">Save Card's Back</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -459,4 +469,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
