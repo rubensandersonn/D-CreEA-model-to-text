@@ -20,6 +20,8 @@ export class statementRuleComponent implements OnInit {
   gameId: string;
   stateId: string;
 
+  specificStatement: boolean = false;
+
   constructor(
     private appService: AppService,
     private stateService: StateService,

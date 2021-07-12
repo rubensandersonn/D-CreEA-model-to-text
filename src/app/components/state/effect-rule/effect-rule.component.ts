@@ -19,6 +19,7 @@ export class EffectRuleComponent implements OnInit {
   states: State[];
   xl: string = "xl";
   openCreateEffect: boolean;
+  specificEffect: boolean = false;
 
   gameId: string;
   stateId: string;

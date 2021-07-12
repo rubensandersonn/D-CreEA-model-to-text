@@ -20,6 +20,7 @@ export class ConditionalRuleComponent implements OnInit {
   condition: Condition;
   xl: string = "xl";
   openCreateCondition: boolean;
+  specificEffect: boolean = false;
 
   gameId: string;
   stateId: string;
@@ -60,7 +61,7 @@ export class ConditionalRuleComponent implements OnInit {
   clearRequest() {
     this.rule = {
       id: null,
-      conditions: null,
+      conditions: [],
       failureCondition: null,
       label: null,
     };

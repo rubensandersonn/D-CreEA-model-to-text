@@ -34,7 +34,7 @@ export class GameDescriptionFormComponent implements OnInit {
       requirements: "",
       minNumberPlayers: 0,
       maxNumberPlayers: 0,
-      authors: [],
+      authors: [""],
       decks: [],
       states: [],
     };

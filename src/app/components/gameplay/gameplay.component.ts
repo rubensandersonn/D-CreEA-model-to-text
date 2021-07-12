@@ -19,6 +19,7 @@ export class GameplayComponent implements OnInit {
   states: State[];
   editRule: boolean;
   innerHeight: number;
+  showStates: boolean = false;
 
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;

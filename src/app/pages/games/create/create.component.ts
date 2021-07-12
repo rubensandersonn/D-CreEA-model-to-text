@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit {
     this.game = {
       id: null,
       audience: null,
-      authors: [],
+      authors: null,
       decks: [],
       description: null,
       knowledgeField: null,

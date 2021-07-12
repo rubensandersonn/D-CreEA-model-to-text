@@ -1,4 +1,4 @@
-<!-- <div class="card">
+<div class="card">
   <div class="card-header">Game Description</div>
   <div class="card-block">
     <div class="clr-col-12">
@@ -6,12 +6,12 @@
         <div class="clr-row">
           <div class="clr-col-6">
             <clr-input-container>
-              <label>Nome do Jogo</label>
+              <label>Name of the Game</label>
               <input placeholder="Nome do Jogo..." clrInput name="name" value="game.name" [(ngModel)]="game.name" type="text" required />
               <clr-control-error>item necessário!</clr-control-error>
             </clr-input-container>
             <clr-textarea-container>
-              <label>Descrição</label>
+              <label>Description</label>
               <textarea clrTextarea name="description" [(ngModel)]="game.description" placeholder="Descrição..." required></textarea>
               <clr-control-error>item necessário!</clr-control-error>
             </clr-textarea-container>
@@ -22,7 +22,15 @@
               <clr-control-error>item necessário!</clr-control-error>
             </clr-textarea-container>
           </div>
+
           <div class="clr-col-6">
+            <clr-input-container>
+              <label>Authors</label>
+              <input clrInput name="authors" [(ngModel)]="game.authors[0]" placeholder="Mary;John;..." required />
+              <clr-control-helper>Author's names must be separated with ';'</clr-control-helper>
+              <clr-control-error>item necessário!</clr-control-error>
+            </clr-input-container>
+
             <clr-input-container>
               <label>Campo de Conhecimento</label>
               <input
@@ -61,4 +69,4 @@
   <div class="card-footer">
     <button class="btn btn-primary float-items-right" (click)="saveGame()">Salvar</button>
   </div>
-</div> -->
+</div>

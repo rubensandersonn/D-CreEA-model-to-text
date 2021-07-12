@@ -1,9 +1,9 @@
-<!-- <div class="card">
+<div class="card">
   <div class="card-header">
     <div class="clr-row">
-      <div class="clr-col-10">Regra Condicional</div>
+      <div class="clr-col-10">Conditional Rule</div>
       <div class="clr-col-2">
-        <*-- <button class="btn btn-primary float-items-right" (click)="saveRule()">Salvar</button> --*
+        <!-- <button class="btn btn-primary float-items-right" (click)="saveRule()">Salvar</button> -->
       </div>
     </div>
   </div>
@@ -14,54 +14,35 @@
           <div class="clr-col-6">
             <clr-input-container>
               <label>Label</label>
-              <input
-                clrInput
-                name="label"
-                type="text"
-                placeholder="Label..."
-                value="conditionalRuleRequest.label"
-                [(ngModel)]="conditionalRuleRequest.label"
-                required
-              />
+              <input clrInput name="label" type="text" placeholder="Label..." value="rule.label" [(ngModel)]="rule.label" required />
 
-              <clr-control-error>item necessário!</clr-control-error>
+              <clr-control-error>required!</clr-control-error>
             </clr-input-container>
           </div>
-          <div class="clr-col-3">
-            <clr-select-container>
-              <label>From State</label>
-              <select clrSelect name="fromState" [(ngModel)]="conditionalRuleRequest.fromState">
-                <option [ngValue]="" disabled selected>select state</option>
-                <option *ngFor="let st of states" [value]="st.label">
-                  {{ st.label }}
-                </option>
-              </select>
-              <clr-control-error>item necessário!</clr-control-error>
-            </clr-select-container>
-          </div>
-          <div class="clr-col-3">
+
+          <!-- <div class="clr-col-3">
             <clr-select-container>
               <label>Otherwise State</label>
-              <select clrSelect name="otherwise" [(ngModel)]="conditionalRuleRequest.otherwise">
+              <select clrSelect name="otherwise" [(ngModel)]="rule.otherwise">
                 <option [ngValue]="" disabled selected>select state</option>
                 <option *ngFor="let st of states" [value]="st.label">
                   {{ st.label }}
                 </option>
               </select>
-              <clr-control-error>item necessário!</clr-control-error>
+              <clr-control-error>required!</clr-control-error>
             </clr-select-container>
-          </div>
+          </div> -->
         </div>
       </form>
     </div>
   </div>
 
-  <*-- conditions grid --*
+  <!-- conditions grid -->
   <div class="card-block">
     <div class="card">
       <div class="card-header">
         <div class="clr-row">
-          <div class="clr-col-10">Condições</div>
+          <div class="clr-col-10">Conditions</div>
           <div class="clr-col-2">
             <button class="btn btn-primary float-items-right" (click)="onAddCondition()">Add Condition</button>
           </div>
@@ -69,21 +50,21 @@
       </div>
       <div class="card-block">
         <clr-datagrid>
-          <*-- <clr-dg-column>User ID</clr-dg-column>
+          <!-- <clr-dg-column>User ID</clr-dg-column>
                     <clr-dg-column>Name</clr-dg-column>
                     <clr-dg-column>Creation date</clr-dg-column>
-                    <clr-dg-column>Favorite color</clr-dg-column> --*
+                    <clr-dg-column>Favorite color</clr-dg-column> -->
 
-          <clr-dg-row *ngFor="let c of conditionalRuleRequest.conditions">
+          <clr-dg-row *ngFor="let c of rule.conditions">
             <clr-dg-cell>IF</clr-dg-cell>
             <clr-dg-cell>{{ c.test }}</clr-dg-cell>
             <clr-dg-cell>DO</clr-dg-cell>
-            <clr-dg-cell>{{ c.effectIfTrue.effect }}; lasts {{ c.effectIfTrue.turns }}</clr-dg-cell>
+            <clr-dg-cell>{{ c.effectIfTrue.simpleEffect }}</clr-dg-cell>
             <clr-dg-cell>THEN GO TO STATE</clr-dg-cell>
             <clr-dg-cell>{{ c.stateIfTrue }}</clr-dg-cell>
           </clr-dg-row>
 
-          <clr-dg-footer>{{ conditionalRuleRequest.conditions.length }} conditions</clr-dg-footer>
+          <clr-dg-footer>{{ rule.conditions.length }} conditions</clr-dg-footer>
         </clr-datagrid>
       </div>
     </div>
@@ -98,93 +79,140 @@
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="openCreateCondition">
+<clr-modal clrModalSize="xl" [(clrModalOpen)]="openCreateCondition">
   <h3 class="modal-title">Create a Condition</h3>
   <div class="modal-body" style="border-top: 1px solid #dedede; border-bottom: 1px solid #dedede">
-    <div class="card-block clr-col-12">
+    <div class="card-block">
       <form clrForm>
-        <div class="card clr-row">
-          <div class="card-header">Test</div>
-          <div class="card-block">
-            <clr-textarea-container>
-              <label>Condition to Test</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="condition.test"
-                name="condition.test"
-                placeholder="What will be tested?"
-                required
-              ></textarea>
-              <clr-control-error>item necessário!</clr-control-error>
-            </clr-textarea-container>
+        <div>
+          <div class="clr-row">
+            <div class="card-block clr-col-6">
+              <clr-textarea-container>
+                <label>Test *</label>
+                <textarea
+                  clrTextarea
+                  [(ngModel)]="condition.test"
+                  name="condition.test"
+                  placeholder="What will be tested?"
+                  required
+                ></textarea>
+                <clr-control-error>required!</clr-control-error>
+              </clr-textarea-container>
 
-            <*-- state if true --*
-            <clr-select-container>
-              <label>Go to State If Test True</label>
-              <select clrSelect name="stateIfTrue" [(ngModel)]="condition.stateIfTrue">
-                <option [ngValue]="" disabled selected>select state</option>
-                <option *ngFor="let st of states" [value]="st.label">
-                  {{ st.label }}
-                </option>
-              </select>
-              <clr-control-error>item necessário!</clr-control-error>
-            </clr-select-container>
+              <!-- state if true -->
+              <clr-select-container>
+                <label>Go to State If Test True</label>
+                <select clrSelect name="stateIfTrue" [(ngModel)]="condition.stateIfTrue">
+                  <option [ngValue]="" disabled selected>select state</option>
+                  <option *ngFor="let st of states" [value]="st.label">
+                    {{ st.label }}
+                  </option>
+                </select>
+                <clr-control-error>required!</clr-control-error>
+              </clr-select-container>
+            </div>
           </div>
-        </div>
 
-        <*-- effectIfTrue --*
-        <div class="card clr-row">
-          <div class="card-header">Effect if Condition is True</div>
-          <div class="card-block">
-            <clr-textarea-container>
-              <label>Effect *</label>
-              <textarea
-                clrTextarea
-                [(ngModel)]="condition.effectIfTrue.effectDescription"
-                name="condition.effectIfTrue.effectDescription"
-                placeholder="What happens If Tests true?"
-                required
-              ></textarea>
-              <clr-control-error>item necessário!</clr-control-error>
-            </clr-textarea-container>
+          <div style="margin-top: 20px; border-top: 1px solid #dedede"></div>
 
-            <clr-input-container>
-              <label>Turns *</label>
-              <input
-                clrInput
-                name="turns"
-                type="number"
-                placeholder="How long this effect lasts"
-                value="condition.effectIfTrue.turns"
-                [(ngModel)]="condition.effectIfTrue.turns"
-                min="1"
-                required
-              />
-              <clr-control-error>item necessário!</clr-control-error>
-            </clr-input-container>
+          <!-- effectIfTrue -->
+          <div class="clr-row">
+            <div class="card-block clr-col-6">
+              <clr-textarea-container>
+                <label>Effect Simplified*</label>
+                <textarea
+                  clrTextarea
+                  [(ngModel)]="condition.effectIfTrue.simpleEffect"
+                  name="condition.effectIfTrue.simpleEffect"
+                  placeholder="What happens If Tests true?"
+                  required
+                ></textarea>
+                <clr-control-helper>Describe the effect simply</clr-control-helper>
+                <clr-control-error>required!</clr-control-error>
+              </clr-textarea-container>
 
-            <clr-input-container>
+              <clr-toggle-container>
+                <clr-toggle-wrapper>
+                  <input type="checkbox" clrToggle name="options" required value="true" [(ngModel)]="specificEffect" />
+                  <label>More precise effect?</label>
+                </clr-toggle-wrapper>
+                <!-- <clr-control-helper>This can be reverted by another effect, however</clr-control-helper> -->
+              </clr-toggle-container>
+            </div>
+            <!-- specific effect -->
+            <div class="card-block clr-col-6" *ngIf="specificEffect">
+              <clr-textarea-container>
+                <label>Status Change*</label>
+                <textarea
+                  clrTextarea
+                  [(ngModel)]="condition.effectIfTrue.statusChange"
+                  name="condition.effectIfTrue.statusChange"
+                  placeholder="What changes If Tests true?"
+                  required
+                ></textarea>
+                <clr-control-helper>Describe what changes on the affected</clr-control-helper>
+                <clr-control-error>required!</clr-control-error>
+              </clr-textarea-container>
+
+              <clr-toggle-container>
+                <label>Effect duration</label>
+                <clr-toggle-wrapper>
+                  <input type="checkbox" clrToggle name="options" required value="true" [(ngModel)]="condition.effectIfTrue.forever" />
+                  <label>For the rest of the game</label>
+                </clr-toggle-wrapper>
+                <!-- <clr-control-helper>This can be reverted by another effect, however</clr-control-helper> -->
+              </clr-toggle-container>
+
+              <clr-input-container>
+                <label>Turns *</label>
+                <input
+                  clrInput
+                  name="turns"
+                  type="number"
+                  placeholder="How long this effect lasts"
+                  value="condition.effectIfTrue.turns"
+                  [(ngModel)]="condition.effectIfTrue.turns"
+                  [disabled]="condition.effectIfTrue.forever"
+                  min="1"
+                />
+                <clr-control-error>required!</clr-control-error>
+                <clr-control-helper>If not forever, for how many turns this lasts?</clr-control-helper>
+              </clr-input-container>
+
+              <div style="margin-top: 20px; border-top: 1px solid #dedede"></div>
+
+              <clr-toggle-container>
+                <label>On whom to apply?</label>
+                <clr-toggle-wrapper>
+                  <input type="checkbox" clrToggle name="options" required value="true" [(ngModel)]="condition.effectIfTrue.toSelf" />
+                  <label>On self player?</label>
+                </clr-toggle-wrapper>
+                <!-- <clr-control-helper>This can be reverted by another effect, however</clr-control-helper> -->
+              </clr-toggle-container>
+
+              <clr-input-container>
+                <label>Specific type of player *</label>
+                <input
+                  clrInput
+                  name="toSpecific"
+                  type="text"
+                  placeholder="e.g, on any player that has x points or more"
+                  value="condition.effectIfTrue.toSpecific"
+                  [(ngModel)]="condition.effectIfTrue.toSpecific"
+                  [disabled]="condition.effectIfTrue.toSelf"
+                />
+                <clr-control-helper>If not on self, on whom?</clr-control-helper>
+              </clr-input-container>
+
+              <!-- <clr-input-container>
               <label>Pros</label>
-              <input
-                clrInput
-                name="pros"
-                type="text"
-                placeholder="What this is good for?"
-                value="condition.effectIfTrue.pros"
-                [(ngModel)]="condition.effectIfTrue.pros"
-              />
+              <input clrInput name="pros" type="text" placeholder="What this is good for?" value="effect.pros" [(ngModel)]="effect.pros" />
             </clr-input-container>
             <clr-input-container>
               <label>Cons</label>
-              <input
-                clrInput
-                name="cons"
-                type="text"
-                placeholder="What are the drawbacks?"
-                value="condition.effectIfTrue.cons"
-                [(ngModel)]="condition.effectIfTrue.cons"
-              />
-            </clr-input-container>
+              <input clrInput name="cons" type="text" placeholder="What are the drawbacks?" value="effect.cons" [(ngModel)]="effect.cons" />
+            </clr-input-container> -->
+            </div>
           </div>
         </div>
       </form>
@@ -193,4 +221,4 @@
   <div class="modal-footer">
     <button class="btn btn-primary float-items-right" (click)="addCondition()">Add</button>
   </div>
-</clr-modal> -->
+</clr-modal>
