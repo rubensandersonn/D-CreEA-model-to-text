@@ -22,6 +22,9 @@
                   </ul>
                 </ul>
               </div>
+              <div class="card-block">
+                <button class="btn btn-primary float-items-right" (click)="test()">Test</button>
+              </div>
             </div>
           </div>
 
@@ -30,6 +33,18 @@
               <div class="card-header">UGC Base</div>
               <div class="card-block">
                 <img style="width: 100%; height: auto" src="../../../assets/UGC.png" />
+              </div>
+            </div>
+          </div>
+
+          <div class="clr-col-6">
+            <div class="card">
+              <div class="card-header">Rules</div>
+              <div class="card-block">
+                <div *ngFor="let r of ruleLines">
+                  <hr *ngIf="r.includes('At')" />
+                  <p>{{ r }}</p>
+                </div>
               </div>
             </div>
           </div>

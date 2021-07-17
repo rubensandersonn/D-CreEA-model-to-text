@@ -1,4 +1,4 @@
-import { Game } from "../shared/models/api";
+import { Game } from "src/app/shared/models/api";
 
 export const gameModel: Game = {
   id: "z",
@@ -47,9 +47,9 @@ export const gameModel: Game = {
         label: "Choose next play",
         conditions: [
           {
-            test: "the player of the turn has no challenge impediments",
+            test: "the player of the turn has not played yet",
             effectIfTrue: {
-              simpleEffect: "S/he can choose to play a challenge",
+              simpleEffect: "S/he can play a challenge",
             },
             stateIfTrue: "Play a challenge",
           },
@@ -57,7 +57,7 @@ export const gameModel: Game = {
         failureCondition: {
           test: "can't do any play",
           effectIfTrue: {
-            simpleEffect: "next player",
+            simpleEffect: "pass turn to next player",
           },
           stateIfTrue: "Turn setup",
         },
