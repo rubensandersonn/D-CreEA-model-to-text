@@ -21,7 +21,7 @@ export class SummaryComponent implements OnInit {
     return this.game.states.find((x) => x.label.toLowerCase() === label.toLowerCase());
   }
 
-  test() {
+  createRules() {
     const initialState = this.findState("game start"); // set this to fix
     if (!initialState) console.log("initial not found");
     this.ruleLines = this.model2text(initialState);

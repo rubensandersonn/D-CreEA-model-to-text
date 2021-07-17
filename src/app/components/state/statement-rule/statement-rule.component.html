@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header">
     <div class="clr-row">
-      <div class="clr-col-8">Regra Statement</div>
+      <div class="clr-col-8">Statement Rule</div>
       <div class="clr-col-4"></div>
     </div>
   </div>
@@ -15,8 +15,19 @@
             <clr-input-container>
               <label>Label</label>
               <input clrInput name="label" type="text" placeholder="Label..." [(value)]="rule.label" [(ngModel)]="rule.label" required />
-              <clr-control-error>item necessário!</clr-control-error>
+              <clr-control-error>required!</clr-control-error>
             </clr-input-container>
+
+            <clr-select-container>
+              <label>Selected State</label>
+              <select clrSelect name="stateId" [(ngModel)]="stateId">
+                <option [ngValue]="" disabled selected>select state</option>
+                <option *ngFor="let st of states" [value]="st.id">
+                  {{ st.label }}
+                </option>
+              </select>
+              <clr-control-error>required!</clr-control-error>
+            </clr-select-container>
 
             <!-- from and to state  -->
             <!-- <div class="clr-row" style="margin-top: 1rem">
@@ -30,7 +41,7 @@
                       {{ st.label }}
                     </option>
                   </select>
-                  <clr-control-error>item necessário!</clr-control-error>
+                  <clr-control-error>required!</clr-control-error>
                 </clr-select-container>
               </div>
               <div class="clr-col-5">
@@ -42,13 +53,13 @@
                       {{ st.label }}
                     </option>
                   </select>
-                  <clr-control-error>item necessário!</clr-control-error>
+                  <clr-control-error>required!</clr-control-error>
                 </clr-select-container>
               </div>
             </div> -->
 
             <clr-textarea-container>
-              <label>Simply description</label>
+              <label>Rule Description</label>
               <textarea clrTextarea [(ngModel)]="rule.simplerDescription" name="rule.simplerDescription" required></textarea>
               <clr-control-error>required!</clr-control-error>
             </clr-textarea-container>
@@ -64,10 +75,10 @@
           <!-- saida frente   -->
           <div class="clr-col-6">
             <div class="card" style="height: 80%">
-              <div class="card-header">Regra {{ rule.label }} (frente)</div>
+              <div class="card-header">Rule {{ rule.label }}</div>
               <div class="card-block">
                 <clr-textarea-container>
-                  <label>Descrição Simplificada</label>
+                  <label>Description</label>
                   <textarea
                     clrTextarea
                     style="border: 0px"
@@ -85,62 +96,62 @@
         <div class="clr-row" *ngIf="specificStatement" style="border-top: 1px solid #dedede; padding-top: 2.5rem; margin-top: 2rem">
           <div class="clr-col-6">
             <clr-input-container>
-              <label>Eu, </label>
+              <label>Me, </label>
               <input clrInput name="me" type="text" placeholder="me..." value="rule.me" [(ngModel)]="rule.me" required />
-              <clr-control-error>item necessário!</clr-control-error>
+              <clr-control-error>required!</clr-control-error>
             </clr-input-container>
 
             <clr-textarea-container>
-              <label>Para</label>
+              <label>To</label>
               <textarea clrTextarea [(ngModel)]="rule.to" name="rule.to" required></textarea>
-              <clr-control-error>item necessário!</clr-control-error>
+              <clr-control-error>required!</clr-control-error>
             </clr-textarea-container>
             <clr-textarea-container>
-              <label>Dado que</label>
+              <label>Since</label>
               <textarea clrTextarea [(ngModel)]="rule.given" name="rule.given"></textarea>
             </clr-textarea-container>
             <clr-textarea-container>
-              <label>Quando</label>
+              <label>When</label>
               <textarea clrTextarea [(ngModel)]="rule.when" name="rule.when" required></textarea>
-              <clr-control-error>item necessário!</clr-control-error>
+              <clr-control-error>required!</clr-control-error>
             </clr-textarea-container>
             <clr-textarea-container>
-              <label>Então</label>
+              <label>Then</label>
               <textarea clrTextarea [(ngModel)]="rule.then" name="rule.then" required></textarea>
-              <clr-control-error>item necessário!</clr-control-error>
+              <clr-control-error>required!</clr-control-error>
             </clr-textarea-container>
             <clr-textarea-container>
-              <label>Senão</label>
+              <label>Otherwise</label>
               <textarea clrTextarea [(ngModel)]="rule.otherwise" name="rule.otherwise"></textarea>
             </clr-textarea-container>
           </div>
 
           <div class="clr-col-6">
             <div class="card">
-              <div class="card-header">Regra {{ rule.label }} (trás)</div>
+              <div class="card-header">Rule {{ rule.label }} (Precise)</div>
               <div class="card-block">
                 <clr-input-container>
                   <label>Me,</label>
                   <input clrInput name="me" type="text" style="border: 0px" [(value)]="rule.me" [(ngModel)]="rule.me" readonly />
                 </clr-input-container>
                 <clr-textarea-container>
-                  <label>Para</label>
+                  <label>To</label>
                   <textarea clrTextarea style="border: 0px" [(ngModel)]="rule.to" name="rule.to" readonly></textarea>
                 </clr-textarea-container>
                 <clr-textarea-container>
-                  <label>Dado que</label>
+                  <label>Since</label>
                   <textarea clrTextarea style="border: 0px" [(ngModel)]="rule.given" name="rule.given" readonly></textarea>
                 </clr-textarea-container>
                 <clr-textarea-container>
-                  <label>Quando</label>
+                  <label>When</label>
                   <textarea clrTextarea style="border: 0px" [(ngModel)]="rule.when" name="rule.when" readonly></textarea>
                 </clr-textarea-container>
                 <clr-textarea-container>
-                  <label>Então</label>
+                  <label>Then</label>
                   <textarea clrTextarea style="border: 0px" [(ngModel)]="rule.then" name="rule.then" readonly></textarea>
                 </clr-textarea-container>
                 <clr-textarea-container>
-                  <label>Senão</label>
+                  <label>Otherwise</label>
                   <textarea clrTextarea style="border: 0px" [(ngModel)]="rule.otherwise" name="rule.otherwise" readonly></textarea>
                 </clr-textarea-container>
               </div>

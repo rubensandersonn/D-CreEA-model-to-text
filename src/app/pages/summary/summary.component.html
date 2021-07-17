@@ -6,11 +6,20 @@
         <div class="clr-row">
           <div class="clr-col-6">
             <div class="card">
-              <div class="card-header">Roteiro do Manual - Under Development</div>
+              <div class="card-header">Game</div>
               <div class="card-block">
-                <p>Seguindo as definições de UGC, o resumo do jogo é como se segue:</p>
+                <p>Game details:</p>
                 <ul>
-                  <li>Game Concept</li>
+                  <li>name: {{ game.name }}</li>
+                  <li>description: {{ game.description }}</li>
+                  <li>audience: {{ game.audience }}</li>
+                  <li>knowledgeField: {{ game.knowledgeField }}</li>
+                  <li>requirements: {{ game.requirements }}</li>
+                  <li>authors: {{ game.authors }}</li>
+                  <li>NumberPlayers: from {{ game.minNumberPlayers }} up to {{ game.maxNumberPlayers }}</li>
+                  <li>decks: {{ game.decks ? game.decks.length : "none" }}</li>
+                  <li>states: {{ game.states ? game.states.length : "none" }}</li>
+                  <!-- <li>Game Concept</li>
                   <li>Game Player</li>
                   <li>Game Interaction</li>
                   <li>Game Core (usando MDA)</li>
@@ -19,25 +28,25 @@
                   <ul>
                     <li>Tokens</li>
                     <li>Cards</li>
-                  </ul>
+                  </ul> -->
                 </ul>
               </div>
               <div class="card-block">
-                <button class="btn btn-primary float-items-right" (click)="test()">Test</button>
+                <button class="btn btn-primary float-items-right" (click)="createRules()">Check Rules</button>
               </div>
             </div>
           </div>
 
-          <div class="clr-col-6">
+          <!-- <div class="clr-col-6">
             <div class="card">
               <div class="card-header">UGC Base</div>
               <div class="card-block">
                 <img style="width: 100%; height: auto" src="../../../assets/UGC.png" />
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="clr-col-6">
+          <div class="clr-col-12">
             <div class="card">
               <div class="card-header">Rules</div>
               <div class="card-block">

@@ -16,6 +16,18 @@
               <clr-control-error>item necessário!</clr-control-error>
             </clr-input-container>
           </div>
+          <div class="clr-col-6">
+            <clr-select-container>
+              <label>Selected State</label>
+              <select clrSelect name="stateId" [(ngModel)]="stateId">
+                <option [ngValue]="" disabled selected>select state</option>
+                <option *ngFor="let st of states" [value]="st.id">
+                  {{ st.label }}
+                </option>
+              </select>
+              <clr-control-error>required!</clr-control-error>
+            </clr-select-container>
+          </div>
           <!-- <div class="clr-col-3">
             <clr-select-container>
               <label>from State</label>

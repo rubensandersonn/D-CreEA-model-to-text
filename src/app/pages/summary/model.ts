@@ -2,14 +2,14 @@ import { Game } from "src/app/shared/models/api";
 
 export const gameModel: Game = {
   id: "z",
-  audience: "none",
-  authors: ["none"],
-  description: "none",
-  knowledgeField: "none",
-  maxNumberPlayers: 3,
+  audience: "computer science students",
+  authors: ["Rubens Silva"],
+  description: "A game to practice software testing",
+  knowledgeField: "Software Testing",
+  maxNumberPlayers: 7,
   minNumberPlayers: 3,
-  name: "none",
-  requirements: "none",
+  name: "GreaTest Card Game",
+  requirements: "Software testing types",
   decks: [],
   states: [
     {
@@ -18,11 +18,11 @@ export const gameModel: Game = {
       conditionalRule: null,
       effectRule: null,
       statementRules: [],
-      transition: "Game start configuration",
+      transition: "Game Setup",
     },
     {
       id: "2",
-      label: "Game start configuration",
+      label: "Game Setup",
       conditionalRule: null,
       effectRule: null,
       statementRules: [
