@@ -25,6 +25,10 @@ export class DeckComponent implements OnInit {
   cardRequest: SaveCardRequest;
   deckRequest: SaveDeckRequest;
 
+  deck: Deck;
+  challengeDeck: Deck;
+  gameDeck: Deck;
+
   states: State[];
   frontFields: cardFrontFields;
   backFields: cardBackFields;
@@ -33,7 +37,7 @@ export class DeckComponent implements OnInit {
   gameId: string;
 
   deckViewmodels: DeckViewModel[];
-  decks: Deck[];
+  decks: Deck[] = [];
 
   typesOfFields: string[] = ["removable", "required", "inexistent"];
 
@@ -50,11 +54,70 @@ export class DeckComponent implements OnInit {
     this.clear();
     this.loadDecks();
 
+    this.challengeDeck = {
+      id: null,
+      cards: [],
+      color: "#30665d",
+      name: "Challenges Deck",
+      description: "Challenges Deck",
+      deckFront: {
+        title: true,
+        art: true,
+        description: true,
+        effect: true,
+        cost: true,
+        level: true,
+        earning: true,
+      },
+      deckBack: {
+        title: true,
+        answers: true,
+        effect: true,
+        cost: true,
+        level: true,
+        earning: true,
+      },
+    };
+
+    this.gameDeck = {
+      id: null,
+      cards: [],
+      color: "#663030",
+      name: "Game Deck",
+      description: "Game Deck",
+      deckFront: {
+        title: true,
+        art: true,
+        description: true,
+        effect: true,
+        cost: true,
+        level: true,
+        earning: true,
+      },
+      deckBack: {
+        title: true,
+        answers: true,
+        effect: true,
+        cost: true,
+        level: true,
+        earning: true,
+      },
+    };
+
+    this.deck = this.challengeDeck;
+
+    this.decks.push(this.challengeDeck);
+    this.decks.push(this.gameDeck);
+
+    console.log(this.decks);
+
     // checkbox do capeta
     this.setCheckboxes();
 
     this.selectDeck(0);
 
+    console.log("deck 1", this.challengeDeck);
+    console.log("deck 2", this.gameDeck);
     console.log("deck request", this.deckRequest);
     console.log("deckViewmodels", this.deckViewmodels[0]);
   }
@@ -246,5 +309,9 @@ export class DeckComponent implements OnInit {
       document.getElementById("deck-" + i).style.borderWidth = "0px";
     }
     document.getElementById("deck-" + deck).style.borderWidth = "5px";
+  }
+
+  saveDeck() {
+    // turn request into deck
   }
 }

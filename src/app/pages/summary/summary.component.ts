@@ -7,7 +7,12 @@ import { gameModel } from "./model";
 @Component({
   selector: "app-summary",
   templateUrl: "./summary.component.html",
-  styleUrls: ["./summary.component.css"],
+  styleUrls: [
+    "./summary.component.css",
+    "../../shared/styles/style.css",
+    "../../shared/styles/cardsAndDecks.css",
+    "../../shared/styles/card.css",
+  ],
 })
 export class SummaryComponent implements OnInit {
   game: Game = gameModel;
@@ -15,7 +20,10 @@ export class SummaryComponent implements OnInit {
 
   constructor(private appService: AppService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.createRules();
+    this.game.decks[0].deckFront.effect;
+  }
 
   findState(label: string) {
     return this.game.states.find((x) => x.label.toLowerCase() === label.toLowerCase());
@@ -262,4 +270,18 @@ export class SummaryComponent implements OnInit {
 
     return lines;
   };
+
+  print() {
+    const printContent = document.getElementById("printable");
+    const WindowPrt = window.open("", "", "left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0");
+    WindowPrt.document.write(printContent.innerHTML);
+    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./summary.component.css">');
+    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="../../shared/styles/style.css">');
+    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="../../shared/styles/cardsAndDecks.css">');
+    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="../../shared/styles/card.css">');
+    WindowPrt.document.close();
+    WindowPrt.focus();
+    WindowPrt.print();
+    WindowPrt.close();
+  }
 }

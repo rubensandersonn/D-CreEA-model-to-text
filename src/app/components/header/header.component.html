@@ -1,11 +1,6 @@
 <clr-header>
   <div class="branding">
-    <a
-      class="nav-link"
-      href="#"
-      (click)="closeHamburger()"
-      [routerLink]="['/home']"
-    >
+    <a class="nav-link" href="#" (click)="closeHamburger()" [routerLink]="['/home']">
       <!-- <clr-icon shape="eye" size="md"></clr-icon>
       <span class="header-logo-separator"></span> -->
       <span class="title">D-CreAE Card Games</span>
@@ -13,75 +8,33 @@
   </div>
   <div class="header-nav" [clr-nav-level]="1">
     <clr-dropdown class="dropdown-nav">
-      <span
-        class="dropdown-trigger-wrapper"
-        [ngClass]="{ active: activeMenu === 1 }"
-      >
-        <button
-          type="button"
-          class="btn btn-nav"
-          clrDropdownTrigger
-          (click)="activeMenu = 1"
-        >
+      <span class="dropdown-trigger-wrapper" [ngClass]="{ active: activeMenu === 1 }">
+        <button type="button" class="btn btn-nav" clrDropdownTrigger (click)="activeMenu = 1">
           Games <clr-icon shape="caret down"></clr-icon>
         </button>
       </span>
       <clr-dropdown-menu *clrIfOpen>
-        <a
-          href="#"
-          [routerLink]="['/games/create']"
-          (click)="closeHamburger()"
-          clrDropdownItem
-          >Create</a
-        >
+        <a href="#" [routerLink]="['/games/create']" (click)="closeHamburger()" clrDropdownItem>Create</a>
       </clr-dropdown-menu>
     </clr-dropdown>
     <clr-dropdown class="dropdown-nav">
-      <span
-        class="dropdown-trigger-wrapper"
-        [ngClass]="{ active: activeMenu === 2 }"
-      >
-        <button
-          type="button"
-          class="btn btn-nav"
-          clrDropdownTrigger
-          (click)="activeMenu = 2"
-        >
+      <span class="dropdown-trigger-wrapper" [ngClass]="{ active: activeMenu === 2 }">
+        <button type="button" class="btn btn-nav" clrDropdownTrigger (click)="activeMenu = 2">
           Help <clr-icon shape="caret down"></clr-icon>
         </button>
       </span>
       <clr-dropdown-menu *clrIfOpen>
-        <a
-          href="#"
-          [routerLink]="['/games/create']"
-          (click)="closeHamburger()"
-          clrDropdownItem
-          >How to Create a Game</a
-        >
+        <a href="#" [routerLink]="['/games/lobby']" (click)="closeHamburger()" clrDropdownItem>How to Create a Game</a>
       </clr-dropdown-menu>
     </clr-dropdown>
     <clr-dropdown class="dropdown-nav">
-      <span
-        class="dropdown-trigger-wrapper"
-        [ngClass]="{ active: activeMenu === 2 }"
-      >
-        <button
-          type="button"
-          class="btn btn-nav"
-          clrDropdownTrigger
-          (click)="activeMenu = 2"
-        >
+      <span class="dropdown-trigger-wrapper" [ngClass]="{ active: activeMenu === 2 }">
+        <button type="button" class="btn btn-nav" clrDropdownTrigger (click)="activeMenu = 2">
           About <clr-icon shape="caret down"></clr-icon>
         </button>
       </span>
       <clr-dropdown-menu *clrIfOpen>
-        <a
-          href="#"
-          [routerLink]="['/games/create']"
-          (click)="closeHamburger()"
-          clrDropdownItem
-          >Disclaimer</a
-        >
+        <a href="#" [routerLink]="['/games/create']" (click)="closeHamburger()" clrDropdownItem>Disclaimer</a>
       </clr-dropdown-menu>
     </clr-dropdown>
   </div>
