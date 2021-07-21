@@ -1,32 +1,36 @@
 <div class="clr-col-12">
   <div class="content-area">
     <div class="clr-row">
-      <div class="clr-col-8"></div>
-      <div class="clr-col-4">
-        <button class="btn btn-primary float-items-right" (click)="print()">Print</button>
+      <div class="clr-col-10"></div>
+      <div class="clr-col-2">
+        <button class="btn btn-primary float-items-right" (click)="print()">Print Game</button>
       </div>
     </div>
     <div id="printable">
+      <!-- capa -->
+
       <div class="page-manual">
         <div class="clr-row" style="text-align: center">
           <div class="clr-col-12" style="margin-top: 5cm">
-            <h1 style="font-size: 60px">Game Name</h1>
+            <h1 style="font-size: 60px">{{ game.name }}</h1>
           </div>
           <div class="clr-col-12" style="margin-top: 3rem">
-            <h2>Subtitle game</h2>
+            <h2>{{ game.description }}</h2>
           </div>
           <div class="clr-col-12" style="margin-top: 3rem">
-            <h3>Authors</h3>
+            <h3>{{ game.authors }}</h3>
           </div>
         </div>
       </div>
+
+      <!-- game description page -->
 
       <div class="page-manual">
         <div class="clr-row">
           <div class="clr-col-12">
             <div class="card card-border">
-              <div class="card-header">Game Name</div>
-              <div class="card-block" style="min-height: 320px">Game Description</div>
+              <div class="card-header">{{ game.name }}</div>
+              <div class="card-block" style="min-height: 320px">{{ game.description }}. {{ game.simplyGameplay }}</div>
             </div>
           </div>
           <div class="clr-col-6">
@@ -34,12 +38,11 @@
               <div class="card-header">Game Details</div>
               <div class="card-block" style="min-height: 320px">
                 <ul>
-                  <li>Game Description</li>
-                  <li>audience</li>
-                  <li>knowledgeField</li>
-                  <li>requirements</li>
-                  <li>authors</li>
-                  <li>NumberPlayers: from 3 up to 7</li>
+                  <li>target audience: {{ game.audience }}</li>
+                  <li>knowledgeField: {{ game.knowledgeField }}</li>
+                  <li>requirements: {{ game.requirements }}</li>
+                  <li>authors: {{ game.authors }}</li>
+                  <li>NumberPlayers: from {{ game.minNumberPlayers }} up to {{ game.maxNumberPlayers }}</li>
                 </ul>
               </div>
             </div>
@@ -52,8 +55,8 @@
                 <ul *ngFor="let d of game.decks; let i = index">
                   <li>{{ d.name }} - {{ d.cards.length }} cards</li>
                 </ul>
-                <p>Tokens</p>
-                <p>Roles</p>
+                <!-- <p>Tokens</p> -->
+                <!-- <p>Roles</p> -->
               </div>
             </div>
           </div>
@@ -65,8 +68,9 @@
                 <ul>
                   <li>This is a turn-based educational card game</li>
                   <li>We have {{ game.decks.length }} decks, and each one has a purpose</li>
-                  <li>We have {{ game.decks.length }} tokens, and each one has its effect(s)</li>
-                  <li>We have {{ game.decks.length }} player roles, and each one has its effect(s)</li>
+
+                  <!-- <li>We have 0 tokens, and each one has its effect(s)</li> -->
+                  <!-- <li>We have 0 player roles, and each one has its effect(s)</li> -->
                   <li>In its turn, the player must solve challenges to get victory points</li>
                   <li>Wins the game the player who has more victory points</li>
                 </ul>
@@ -75,6 +79,8 @@
           </div>
         </div>
       </div>
+
+      <!-- game rules  -->
 
       <div class="page-manual">
         <div class="clr-row">
@@ -92,85 +98,120 @@
         </div>
       </div>
 
-      <!-- deck expl -->
-      <div class="page-manual">
+      <!-- deck explication -->
+
+      <div class="page-manual" *ngFor="let d of game.decks; let i = index">
         <div class="clr-row">
-          <div class="clr-col-12" *ngFor="let d of game.decks; let i = index">
+          <div class="clr-col-12">
             <div class="card card-border">
-              <div class="card-header">Deck {{ i }} - {{ d.name }}</div>
+              <div class="card-header">Deck {{ i + 1 }} - {{ d.name }}</div>
               <div class="card-block" style="min-height: 320px">
                 <div class="clr-row">
                   <!-- deck fields -->
-                  <div class="clr-col-6"></div>
-                  <!-- expl -->
                   <div class="clr-col-6">
-                    <div
-                      class="card-wrapper"
-                      [ngStyle]="{
-                        'background-color': d.color
-                      }"
+                    On <b>Front of each card</b> of this deck, we have:
+                    <ul>
+                      <li *ngIf="d.deckFront.title"><b>Title</b>: the title of the card</li>
+                      <li *ngIf="d.deckFront.art"><b>Art</b> (optional): the art of the card. This aims to ilustrate the card's content</li>
+                      <li *ngIf="d.deckFront.description"><b>Description</b>: the description aims to define the card's content/meaning</li>
+                      <li *ngIf="d.deckFront.effect"><b>Effect</b> (optional): the effect of the card</li>
+                      <li *ngIf="d.deckFront.cost">
+                        <b> Cost</b> (diamond-shape / optional): the cost to use this card. This type of point aims to balance the gain x
+                        price of a card, i.e., the highest the goods, highest the price to use.
+                      </li>
+                      <li *ngIf="d.deckFront.level">
+                        <b>Level</b> (circle - optional): the level required to use this card. This type of point is attached to the player
+                        level on gameplay. The idea is to evolve the level as the player is playing. This is used to allow players to evolve
+                        on gameplay, i.e., highest the level, hardest the challenge s/he can/is allowed to beat.
+                      </li>
+                      <li *ngIf="d.deckFront.earning">
+                        <b>Earning</b> (triangle - optional): the earning of the card when is used. It's recomended to be used on challenge
+                        or effect cards. The idea is the highest the earning, highest is the reward of the challenge. It's optional for
+                        games where all rewards are equal.
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="clr-col-6">
+                    On <b>Back of each card</b> of this deck, we have
+                    {{
+                      d.deckBack.title ||
+                      d.deckBack.answers ||
+                      d.deckBack.effect ||
+                      d.deckBack.cost ||
+                      d.deckBack.level ||
+                      d.deckBack.earning
+                        ? ":"
+                        : "nothing enabled, just the logo"
+                    }}
+                    <ul
+                      *ngIf="
+                        d.deckBack.title ||
+                        d.deckBack.answers ||
+                        d.deckBack.effect ||
+                        d.deckBack.cost ||
+                        d.deckBack.level ||
+                        d.deckBack.earning
+                      "
                     >
-                      <div class="card-margins">
-                        <div class="card-game-header">Title</div>
-                        <div class="card-game-body">
-                          <div class="card-art" *ngIf="d.deckFront.art">card Art</div>
-                          <div class="card-description">Card Description</div>
-                          <div class="card-effect" *ngIf="d.deckFront.effect">Card Effect</div>
-                        </div>
-                        <div class="card-game-footer">
-                          <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckFront.cost">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26.87" height="26.87" viewBox="0 0 26.87 26.87">
-                              <g
-                                id="Retângulo_28"
-                                data-name="Retângulo 28"
-                                transform="translate(0 13.435) rotate(-45)"
-                                fill="#e5ee9a"
-                                stroke="#707070"
-                                stroke-width="3"
-                              >
-                                <rect width="19" height="19" stroke="none" />
-                                <rect x="1.5" y="1.5" width="16" height="16" fill="none" />
-                              </g>
-                            </svg>
-                            <label class="card-point-label">Cost</label>
-                          </div>
-
-                          <div
-                            class="float-items-right clr-col-4 vertical-center-input"
-                            *ngIf="d.deckFront.level"
-                            style="border-left: 1px solid #707070; border-right: 1px solid #707070"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                              <g id="Elipse_5" data-name="Elipse 5" fill="#956aea" stroke="#707070" stroke-width="3">
-                                <circle cx="12" cy="12" r="12" stroke="none" />
-                                <circle cx="12" cy="12" r="10.5" fill="none" />
-                              </g>
-                            </svg>
-                            <label class="card-point-label">Level</label>
-                          </div>
-
-                          <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckFront.earning">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
-                              <g id="Polígono_4" data-name="Polígono 4" fill="#66f9be">
-                                <path
-                                  d="M 25.38844108581543 22.5 L 2.611559152603149 22.5 L 14 2.976958513259888 L 25.38844108581543 22.5 Z"
-                                  stroke="none"
-                                />
-                                <path
-                                  d="M 14 5.953907012939453 L 5.223112106323242 21 L 22.77688789367676 21 L 14 5.953907012939453 M 14 0 L 28 24 L 0 24 L 14 0 Z"
-                                  stroke="none"
-                                  fill="#707070"
-                                />
-                              </g>
-                            </svg>
-                            <label class="card-point-label">Earning</label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                      <li *ngIf="d.deckBack.title"><b>Title</b>: the title of the card</li>
+                      <li *ngIf="d.deckBack.answers">
+                        <b>Answers</b>: the answers of a given challenge. This is recomended to challenge cards, but can be used as any type
+                        of pré-message (since the player will see this side first)
+                      </li>
+                      <li *ngIf="d.deckBack.effect"><b>Effect</b> (optional): the effect of the card</li>
+                      <li *ngIf="d.deckBack.cost">
+                        <b> Cost</b> (diamond-shape / optional): the cost is the same as the front. However, this is seed by the player only
+                        s/he turns the card, so it's ideal to surprise cost.
+                      </li>
+                      <li *ngIf="d.deckBack.level">
+                        <b>Level</b> (circle - optional): the level is the same as the front. However, this is seed by the player only s/he
+                        turns the card, so it's ideal to surprise level.
+                      </li>
+                      <li *ngIf="d.deckBack.earning">
+                        <b>Earning</b> (triangle - optional): the earning is the same as the front. However, this is seed by the player only
+                        s/he turns the card, so it's ideal to surprise reward.
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- expl -->
+                  <div class="clr-col-12">
+                    <app-card
+                      [deck]="d"
+                      [card]="cardDefault"
+                      cardWidth="200"
+                      marginBetwCards="15"
+                      [back]="
+                        d.deckBack.title ||
+                        d.deckBack.answers ||
+                        d.deckBack.effect ||
+                        d.deckBack.cost ||
+                        d.deckBack.level ||
+                        d.deckBack.earning
+                      "
+                    ></app-card>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngFor="let d of game.decks; let i = index">
+        <div class="page-manual">
+          <p>Cards to Print - {{ d.name }}</p>
+          <div class="clr-row">
+            <div class="clr-col-6" *ngFor="let c of d.cards; let j = index">
+              <app-card
+                [deck]="d"
+                [card]="c"
+                cardWidth="220"
+                marginBetwCards="5"
+                [back]="
+                  d.deckBack.title || d.deckBack.answers || d.deckBack.effect || d.deckBack.cost || d.deckBack.level || d.deckBack.earning
+                "
+              ></app-card>
             </div>
           </div>
         </div>

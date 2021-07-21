@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { CardComponent } from "src/app/components/card/card.component";
 import { AppService } from "src/app/services/app.service";
-import { ConditionalRule, Effect, EffectRule, Game, State, StatementRule } from "src/app/shared/models/api";
+import { Card, ConditionalRule, Effect, EffectRule, Game, State, StatementRule } from "src/app/shared/models/api";
 import { gameModel } from "./model";
 
 @Component({
@@ -17,12 +18,34 @@ import { gameModel } from "./model";
 export class SummaryComponent implements OnInit {
   game: Game = gameModel;
   ruleLines: string[] = [];
+  cardDefault: Card;
+  isBack: boolean = false;
 
   constructor(private appService: AppService, private router: Router) {}
 
   ngOnInit(): void {
     this.createRules();
-    this.game.decks[0].deckFront.effect;
+    this.game.simplyGameplay;
+    this.cardDefault = {
+      id: null,
+      cardFront: {
+        title: "Card Title",
+        art: "Card art",
+        description: "Card description",
+        effect: "Card effect",
+        cost: 99,
+        level: 99,
+        earning: 99,
+      },
+      cardBack: {
+        title: "Card Title",
+        answers: "Card answers",
+        effect: "Card effect",
+        cost: 99,
+        level: 99,
+        earning: 99,
+      },
+    };
   }
 
   findState(label: string) {

@@ -3,8 +3,8 @@ card poker size: 6.985 x 12.065 cm = 1.72 ratio
 */
 
 .card-wrapper {
-  height: 12.065cm;
-  width: 6.985cm;
+  /* height: 12.065cm; */
+  /* width: 6.985cm; */
   border-radius: 0.5rem;
   background-color: #dedede;
   border: 1px solid white;
@@ -51,7 +51,7 @@ card poker size: 6.985 x 12.065 cm = 1.72 ratio
 
 .card-answers {
   width: 100%;
-  height: 70%;
+  height: 75%;
   /* centering */
   display: flex;
   justify-content: center;

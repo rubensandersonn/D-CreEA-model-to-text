@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CreateComponent } from "./pages/games/create/create.component";
 import { HomeComponent } from "./pages/home/home.component";
-import { GameDescriptionFormComponent } from "./components/game-description-form/game-description-form.component";
+import { GameDescriptionFormComponent } from "./pages/game-description-form/game-description-form.component";
 import { DragNDropToolComponent } from "./components/drag-n-drop-tool/drag-n-drop-tool.component";
 import { StateComponent } from "./components/state/state.component";
 import { ConditionalRuleComponent } from "./components/state/conditional-rule/conditional-rule.component";
@@ -12,6 +12,7 @@ import { statementRuleComponent } from "./components/state/statement-rule/statem
 import { SummaryComponent } from "./pages/summary/summary.component";
 import { DeckComponent } from "./pages/deck/deck.component";
 import { CardsComponent } from "./pages/cards/cards.component";
+import { CardComponent } from "./components/card/card.component";
 
 export const PageComponents = {
   CreateComponent,
@@ -26,6 +27,7 @@ export const PageComponents = {
   SummaryComponent,
   DeckComponent,
   CardsComponent,
+  CardComponent,
 };
 
 export const Pipes = {};
@@ -44,6 +46,7 @@ export const flattenPageComponents = [
   SummaryComponent,
   DeckComponent,
   CardsComponent,
+  CardComponent,
 ];
 
 export const commonComponents = [];

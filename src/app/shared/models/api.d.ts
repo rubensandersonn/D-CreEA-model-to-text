@@ -112,6 +112,7 @@ export interface Game {
   id: string;
   name: string;
   description: string;
+  simplyGameplay: string;
   audience: string;
   knowledgeField: string;
   requirements: string;

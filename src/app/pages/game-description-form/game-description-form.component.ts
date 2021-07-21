@@ -28,6 +28,7 @@ export class GameDescriptionFormComponent implements OnInit {
     this.game = {
       id: null,
       name: "",
+      simplyGameplay: "",
       description: "",
       audience: "",
       knowledgeField: "",

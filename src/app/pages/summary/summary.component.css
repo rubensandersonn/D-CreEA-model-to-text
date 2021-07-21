@@ -15,3 +15,11 @@
   border-radius: 0.4rem;
   box-shadow: 2px 5px 11px #888888;
 }
+
+.rotate {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}

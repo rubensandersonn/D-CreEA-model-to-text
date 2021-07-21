@@ -1,10 +1,12 @@
 import { Game } from "src/app/shared/models/api";
+import { challengeCards, gameCards } from "./cardModel";
 
 export const gameModel: Game = {
   id: "z",
   audience: "computer science students",
   authors: ["Rubens Silva"],
   description: "A game to practice software testing",
+  simplyGameplay: "A game to practice software testing",
   knowledgeField: "Software Testing",
   maxNumberPlayers: 7,
   minNumberPlayers: 3,
@@ -13,7 +15,7 @@ export const gameModel: Game = {
   decks: [
     {
       id: "98",
-      cards: [],
+      cards: challengeCards,
       color: "#663030",
       name: "Challenges Deck",
       description: "Challenges Deck",
@@ -37,7 +39,7 @@ export const gameModel: Game = {
     },
     {
       id: "99",
-      cards: [],
+      cards: gameCards,
       color: "#30665d",
       name: "Game Deck",
       description: "Game Deck",
@@ -51,12 +53,12 @@ export const gameModel: Game = {
         earning: true,
       },
       deckBack: {
-        title: true,
-        answers: true,
-        effect: true,
-        cost: true,
-        level: true,
-        earning: true,
+        title: false,
+        answers: false,
+        effect: false,
+        cost: false,
+        level: false,
+        earning: false,
       },
     },
   ],

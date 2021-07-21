@@ -1,0 +1,8 @@
+Melhorias:
+
+1. gdd precisa ter
+- gameplay simplificado
+
+2. deck precisa ter
+- tipos de carta dentro de um deck
+    - cada tipo tem seu próprio layout

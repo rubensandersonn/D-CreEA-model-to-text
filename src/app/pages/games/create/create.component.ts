@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { GameDescriptionFormComponent } from "src/app/components/game-description-form/game-description-form.component";
+import { GameDescriptionFormComponent } from "src/app/pages/game-description-form/game-description-form.component";
 import { GameplayComponent } from "src/app/components/gameplay/gameplay.component";
 import { AppService } from "src/app/services/app.service";
 import { GameService } from "src/app/services/game.service";
@@ -35,6 +35,7 @@ export class CreateComponent implements OnInit {
       audience: null,
       authors: null,
       decks: [],
+      simplyGameplay: null,
       description: null,
       knowledgeField: null,
       maxNumberPlayers: 0,

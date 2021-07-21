@@ -6,6 +6,7 @@ export const gameModel: Game = {
   authors: ["none"],
   description: "none",
   knowledgeField: "none",
+  simplyGameplay: "none",
   maxNumberPlayers: 3,
   minNumberPlayers: 3,
   name: "none",

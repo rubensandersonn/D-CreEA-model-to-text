@@ -1,0 +1,146 @@
+<div class="clr-row" *ngIf="card">
+  <!-- card front -->
+  <!-- card front -->
+  <!-- card front -->
+  <div
+    class="card-wrapper"
+    [ngStyle]="{
+      'background-color': d.color,
+      'width.px': cardWidth,
+      'height.px': cardHeight,
+      'margin-right.px': marginBetwCards
+    }"
+  >
+    <div class="card-margins">
+      <div class="card-game-header">{{ card.cardFront.title }}</div>
+      <div class="card-game-body">
+        <div class="card-art" *ngIf="d.deckFront.art">{{ card.cardFront.art }}</div>
+        <div class="card-description">{{ card.cardFront.description }}</div>
+        <div class="card-effect" *ngIf="d.deckFront.effect">{{ card.cardFront.effect }}</div>
+      </div>
+      <div class="card-game-footer">
+        <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckFront.cost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26.87" height="26.87" viewBox="0 0 26.87 26.87">
+            <g
+              id="Retângulo_28"
+              data-name="Retângulo 28"
+              transform="translate(0 13.435) rotate(-45)"
+              fill="#e5ee9a"
+              stroke="#707070"
+              stroke-width="3"
+            >
+              <rect width="19" height="19" stroke="none" />
+              <rect x="1.5" y="1.5" width="16" height="16" fill="none" />
+            </g>
+          </svg>
+          <label class="card-point-label">{{ card.cardFront.cost }}</label>
+        </div>
+
+        <div
+          class="float-items-right clr-col-4 vertical-center-input"
+          *ngIf="d.deckFront.level"
+          style="border-left: 1px solid #707070; border-right: 1px solid #707070"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g id="Elipse_5" data-name="Elipse 5" fill="#956aea" stroke="#707070" stroke-width="3">
+              <circle cx="12" cy="12" r="12" stroke="none" />
+              <circle cx="12" cy="12" r="10.5" fill="none" />
+            </g>
+          </svg>
+          <label class="card-point-label">{{ card.cardFront.level }}</label>
+        </div>
+
+        <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckFront.earning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
+            <g id="Polígono_4" data-name="Polígono 4" fill="#66f9be">
+              <path d="M 25.38844108581543 22.5 L 2.611559152603149 22.5 L 14 2.976958513259888 L 25.38844108581543 22.5 Z" stroke="none" />
+              <path
+                d="M 14 5.953907012939453 L 5.223112106323242 21 L 22.77688789367676 21 L 14 5.953907012939453 M 14 0 L 28 24 L 0 24 L 14 0 Z"
+                stroke="none"
+                fill="#707070"
+              />
+            </g>
+          </svg>
+          <label class="card-point-label">{{ card.cardFront.earning }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card back -->
+  <!-- card back -->
+  <!-- card back -->
+  <div
+    *ngIf="back"
+    class="card-wrapper"
+    [ngStyle]="{
+      'background-color': d.color,
+      'width.px': cardWidth,
+      'height.px': cardHeight
+    }"
+  >
+    <div class="card-margins">
+      <div class="card-game-header">{{ card.cardBack.title }}</div>
+      <div class="card-game-body">
+        <div class="card-answers">{{ card.cardBack.answers }}</div>
+        <div class="card-effect" *ngIf="d.deckBack.effect">{{ card.cardBack.effect }}</div>
+      </div>
+      <div class="card-game-footer">
+        <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckBack.cost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26.87" height="26.87" viewBox="0 0 26.87 26.87">
+            <g
+              id="Retângulo_28"
+              data-name="Retângulo 28"
+              transform="translate(0 13.435) rotate(-45)"
+              fill="#e5ee9a"
+              stroke="#707070"
+              stroke-width="3"
+            >
+              <rect width="19" height="19" stroke="none" />
+              <rect x="1.5" y="1.5" width="16" height="16" fill="none" />
+            </g>
+          </svg>
+          <label class="card-point-label">{{ card.cardBack.cost }}</label>
+        </div>
+
+        <div
+          class="float-items-right clr-col-4 vertical-center-input"
+          *ngIf="d.deckBack.level"
+          style="border-left: 1px solid #707070; border-right: 1px solid #707070"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g id="Elipse_5" data-name="Elipse 5" fill="#956aea" stroke="#707070" stroke-width="3">
+              <circle cx="12" cy="12" r="12" stroke="none" />
+              <circle cx="12" cy="12" r="10.5" fill="none" />
+            </g>
+          </svg>
+          <label class="card-point-label">{{ card.cardBack.level }}</label>
+        </div>
+
+        <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckBack.earning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="24" viewBox="0 0 28 24">
+            <g id="Polígono_4" data-name="Polígono 4" fill="#66f9be">
+              <path d="M 25.38844108581543 22.5 L 2.611559152603149 22.5 L 14 2.976958513259888 L 25.38844108581543 22.5 Z" stroke="none" />
+              <path
+                d="M 14 5.953907012939453 L 5.223112106323242 21 L 22.77688789367676 21 L 14 5.953907012939453 M 14 0 L 28 24 L 0 24 L 14 0 Z"
+                stroke="none"
+                fill="#707070"
+              />
+            </g>
+          </svg>
+          <label class="card-point-label">{{ card.cardBack.earning }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!back"
+    class="card-wrapper"
+    [ngStyle]="{
+      'background-color': d.color,
+      'width.px': cardWidth,
+      'height.px': cardHeight
+    }"
+  ></div>
+</div>
