@@ -38,6 +38,7 @@ export class StateComponent implements OnInit {
   ngOnInit(): void {
     this.state = {
       id: "",
+      purpose: "",
       label: "",
       conditionalRule: null,
       effectRule: null,

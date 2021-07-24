@@ -23,3 +23,8 @@
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
 }
+
+p {
+  font-size: large;
+  line-height: 100%;
+}

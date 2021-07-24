@@ -1,142 +1,201 @@
-import { ConditionalRule, Effect, EffectRule, Game, State, StatementRule } from "../shared/models/api";
-import { gameModel } from "./model";
+import { OnInit } from "@angular/core";
+import { gameModel } from "../pages/summary/model";
+import { Condition, Effect, Game, State, StatementRule } from "../shared/models/api";
 
-const game: Game = gameModel;
+export class ModelToText {
+  stack: string[] = [];
+  pipe: string[] = [];
+  game: Game = gameModel;
 
-/**
- *
- * @param effect
- * @returns
- */
-const writeEffect = (effect: Effect, level: string): string => {
-  if (!effect) return "[error] effect not well formed";
-  const st =
-    level + effect.simpleEffect + ". In other words, apply this effect to " + effect.toSelf
-      ? "Self player "
-      : effect.toSpecific + " players: " + effect.statusChange + "; This effect lasts for " + effect.forever
-      ? "the rest of this game"
-      : effect.turns + "turns.";
-  return st;
-};
+  constructor() {}
 
-/**
- *
- * @param rule
- * @param level
- * @returns
- */
-const writeEffectRule = (rule: EffectRule, level: string): string[] => {
-  var lines = [];
-  rule.effects.forEach((effect) => {
-    if (effect.statusChange && effect.statusChange !== "") {
-      lines.push(writeEffect(effect, level));
+  public start(): string[] {
+    if (this.invalid()) return ["error: model not valid"];
+
+    console.log("states", this.game.states.length);
+
+    var lines: string[] = [];
+
+    this.addToPipe(this.game.states[0].label);
+    do {
+      // getting the next state
+      const stateName = this.pipe[0];
+      const state = this.game.states.find((s) => s.label === stateName);
+
+      // removing from pipe
+      this.pipe.shift();
+      const result = this.presentState(state);
+
+      // updating the lines
+      lines = lines.concat(result);
+
+      // removing the first
+    } while (this.pipe.length > 0);
+
+    console.log(lines);
+
+    return lines;
+  }
+
+  /**
+   *
+   * @param state
+   * @returns
+   */
+  presentState(state: State): string[] {
+    this.stack.push(state.label); // se chegou aqui, então não está na pilha
+
+    var lines: string[] = [`* '${state.label}': ${state.purpose}.`];
+
+    if (state.label === "Game Over") return lines;
+
+    // statement rules
+    if (state.statementRules && state.statementRules.length > 0) {
+      lines = lines.concat(this.writeStatementRules(state));
     }
-  });
 
-  return lines;
-};
+    // effect rules
+    if (state.effectRule) {
+      lines = lines.concat(this.writeEffectRules(state));
+    }
 
-/**
- *
- * @param rules rules
- */
-const writeStatementRule = (rules: StatementRule[], level: string): string[] => {
-  var lines = [];
+    // conditional rules
+    if (state.conditionalRule) {
+      lines = lines.concat(this.writeConditionalRule(state));
+    } else {
+      // transition
+      lines = lines.concat(this.writeTransition(state));
+    }
 
-  const writeStatement = (rule: StatementRule): string => {
-    if (!rule) return "[error] rule not well formed";
-    var st = rule.me ? "me, as " + rule.me.toString() + "; " : "";
-    st += rule.given ? "given that " + rule.given.toString() + "; " : "";
-    st += rule.when ? "when " + rule.when.toString() + "; " : "";
-    st += rule.then ? "then " + rule.then.toString() + "; " : "";
-    st += rule.otherwise ? "otherwise " + rule.otherwise.toString() + ". " : "";
+    return lines;
+  }
+
+  /**
+   *
+   * @param state
+   * @returns
+   */
+  writeTransition(state: State): string[] {
+    var lines: string[] = [];
+    if (!this.stack.includes(state.transition)) {
+      this.addToPipe(state.transition);
+      lines.push(` Go ahead to '${state.transition}'.`);
+    } else {
+      lines.push(` And follows as '${state.transition}'.`);
+    }
+    return lines;
+  }
+
+  //////////////////////////////////
+
+  /**
+   *
+   * @param state
+   * @returns
+   */
+  writeStatementRules(state: State): string[] {
+    var lines: string[] = [];
+
+    const writeStatement = (rule: StatementRule): string => {
+      if (!rule) return "[error] rule not well formed";
+      var st = rule.me ? "me, as " + rule.me.toString() + "; " : "";
+      st += rule.given ? "given that " + rule.given.toString() + "; " : "";
+      st += rule.when ? "when " + rule.when.toString() + "; " : "";
+      st += rule.then ? "then " + rule.then.toString() + "; " : "";
+      st += rule.otherwise ? "otherwise " + rule.otherwise.toString() + ". " : "";
+      return st;
+    };
+
+    state.statementRules.forEach((rule) => {
+      lines.push(" - " + rule.simplerDescription);
+      if (rule.when) {
+        lines.push("   * a more detailed description: " + writeStatement(rule));
+      }
+    });
+
+    return lines;
+  }
+
+  /**
+   *
+   * @param effect
+   * @returns
+   */
+  writeEffect = (effect: Effect): string => {
+    if (!effect) return "[error] effect not well formed";
+    var st = effect.simpleEffect;
+    if (effect.statusChange) {
+      st += `. In other words, apply '${effect.statusChange}' to `;
+      st += effect.toSelf != null && effect.toSelf == true ? "self player;" : `players ${effect.toSpecific};`;
+      st += ` This effect lasts for ${
+        effect.forever != null && effect.forever == true ? "the rest of this game" : effect.turns + " turns."
+      }`;
+    }
+
     return st;
   };
 
-  rules.forEach((rule) => {
-    lines.push(level + "- " + rule.simplerDescription);
-    if (rule.when) {
-      lines.push(level + "* a more detailed description: ");
-      lines.push(level + writeStatement(rule));
-    }
-  });
+  writeEffectRules(state: State): string[] {
+    var lines = [];
+    state.effectRule.effects.forEach((effect) => {
+      lines.push(this.writeEffect(effect));
+    });
 
-  return lines;
-};
-
-/**
- *
- * @param rule
- * @param level
- * @returns
- */
-const writeConditionalRule = (rule: ConditionalRule, level: string, pile: string[]): string[] => {
-  var lines = [];
-  rule.conditions.forEach((condition) => {
-    lines.push(level + "If " + condition.test + " is true, then ");
-    lines.push(writeEffect(condition.effectIfTrue, level));
-    lines.push(level + "and go to state " + condition.stateIfTrue);
-  });
-
-  // go down on the tree
-  rule.conditions.forEach((condition) => {
-    const stName = condition.stateIfTrue;
-    if (stName === "Check if game completed") {
-      lines.push(level + "and ends in " + stName);
-    } else {
-      if (pile.includes(stName)) {
-        //falls into an already visited path
-        lines.push(level + "and follows as " + stName);
-      } else {
-        // go deeper
-        const nextState = game.states.find((st) => st.label === stName)[0];
-        lines.concat(followThePath(nextState, level, pile));
-      }
-    }
-  });
-
-  return lines;
-};
-
-/**
- *
- * @param state
- * @param level
- * @param pile
- * @returns
- */
-const followThePath = (state: State, level: string, pile: string[]): string[] => {
-  //checks if turn into a cycle
-  if (pile.includes(state.label)) return [level + "and returns to state" + state.label];
-
-  pile.push(state.label);
-  var lines = [];
-  lines.push("In state " + state.label);
-  if (state.statementRules && state.statementRules.length > 0) {
-    lines.concat(writeStatementRule(state.statementRules, level + "  "));
+    return lines;
   }
 
-  if (state.effectRule) {
-    lines.concat(writeEffectRule(state.effectRule, level + "  "));
+  /**
+   *
+   * @param condition
+   * @returns
+   */
+  writeCondition(condition: Condition) {
+    return ` - If ${condition.test}, Then ${this.writeEffect(condition.effectIfTrue)}. With this, go to '${condition.stateIfTrue}'`;
   }
 
-  if (state.conditionalRule) {
-    lines.concat(writeConditionalRule(state.conditionalRule, level + "  ", pile));
-  } else {
-    const nextState = game.states.find((st) => st.label === state.transition)[0];
-    lines.concat(followThePath(nextState, level, pile));
+  /**
+   *
+   * @param state
+   * @returns
+   */
+  writeConditionalRule(state: State): string[] {
+    var lines: string[] = [];
+    var states = [];
+
+    state.conditionalRule.conditions.forEach((condition) => {
+      // - add it as priority on pipe on order
+      states.unshift(condition.stateIfTrue);
+
+      // present condition
+      lines.push(this.writeCondition(condition));
+    });
+
+    // present failure
+    lines.push(this.writeCondition(state.conditionalRule.failureCondition));
+
+    // add as priority failure on pipe
+    this.addAsPriority(state.conditionalRule.failureCondition.stateIfTrue);
+
+    states.forEach((st) => {
+      this.addAsPriority(st);
+    });
+
+    return lines;
   }
 
-  return lines;
-};
+  ////////////////////////
 
-/**
- *
- * @param initialSt
- * @returns
- */
-export const model2text = (initialSt: State) => {
-  if (!initialSt) return;
+  addAsPriority(stateName: string) {
+    if (this.stack.includes(stateName)) return;
+    this.pipe.unshift(stateName);
+  }
 
-  followThePath(initialSt, "", []);
-};
+  addToPipe(stateName: string) {
+    if (this.stack.includes(stateName)) return;
+    this.pipe.push(stateName);
+  }
+
+  invalid(): boolean {
+    return !this.game || this.game.states.length <= 0;
+  }
+}

@@ -12,7 +12,9 @@
       <div class="page-manual">
         <div class="clr-row" style="text-align: center">
           <div class="clr-col-12" style="margin-top: 5cm">
-            <h1 style="font-size: 60px">{{ game.name }}</h1>
+            <h1 style="font-size: 60px">
+              <span style="font-weight: 800">{{ game.name }}</span>
+            </h1>
           </div>
           <div class="clr-col-12" style="margin-top: 3rem">
             <h2>{{ game.description }}</h2>
@@ -27,15 +29,17 @@
 
       <div class="page-manual">
         <div class="clr-row">
-          <div class="clr-col-12">
+          <div class="clr-col-6">
             <div class="card card-border">
-              <div class="card-header">{{ game.name }}</div>
+              <div class="card-header">
+                <span style="font-weight: 800">{{ game.name }}</span>
+              </div>
               <div class="card-block" style="min-height: 320px">{{ game.description }}. {{ game.simplyGameplay }}</div>
             </div>
           </div>
           <div class="clr-col-6">
             <div class="card card-border">
-              <div class="card-header">Game Details</div>
+              <div class="card-header"><span style="font-weight: 800">Game Details</span></div>
               <div class="card-block" style="min-height: 320px">
                 <ul>
                   <li>target audience: {{ game.audience }}</li>
@@ -49,11 +53,11 @@
           </div>
           <div class="clr-col-6">
             <div class="card card-border">
-              <div class="card-header">Game Material</div>
+              <div class="card-header"><span style="font-weight: 800">Game Material</span></div>
               <div class="card-block" style="min-height: 320px">
                 <p>Decks</p>
                 <ul *ngFor="let d of game.decks; let i = index">
-                  <li>{{ d.name }} - {{ d.cards.length }} cards</li>
+                  <li>{{ d.name }}: {{ d.description }}. This deck has {{ d.cards.length }} cards</li>
                 </ul>
                 <!-- <p>Tokens</p> -->
                 <!-- <p>Roles</p> -->
@@ -63,7 +67,7 @@
 
           <div class="clr-col-6">
             <div class="card card-border">
-              <div class="card-header">Game Basics</div>
+              <div class="card-header"><span style="font-weight: 800">Game Basics</span></div>
               <div class="card-block" style="min-height: 320px">
                 <ul>
                   <li>This is a turn-based educational card game</li>
@@ -86,11 +90,11 @@
         <div class="clr-row">
           <div class="clr-col-12">
             <div class="card card-border">
-              <div class="card-header">Game Rules</div>
+              <div class="card-header"><span style="font-weight: 800">Game Rules</span></div>
               <div class="card-block" style="min-height: 320px">
                 <div *ngFor="let r of ruleLines">
-                  <hr *ngIf="r.includes('At')" />
-                  <p>{{ r }}</p>
+                  <hr *ngIf="r.includes('* ')" />
+                  <p style="margin: 3px 0px">{{ r }}</p>
                 </div>
               </div>
             </div>
@@ -104,7 +108,9 @@
         <div class="clr-row">
           <div class="clr-col-12">
             <div class="card card-border">
-              <div class="card-header">Deck {{ i + 1 }} - {{ d.name }}</div>
+              <div class="card-header">
+                <span style="font-weight: 800">Deck {{ i + 1 }} - {{ d.name }}</span>
+              </div>
               <div class="card-block" style="min-height: 320px">
                 <div class="clr-row">
                   <!-- deck fields -->

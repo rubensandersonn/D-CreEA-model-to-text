@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { CardComponent } from "src/app/components/card/card.component";
 import { AppService } from "src/app/services/app.service";
 import { Card, ConditionalRule, Effect, EffectRule, Game, State, StatementRule } from "src/app/shared/models/api";
+import { ModelToText } from "src/app/user-stories/model2text";
 import { gameModel } from "./model";
 
 @Component({
@@ -24,8 +25,12 @@ export class SummaryComponent implements OnInit {
   constructor(private appService: AppService, private router: Router) {}
 
   ngOnInit(): void {
-    this.createRules();
+    // this.createRules();
     this.game.simplyGameplay;
+
+    const model2text = new ModelToText();
+    this.ruleLines = model2text.start();
+
     this.cardDefault = {
       id: null,
       cardFront: {
@@ -176,12 +181,16 @@ export class SummaryComponent implements OnInit {
 
     var lines: string[] = [];
 
+    // check if exists rules
+    var noRules = true;
+
     // begin of coding the line
-    lines.push(`At '${state.label}'`);
+    lines.push(`* '${state.label}' ${state.purpose}. `);
 
     // statement rules
     if (state.statementRules && state.statementRules.length > 0) {
-      lines[0] += ", we have the following rules:";
+      // lines[0] += ", we have the following rules:";
+      noRules = false;
 
       const r = this.writeStatementRule(state.statementRules, level + "  ");
       lines = lines.concat(r);
@@ -189,7 +198,8 @@ export class SummaryComponent implements OnInit {
 
     // effect rules
     if (state.effectRule) {
-      if (!lines[0].includes(", we have the following rules:")) lines[0] += ", we have the following rules:";
+      // if (!lines[0].includes(", we have the following rules:")) lines[0] += ", we have the following rules:";
+      noRules = false;
 
       lines = lines.concat(this.writeEffectRule(state.effectRule, level + "  "));
       // lines = lines.concat(["effect rules"]);
@@ -198,7 +208,7 @@ export class SummaryComponent implements OnInit {
     // conditional rules
     if (state.conditionalRule) {
       // formating the text
-      if (!lines[0].includes(", we have the following rules:")) lines[0] += ", we have the following rules:";
+      noRules = false;
 
       //writing the conditions as width search
       lines = lines.concat(this.writeConditionalRule(state.conditionalRule, level + "  ", stack));
@@ -268,10 +278,10 @@ export class SummaryComponent implements OnInit {
         lines.push(level + "and follows as " + nextState.label);
       } else {
         // formating the text
-        if (!lines[0].includes(", we have the following rules:")) {
-          lines[0] += ", just go ahead to the step labeled as '" + nextState.label + "'";
+        if (noRules) {
+          lines[0] += `Go ahead to '${nextState.label}'.`;
         } else {
-          lines.push("Next, go to step labeled as '" + nextState.label + "'");
+          lines.push(`Next, go to '${nextState.label}'`);
         }
         // next state
         lines = lines.concat(this.followThePath(nextState, level, stack));

@@ -45,6 +45,7 @@ export interface StatementRule {
 
 export interface State {
   id: string;
+  purpose: string;
   label: string;
   conditionalRule: ConditionalRule;
   transition: string;

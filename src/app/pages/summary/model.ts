@@ -6,7 +6,8 @@ export const gameModel: Game = {
   audience: "computer science students",
   authors: ["Rubens Silva"],
   description: "A game to practice software testing",
-  simplyGameplay: "A game to practice software testing",
+  simplyGameplay:
+    "In this game, the players must resolve challenges by combining types of software testing with software application scenarios. The objective is to choose the type of test that best suits the software scenario",
   knowledgeField: "Software Testing",
   maxNumberPlayers: 7,
   minNumberPlayers: 3,
@@ -18,23 +19,23 @@ export const gameModel: Game = {
       cards: challengeCards,
       color: "#663030",
       name: "Challenges Deck",
-      description: "Challenges Deck",
+      description: "This deck has all the challenges of this game. Each challenge is a software use description",
       deckFront: {
         title: true,
         art: true,
         description: true,
-        effect: true,
-        cost: true,
-        level: true,
-        earning: true,
+        effect: false,
+        cost: false,
+        level: false,
+        earning: false,
       },
       deckBack: {
-        title: true,
+        title: false,
         answers: true,
-        effect: true,
-        cost: true,
-        level: true,
-        earning: true,
+        effect: false,
+        cost: false,
+        level: false,
+        earning: false,
       },
     },
     {
@@ -42,15 +43,39 @@ export const gameModel: Game = {
       cards: gameCards,
       color: "#30665d",
       name: "Game Deck",
-      description: "Game Deck",
+      description: "This deck has the types of software testing, e.g., Unit Test, Usability Test",
+      deckFront: {
+        title: true,
+        art: true,
+        description: true,
+        effect: false,
+        cost: false,
+        level: false,
+        earning: false,
+      },
+      deckBack: {
+        title: false,
+        answers: false,
+        effect: false,
+        cost: false,
+        level: false,
+        earning: false,
+      },
+    },
+    {
+      id: "999",
+      cards: gameCards,
+      color: "#613d61",
+      name: "Bonus Deck",
+      description: "This deck has all bonus cards. Every bonus card has an effect",
       deckFront: {
         title: true,
         art: true,
         description: true,
         effect: true,
-        cost: true,
-        level: true,
-        earning: true,
+        cost: false,
+        level: false,
+        earning: false,
       },
       deckBack: {
         title: false,
@@ -65,6 +90,7 @@ export const gameModel: Game = {
   states: [
     {
       id: "1",
+      purpose: "sets the begining of the game",
       label: "Game Start",
       conditionalRule: null,
       effectRule: null,
@@ -73,6 +99,7 @@ export const gameModel: Game = {
     },
     {
       id: "2",
+      purpose: "sets the setup of every begining of a game",
       label: "Game Setup",
       conditionalRule: null,
       effectRule: null,
@@ -92,27 +119,9 @@ export const gameModel: Game = {
     },
     {
       id: "3",
+      purpose: "sets the setup of every begining of a turn",
       label: "Turn setup",
-      conditionalRule: {
-        id: "b",
-        label: "Choose next play",
-        conditions: [
-          {
-            test: "the player of the turn has not played yet",
-            effectIfTrue: {
-              simpleEffect: "S/he can play a challenge",
-            },
-            stateIfTrue: "Play a challenge",
-          },
-        ],
-        failureCondition: {
-          test: "can't do any play",
-          effectIfTrue: {
-            simpleEffect: "pass turn to next player",
-          },
-          stateIfTrue: "Turn setup",
-        },
-      },
+      conditionalRule: null,
       effectRule: null,
       statementRules: [
         {
@@ -126,27 +135,77 @@ export const gameModel: Game = {
           simplerDescription: "the table is filled with 5 challenge cards, if not already",
         },
       ],
+      transition: "Play or next player",
+    },
+    {
+      id: "3.1",
+      purpose: "Decides what is the play",
+      label: "Play or next player",
+      conditionalRule: {
+        id: "b",
+        label: "Choose next play",
+        conditions: [
+          {
+            test: "the player of the turn has not tried a challenge yet",
+            effectIfTrue: {
+              simpleEffect: "S/he can play a challenge",
+            },
+            stateIfTrue: "Play a challenge",
+          },
+          {
+            test: "the player of the turn has not tried to bargain",
+            effectIfTrue: {
+              simpleEffect: "S/he can try to negotiate with other players",
+            },
+            stateIfTrue: "Do a bargain",
+          },
+          {
+            test: "the player of the turn has not used a Bonus Card effect",
+            effectIfTrue: {
+              simpleEffect: "S/he can use it",
+            },
+            stateIfTrue: "Bonus play",
+          },
+        ],
+        failureCondition: {
+          test: "can't do any play",
+          effectIfTrue: {
+            simpleEffect: "pass the turn to next player",
+          },
+          stateIfTrue: "Turn setup",
+        },
+      },
+      effectRule: null,
+      statementRules: null,
       transition: null,
     },
     {
       id: "4",
+      purpose: "Describes the way to resolve a challenge",
       label: "Play a challenge",
       conditionalRule: {
         id: "e",
         label: "play a challenge",
         conditions: [
           {
-            test: "the player used a game card that answers correctly the challenge card that s/he chose from table",
+            test: "the player beats the challenge AND the dice throw shows a number present in the answers",
             effectIfTrue: {
               simpleEffect: "S/he wins the challenge",
             },
             stateIfTrue: "Update status: success",
           },
+          {
+            test: "the player beats the challenge but the dice throw shows a number NOT present in the answers",
+            effectIfTrue: {
+              simpleEffect: "S/he wins the challenge",
+            },
+            stateIfTrue: "Play or next player",
+          },
         ],
         failureCondition: {
           test: "the player used a game card that DO NOT answers correctly the challenge",
           effectIfTrue: {
-            simpleEffect: "S/he loose the challenge",
+            simpleEffect: "S/he looses the challenge",
           },
           stateIfTrue: "Update status: failure",
         },
@@ -154,20 +213,57 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "f",
-          label: "rule 7",
-          simplerDescription: "the player of the turn draws 1 card from game deck",
+          id: "g1",
+          label: "rule 8.1",
+          simplerDescription: "The player combines 1 Game Card with 1 Challenge Card to make it's play",
         },
         {
-          id: "g",
-          label: "rule 8",
-          simplerDescription: "the table is filled with 5 challenge cards, if not already",
+          id: "g1",
+          label: "rule 8.1",
+          simplerDescription:
+            "the player beats the challenge if S/He uses a game card that answers correctly the challenge card that s/he chose from table",
+        },
+        {
+          id: "g1",
+          label: "rule 8.1",
+          simplerDescription: "the player throw the dice if S/He beats the challenge",
         },
       ],
       transition: null,
     },
     {
+      id: "10",
+      purpose: "Negotiate with another player",
+      label: "Do a bargain",
+      conditionalRule: null,
+      effectRule: null,
+      statementRules: [
+        {
+          id: "c",
+          label: "rule 6",
+          simplerDescription: "the player can offer card to trade. This negotiation is made in front of all other players",
+        },
+      ],
+      transition: "Play or next player",
+    },
+    {
+      id: "11",
+      purpose: "To use the effect of a Bonus card",
+      label: "Bonus play",
+      conditionalRule: null,
+      effectRule: null,
+      statementRules: [
+        {
+          id: "c",
+          label: "rule 6",
+          simplerDescription: "the player can use a Bonus Card if S/He has",
+        },
+      ],
+      transition: "Play or next player",
+    },
+    {
       id: "5",
+      purpose: "Describes the way to change the points in case of win a challenge",
       label: "Update status: success",
       conditionalRule: null,
       effectRule: null,
@@ -177,11 +273,17 @@ export const gameModel: Game = {
           label: "st rule 3",
           simplerDescription: "the player earns +1 victory point",
         },
+        {
+          id: "h",
+          label: "st rule 3",
+          simplerDescription: "the player draws a card from the Deck Bonus to it's hand",
+        },
       ],
       transition: "Check if game completed",
     },
     {
       id: "6",
+      purpose: "Describes the way to change the points in case of miss a challenge",
       label: "Update status: failure",
       conditionalRule: null,
       effectRule: null,
@@ -192,56 +294,30 @@ export const gameModel: Game = {
           simplerDescription: "there is no penalties for loosing",
         },
       ],
-      transition: "Check if game completed",
+      transition: "Play or next player",
     },
     {
       id: "7",
+      purpose: "if someone won, the game must end",
       label: "Check if game completed",
       conditionalRule: {
         id: "j",
         label: "end game condition",
         conditions: [
           {
-            test: "any player achieved 5 victory points",
+            test: "any player achieved 7 victory points",
             effectIfTrue: {
               simpleEffect: "S/he wins the game",
             },
-            stateIfTrue: "Game over",
+            stateIfTrue: "Game Over",
           },
         ],
         failureCondition: {
-          test: "no player achieved 5 victory points yet",
+          test: "no player achieved 7 victory points yet",
           effectIfTrue: {
             simpleEffect: "next player",
           },
-          stateIfTrue: "Play again or next player",
-        },
-      },
-      effectRule: null,
-      statementRules: [],
-      transition: null,
-    },
-    {
-      id: "8",
-      label: "Play again or next player",
-      conditionalRule: {
-        id: "k",
-        label: "play again",
-        conditions: [
-          {
-            test: "not all play possibilities were used",
-            effectIfTrue: {
-              simpleEffect: "S/he wins the game",
-            },
-            stateIfTrue: "Game over",
-          },
-        ],
-        failureCondition: {
-          test: "no player achieved 5 victory points yet",
-          effectIfTrue: {
-            simpleEffect: "next player",
-          },
-          stateIfTrue: "Play again or next player",
+          stateIfTrue: "Play or next player",
         },
       },
       effectRule: null,
@@ -250,6 +326,7 @@ export const gameModel: Game = {
     },
     {
       id: "-1",
+      purpose: "The end of the game. Lets see the winners",
       label: "Game Over",
       conditionalRule: null,
       effectRule: null,

@@ -15,8 +15,12 @@
       <div class="card-game-header">{{ card.cardFront.title }}</div>
       <div class="card-game-body">
         <div class="card-art" *ngIf="d.deckFront.art">{{ card.cardFront.art }}</div>
-        <div class="card-description">{{ card.cardFront.description }}</div>
-        <div class="card-effect" *ngIf="d.deckFront.effect">{{ card.cardFront.effect }}</div>
+        <div class="card-description" [ngStyle]="{ height: d.deckFront.effect ? '25%' : '50%' }">
+          <p class="card-text">{{ card.cardFront.description }}</p>
+        </div>
+        <div class="card-effect" *ngIf="d.deckFront.effect">
+          <p class="card-text">{{ card.cardFront.effect }}{{ d.deckFront.effect }}</p>
+        </div>
       </div>
       <div class="card-game-footer">
         <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckFront.cost">
@@ -82,8 +86,12 @@
     <div class="card-margins">
       <div class="card-game-header">{{ card.cardBack.title }}</div>
       <div class="card-game-body">
-        <div class="card-answers">{{ card.cardBack.answers }}</div>
-        <div class="card-effect" *ngIf="d.deckBack.effect">{{ card.cardBack.effect }}</div>
+        <div class="card-answers" [ngStyle]="{ height: d.deckBack.effect ? '75%' : '100%' }">
+          <p class="card-text">{{ card.cardBack.answers }}</p>
+        </div>
+        <div class="card-effect" *ngIf="d.deckBack.effect">
+          <p class="card-text">{{ card.cardBack.effect }}</p>
+        </div>
       </div>
       <div class="card-game-footer">
         <div class="float-items-right clr-col-4 vertical-center-input" *ngIf="d.deckBack.cost">
