@@ -1,6 +1,6 @@
 import { OnInit } from "@angular/core";
-import { gameModel } from "../pages/summary/model";
-import { Condition, Effect, Game, State, StatementRule } from "../shared/models/api";
+import { Condition, Effect, Game, State, StatementRule } from "src/app/shared/models/api";
+import { gameModel } from "./model";
 
 export class ModelToText {
   stack: string[] = [];

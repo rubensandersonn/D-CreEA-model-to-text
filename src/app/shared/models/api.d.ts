@@ -1,5 +1,3 @@
-import { cardBackFields, cardFrontFields, clickableField } from "./requests-api";
-
 export interface Effect {
   simpleEffect: string;
   toSelf?: boolean;

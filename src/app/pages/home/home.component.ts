@@ -13,6 +13,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   createNew() {
-    this.router.navigate(["/games/create"]);
+    this.router.navigate(["/demo"]);
   }
 }

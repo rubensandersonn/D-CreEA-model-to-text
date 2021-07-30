@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { CardComponent } from "src/app/components/card/card.component";
 import { AppService } from "src/app/services/app.service";
 import { Card, ConditionalRule, Effect, EffectRule, Game, State, StatementRule } from "src/app/shared/models/api";
-import { ModelToText } from "src/app/user-stories/model2text";
+import { ModelToText } from "./model2text";
 import { gameModel } from "./model";
 
 @Component({
