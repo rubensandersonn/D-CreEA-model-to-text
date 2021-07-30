@@ -8,4 +8,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Test Server
 
-Run `npm start` or `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+To test this project, you must
+
+1. install [NodeJS / npm](https://nodejs.org/en/download/)
+
+2. install angular via cmd/terminal - `npm install -g @angular/cli`
+
+3. install all library required - `npm i`
+
+Then, run `npm start` or `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
