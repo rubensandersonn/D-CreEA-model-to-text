@@ -72,7 +72,7 @@ export const gameModel: Game = {
         title: true,
         art: true,
         description: true,
-        effect: true,
+        effect: false,
         cost: false,
         level: false,
         earning: false,
