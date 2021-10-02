@@ -31,6 +31,21 @@ card poker size: 6.985 x 12.065 cm = 1.72 ratio
   justify-content: center;
   align-items: center;
 }
+
+.card-game-header-back {
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid #942929;
+  background-color: rgb(249, 249, 249, 0.2);
+  color: white;
+  border-radius: 0.5rem 0.5rem 0 0;
+  margin-bottom: 1%;
+  border: 1px solid rgb(249, 249, 249, 0.4);
+  /* //// */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .card-game-body {
   width: 100%;
   height: 78%;
@@ -67,7 +82,7 @@ card poker size: 6.985 x 12.065 cm = 1.72 ratio
   /* centering */
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   background-color: rgba(222, 222, 222, 0.2);
   color: white;
 }
@@ -78,8 +93,8 @@ card poker size: 6.985 x 12.065 cm = 1.72 ratio
   border-top: 1px solid rgb(214, 214, 214);
   /* centering */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   background-color: rgba(222, 222, 222, 0.2);
   color: white;
 }
@@ -91,6 +106,21 @@ card poker size: 6.985 x 12.065 cm = 1.72 ratio
   color: black;
   margin-bottom: 1%;
   border: 1px solid white;
+  border-radius: 0 0 0.5rem 0.5rem;
+  /* centering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-game-footer-back {
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid #dedede;
+  background-color: rgb(249, 249, 249, 0.2);
+  color: white;
+  margin-bottom: 1%;
+  border: 1px solid rgb(249, 249, 249, 0.4);
   border-radius: 0 0 0.5rem 0.5rem;
   /* centering */
   display: flex;
@@ -142,4 +172,35 @@ card poker size: 6.985 x 12.065 cm = 1.72 ratio
   line-height: 100%;
   text-align: center;
   width: 100%;
+}
+
+.card-body-text {
+  color: white;
+  font-size: small;
+  line-height: 100%;
+  text-align: center;
+  width: 100%;
+  margin: 0.4rem;
+}
+
+.card-answer-text {
+  color: white;
+  font-size: small;
+  line-height: 100%;
+  text-align: center;
+  width: 100%;
+  margin: 0.2rem 0rem 0.2rem 0.2rem;
+}
+
+p {
+  white-space: normal;
+  width: 100%;
+  overflow: hidden; /* "overflow" value must be different from "visible" */
+  text-overflow: ellipsis;
+}
+
+.centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

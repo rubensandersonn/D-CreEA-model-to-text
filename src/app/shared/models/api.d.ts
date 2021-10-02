@@ -30,15 +30,20 @@ export interface EffectRule {
 }
 
 export interface StatementRule {
-  id: string;
+  _id: string;
   label: string;
   simplerDescription: string;
   me?: string;
   to?: string;
   given?: string;
-  when?: string;
-  then?: string;
-  otherwise?: string;
+  // when?: string;
+  // then?: string;
+  // otherwise?: string;
+  toSelf?: boolean;
+  toSpecific?: string;
+  forever?: boolean;
+  turns?: number;
+  statusChange?: string;
 }
 
 export interface State {
@@ -54,7 +59,9 @@ export interface State {
 //=====================
 
 export interface Card {
-  id: string;
+  _id: string;
+  deck: string;
+  repetitions: number;
   cardFront: CardFront;
   cardBack: CardBack;
 }
@@ -79,7 +86,8 @@ export class CardBack {
 }
 
 export interface Deck {
-  id: string;
+  _id: string;
+  game: string;
   name: string;
   description: string;
   color: string;

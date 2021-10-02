@@ -1,18 +1,20 @@
-import { OnInit } from "@angular/core";
+// import { Condition, Effect, Game, State, StatementRule } from "../shared/models/api";
+
 import { Condition, Effect, Game, State, StatementRule } from "src/app/shared/models/api";
-import { gameModel } from "./model";
 
 export class ModelToText {
   stack: string[] = [];
   pipe: string[] = [];
-  game: Game = gameModel;
+  game: Game;
 
   constructor() {}
 
-  public start(): string[] {
-    if (this.invalid()) return ["error: model not valid"];
+  public start(game: Game): string[] {
+    this.game = game;
+    console.log("game at model 2 text", this.game);
 
-    console.log("states", this.game.states.length);
+    var errors = this.invalid();
+    if (errors.length > 0) return errors;
 
     var lines: string[] = [];
 
@@ -31,8 +33,6 @@ export class ModelToText {
 
       // removing the first
     } while (this.pipe.length > 0);
-
-    console.log(lines);
 
     return lines;
   }
@@ -55,9 +55,9 @@ export class ModelToText {
     }
 
     // effect rules
-    if (state.effectRule) {
-      lines = lines.concat(this.writeEffectRules(state));
-    }
+    // if (state.effectRule) {
+    //   lines = lines.concat(this.writeEffectRules(state));
+    // }
 
     // conditional rules
     if (state.conditionalRule) {
@@ -97,18 +97,19 @@ export class ModelToText {
     var lines: string[] = [];
 
     const writeStatement = (rule: StatementRule): string => {
-      if (!rule) return "[error] rule not well formed";
+      if (!rule) return `[error] statement rule from state ${state.label} is empty`;
       var st = rule.me ? "me, as " + rule.me.toString() + "; " : "";
+      var st = rule.to ? "in order to " + rule.to.toString() + "; " : "";
       st += rule.given ? "given that " + rule.given.toString() + "; " : "";
-      st += rule.when ? "when " + rule.when.toString() + "; " : "";
-      st += rule.then ? "then " + rule.then.toString() + "; " : "";
-      st += rule.otherwise ? "otherwise " + rule.otherwise.toString() + ". " : "";
+      st += rule.statusChange ? "" + rule.statusChange.toString() + "; " : "";
+      st += "apply this to " + rule.toSelf ? "self player " : rule.toSpecific + "; ";
+      st += "apply this for " + rule.forever ? " the rest of the game " : rule.turns + " turns; ";
       return st;
     };
 
     state.statementRules.forEach((rule) => {
       lines.push(" - " + rule.simplerDescription);
-      if (rule.when) {
+      if (rule.statusChange) {
         lines.push("   * a more detailed description: " + writeStatement(rule));
       }
     });
@@ -122,7 +123,7 @@ export class ModelToText {
    * @returns
    */
   writeEffect = (effect: Effect): string => {
-    if (!effect) return "[error] effect not well formed";
+    if (!effect) return "[error] effect is empty";
     var st = effect.simpleEffect;
     if (effect.statusChange) {
       st += `. In other words, apply '${effect.statusChange}' to `;
@@ -135,14 +136,14 @@ export class ModelToText {
     return st;
   };
 
-  writeEffectRules(state: State): string[] {
-    var lines = [];
-    state.effectRule.effects.forEach((effect) => {
-      lines.push(this.writeEffect(effect));
-    });
+  // writeEffectRules(state: State): string[] {
+  //   var lines = [];
+  //   state.effectRule.effects.forEach((effect) => {
+  //     lines.push(this.writeEffect(effect));
+  //   });
 
-    return lines;
-  }
+  //   return lines;
+  // }
 
   /**
    *
@@ -195,7 +196,24 @@ export class ModelToText {
     this.pipe.push(stateName);
   }
 
-  invalid(): boolean {
-    return !this.game || this.game.states.length <= 0;
+  findState(label: string): State {
+    for (var i = 0; i < this.game.states.length; i++) {
+      if (this.game.states[i].label == label) {
+        return this.game.states[i];
+      }
+    }
+
+    return null;
+  }
+
+  invalid(): string[] {
+    var errors: string[] = [];
+
+    if (!this.game) errors.push("[error] Game is Null");
+    if (this.game && this.game.states.length <= 0) errors.push("[error] This game has no states");
+    if (this.game && !this.findState("Game Start")) errors.push("[error] Game Start does not exist and is required");
+    if (this.game && !this.findState("Game Over")) errors.push("[error] Game Over does not exist and is required");
+
+    return errors;
   }
 }

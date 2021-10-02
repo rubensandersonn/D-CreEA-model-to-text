@@ -53,6 +53,9 @@ input {
   border-radius: 0.3rem;
 }
 
+.btn-deck-wrapper :hover {
+  background-color: #dedede80;
+}
 .card-point-label {
   margin-left: 0.4rem;
 }

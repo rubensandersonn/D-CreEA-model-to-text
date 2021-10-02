@@ -1,10 +1,11 @@
 .page-manual {
-  padding: 3rem;
-  margin-top: 3rem;
+  padding: 1rem;
+  margin-top: 5rem;
   margin-bottom: 1rem;
-  margin-inline: 6cm;
   border-radius: 0.7rem;
-  min-height: 1280px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  min-height: 1934px;
   border: 5px double #52a798;
   background-color: white;
 }
@@ -16,15 +17,16 @@
   box-shadow: 2px 5px 11px #888888;
 }
 
-.rotate {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
 p {
-  font-size: large;
+  font-size: 0.3rem;
   line-height: 100%;
 }
+
+/* ////////////////////////////////////////////// */
+/* ////////////////////////////////////////////// */
+/* ////////////////////////////////////////////// */
+/* ////////////////////////////////////////////// */
+
+/*
+card poker size: 6.985 x 12.065 cm = 1.72 ratio 
+*/

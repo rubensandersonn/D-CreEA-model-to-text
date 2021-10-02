@@ -15,7 +15,8 @@ export const gameModel: Game = {
   requirements: "Software testing types",
   decks: [
     {
-      id: "98",
+      _id: "98",
+      game: null,
       cards: challengeCards,
       color: "#663030",
       name: "Challenges Deck",
@@ -39,7 +40,8 @@ export const gameModel: Game = {
       },
     },
     {
-      id: "99",
+      _id: "99",
+      game: null,
       cards: gameCards,
       color: "#30665d",
       name: "Game Deck",
@@ -63,7 +65,8 @@ export const gameModel: Game = {
       },
     },
     {
-      id: "999",
+      _id: "999",
+      game: null,
       cards: gameCards,
       color: "#613d61",
       name: "Bonus Deck",
@@ -105,12 +108,12 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "a",
+          _id: "a",
           label: "st rule 1",
           simplerDescription: "all players draw 5 cards from game deck",
         },
         {
-          id: "a",
+          _id: "a",
           label: "st rule 2",
           simplerDescription: "chose random player to start",
         },
@@ -125,12 +128,12 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "c",
+          _id: "c",
           label: "rule 6",
           simplerDescription: "the player of the turn draws 1 card from game deck",
         },
         {
-          id: "d",
+          _id: "d",
           label: "rule 5",
           simplerDescription: "the table is filled with 5 challenge cards, if not already",
         },
@@ -213,18 +216,18 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "g1",
+          _id: "g1",
           label: "rule 8.1",
           simplerDescription: "The player combines 1 Game Card with 1 Challenge Card to make it's play",
         },
         {
-          id: "g1",
+          _id: "g1",
           label: "rule 8.1",
           simplerDescription:
             "the player beats the challenge if S/He uses a game card that answers correctly the challenge card that s/he chose from table",
         },
         {
-          id: "g1",
+          _id: "g1",
           label: "rule 8.1",
           simplerDescription: "the player throw the dice if S/He beats the challenge",
         },
@@ -239,7 +242,7 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "c",
+          _id: "c",
           label: "rule 6",
           simplerDescription: "the player can offer card to trade. This negotiation is made in front of all other players",
         },
@@ -254,7 +257,7 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "c",
+          _id: "c",
           label: "rule 6",
           simplerDescription: "the player can use a Bonus Card if S/He has",
         },
@@ -269,12 +272,12 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "h",
+          _id: "h",
           label: "st rule 3",
           simplerDescription: "the player earns +1 victory point",
         },
         {
-          id: "h",
+          _id: "h",
           label: "st rule 3",
           simplerDescription: "the player draws a card from the Deck Bonus to it's hand",
         },
@@ -289,7 +292,7 @@ export const gameModel: Game = {
       effectRule: null,
       statementRules: [
         {
-          id: "i",
+          _id: "i",
           label: "rule",
           simplerDescription: "there is no penalties for loosing",
         },

@@ -1,19 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { CardComponent } from "src/app/components/card/card.component";
 import { AppService } from "src/app/services/app.service";
-import { Card, ConditionalRule, Effect, EffectRule, Game, State, StatementRule } from "src/app/shared/models/api";
+import { Card, Game } from "src/app/shared/models/api";
 import { ModelToText } from "./model2text";
 import { gameModel } from "./model";
+import html2PDF from "jspdf-html2canvas";
+import { getErrors } from "src/app/shared/helpers/get-message-errors";
 
 @Component({
   selector: "app-summary",
   templateUrl: "./summary.component.html",
   styleUrls: [
     "./summary.component.css",
-    "../../shared/styles/style.css",
-    "../../shared/styles/cardsAndDecks.css",
-    "../../shared/styles/card.css",
+    "../../../shared/styles/style.css",
+    "../../../shared/styles/cardsAndDecks.css",
+    "../../../shared/styles/card.css",
   ],
 })
 export class SummaryComponent implements OnInit {
@@ -21,18 +22,36 @@ export class SummaryComponent implements OnInit {
   ruleLines: string[] = [];
   cardDefault: Card;
   isBack: boolean = false;
+  modelErrors: string[] = [];
+  @ViewChild("printable") page: ElementRef;
+  @ViewChild("cardsToPrint") cards: ElementRef;
+  width: number = window.innerWidth;
 
-  constructor(private appService: AppService, private router: Router) {}
+  cardWidth: number = 250;
+  marginBetwCards: number = 15;
+  marginLeft: number = 0;
+  cardHeight: number;
+
+  constructor(private appService: AppService) {}
 
   ngOnInit(): void {
-    // this.createRules();
-    this.game.simplyGameplay;
-
     const model2text = new ModelToText();
-    this.ruleLines = model2text.start();
+    this.ruleLines = model2text.start(this.game);
+
+    this.ruleLines.forEach((line) => {
+      if (line.includes("[error]")) {
+        this.modelErrors.push(line);
+      }
+    });
+
+    if (this.modelErrors.length > 0) {
+      this.appService.setAppAlerts(this.modelErrors.map((error) => ({ message: error, type: "danger" })));
+    }
 
     this.cardDefault = {
-      id: null,
+      _id: null,
+      deck: null,
+      repetitions: 1,
       cardFront: {
         title: "Card Title",
         art: "Card art",
@@ -53,268 +72,54 @@ export class SummaryComponent implements OnInit {
     };
   }
 
-  findState(label: string) {
-    return this.game.states.find((x) => x.label.toLowerCase() === label.toLowerCase());
-  }
-
-  createRules() {
-    const initialState = this.findState("game start"); // set this to fix
-    if (!initialState) console.log("initial not found");
-    this.ruleLines = this.model2text(initialState);
-    console.log("result", this.ruleLines);
-  }
-
-  /**
-   *
-   * @param effect
-   * @returns
-   */
-  writeEffect = (effect: Effect, level: string): string => {
-    if (!effect) return "[error] effect not well formed";
-    var st = effect.simpleEffect;
-    if (effect.statusChange) {
-      st += `. In other words, apply '${effect.statusChange}' to `;
-      st += effect.toSelf != null && effect.toSelf == true ? "self player;" : `players ${effect.toSpecific};`;
-      st += ` This effect lasts for ${
-        effect.forever != null && effect.forever == true ? "the rest of this game" : effect.turns + " turns."
-      }`;
+  async downloadPDF() {
+    if (!this.page || !this.cards) {
+      this.appService.setAppAlerts([{ message: "Error while checking the print page, please try again", type: "danger" }]);
+      return;
     }
 
-    return st;
-  };
+    this.appService.setGlobalLoading(true);
 
-  /**
-   *
-   * @param rule
-   * @param level
-   * @returns
-   */
-  writeEffectRule = (rule: EffectRule, level: string): string[] => {
-    var lines = [];
-    rule.effects.forEach((effect) => {
-      if (effect.statusChange && effect.statusChange !== "") {
-        lines.push(this.writeEffect(effect, level));
-      }
-    });
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
 
-    return lines;
-  };
+    const todaystr = dd + "-" + mm + "-" + yyyy;
 
-  /**
-   *
-   * @param rules rules
-   */
-  writeStatementRule = (rules: StatementRule[], level: string): string[] => {
-    var lines = [];
-
-    const writeStatement = (rule: StatementRule): string => {
-      if (!rule) return "[error] rule not well formed";
-      var st = rule.me ? "me, as " + rule.me.toString() + "; " : "";
-      st += rule.given ? "given that " + rule.given.toString() + "; " : "";
-      st += rule.when ? "when " + rule.when.toString() + "; " : "";
-      st += rule.then ? "then " + rule.then.toString() + "; " : "";
-      st += rule.otherwise ? "otherwise " + rule.otherwise.toString() + ". " : "";
-      return st;
-    };
-
-    rules.forEach((rule) => {
-      lines.push(level + "- " + rule.simplerDescription);
-      if (rule.when) {
-        lines.push(level + "* a more detailed description: ");
-        lines.push(level + writeStatement(rule));
-      }
-    });
-
-    return lines;
-  };
-
-  /**
-   *
-   * @param rule
-   * @param level
-   * @returns
-   */
-  writeConditionalRule = (rule: ConditionalRule, level: string, stack: string[]): string[] => {
-    var lines = [];
-
-    // writing the conditions
-    rule.conditions.forEach((condition) => {
-      lines.push(
-        level +
-          "- If " +
-          condition.test +
-          ", then " +
-          this.writeEffect(condition.effectIfTrue, level) +
-          ". With this, go to step '" +
-          condition.stateIfTrue +
-          "'"
-      );
-    });
-
-    // writing the failure test
-    lines.push(
-      level +
-        "- If previous tests fails, then " +
-        this.writeEffect(rule.failureCondition.effectIfTrue, level) +
-        ". With this, go to step '" +
-        rule.failureCondition.stateIfTrue +
-        "'"
-    );
-
-    return lines;
-  };
-
-  /**
-   *
-   * @param state
-   * @param level
-   * @param stack
-   * @returns
-   */
-  followThePath = (state: State, level: string, stack: string[]): string[] => {
-    //checks if turn into a cycle
-    if (!state) return ["ERROR: state not set"];
-    if (state.label.toLowerCase() === "game over") return [". With this, we have the end of game!"];
-    if (stack.includes(state.label)) return [level + "and returns to state" + state.label];
-
-    stack.push(state.label);
-
-    var lines: string[] = [];
-
-    // check if exists rules
-    var noRules = true;
-
-    // begin of coding the line
-    lines.push(`* '${state.label}' ${state.purpose}. `);
-
-    // statement rules
-    if (state.statementRules && state.statementRules.length > 0) {
-      // lines[0] += ", we have the following rules:";
-      noRules = false;
-
-      const r = this.writeStatementRule(state.statementRules, level + "  ");
-      lines = lines.concat(r);
-    }
-
-    // effect rules
-    if (state.effectRule) {
-      // if (!lines[0].includes(", we have the following rules:")) lines[0] += ", we have the following rules:";
-      noRules = false;
-
-      lines = lines.concat(this.writeEffectRule(state.effectRule, level + "  "));
-      // lines = lines.concat(["effect rules"]);
-    }
-
-    // conditional rules
-    if (state.conditionalRule) {
-      // formating the text
-      noRules = false;
-
-      //writing the conditions as width search
-      lines = lines.concat(this.writeConditionalRule(state.conditionalRule, level + "  ", stack));
-
-      // go down on each condition
-      state.conditionalRule.conditions.forEach((condition) => {
-        const nextStateLabel = condition.stateIfTrue;
-
-        console.log(`next state: ${nextStateLabel}`);
-        if (nextStateLabel === "Check if game completed") {
-          lines.push(level + "and ends in " + nextStateLabel);
-        } else {
-          var alreadyVisited = false;
-
-          for (var st in stack) {
-            if (st.toLowerCase() === nextStateLabel.toLowerCase()) {
-              lines.push(level + "and follows as " + nextStateLabel);
-              alreadyVisited = true;
-              break;
-            }
-          }
-
-          if (!alreadyVisited) {
-            // go deeper
-            const nextState = this.findState(nextStateLabel);
-            if (!nextState) return [`ERROR: state ${nextStateLabel} not found at condition in level ${level}`];
-            console.log(`going down at ${nextState.label}`);
-            console.log("stack", stack);
-            lines = lines.concat(this.followThePath(nextState, level, stack));
-          }
-        }
+    try {
+      await html2PDF(this.page.nativeElement, {
+        jsPDF: {
+          format: "a4",
+        },
+        output: `[${todaystr}] Game Manual - ${this.game.name}.pdf`,
       });
 
-      // failure condition going deeper
-      const nextStateLabel = state.conditionalRule.failureCondition.stateIfTrue;
-      if (nextStateLabel === "Check if game completed") {
-        lines.push(level + "and ends in " + nextStateLabel);
-      } else {
-        var alreadyVisited = false;
+      this.appService.setAppAlerts([{ message: "Game Manual created", type: "success" }]);
 
-        for (var st in stack) {
-          if (st.toLowerCase() === nextStateLabel.toLowerCase()) {
-            lines.push(level + "and follows as " + nextStateLabel);
-            alreadyVisited = true;
-            break;
-          }
-        }
+      await html2PDF(this.cards.nativeElement, {
+        jsPDF: {
+          format: "a4",
+        },
+        imageType: "image/jpeg",
+        output: `[${todaystr}] Cards - ${this.game.name}.pdf`,
+      });
 
-        if (!alreadyVisited) {
-          // go deeper
-          const nextState = this.findState(nextStateLabel);
-          if (!nextState) return [`ERROR: state ${nextStateLabel} not found at condition in level ${level}`];
-          console.log(`going down at ${nextState.label}`);
-          console.log("stack", stack);
-          lines = lines.concat(this.followThePath(nextState, level, stack));
-        }
-      }
-    } else {
-      // transition
-      const nextState = this.findState(state.transition);
+      this.appService.setAppAlerts([{ message: "Cards PDF created", type: "success" }]);
+    } catch (error) {
+      console.log("errror while pdf", error);
+      this.appService.setAppAlerts([{ message: "Error while creating PDF. Please try again", type: "danger" }]);
+    } finally {
+      this.appService.setGlobalLoading(false);
+    }
+  }
 
-      if (!nextState) return ["ERROR: state " + state.transition + " not found at level " + level];
-
-      if (nextState.label === "Check if game completed") {
-        lines.push(level + "and ends in " + nextState.label);
-      } else if (stack.includes(nextState.label)) {
-        lines.push(level + "and follows as " + nextState.label);
-      } else {
-        // formating the text
-        if (noRules) {
-          lines[0] += `Go ahead to '${nextState.label}'.`;
-        } else {
-          lines.push(`Next, go to '${nextState.label}'`);
-        }
-        // next state
-        lines = lines.concat(this.followThePath(nextState, level, stack));
-      }
+  range(m: number) {
+    var res: number[] = [];
+    for (let i = 0; i < m; i++) {
+      res.push(i);
     }
 
-    return lines;
-  };
-
-  /**
-   *
-   * @param initialSt
-   * @returns
-   */
-  model2text = (initialSt: State) => {
-    if (!initialSt) return;
-
-    const lines = this.followThePath(initialSt, "", []);
-
-    return lines;
-  };
-
-  print() {
-    const printContent = document.getElementById("printable");
-    const WindowPrt = window.open("", "", "left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0");
-    WindowPrt.document.write(printContent.innerHTML);
-    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="./summary.component.css">');
-    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="../../shared/styles/style.css">');
-    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="../../shared/styles/cardsAndDecks.css">');
-    WindowPrt.document.write('<link rel="stylesheet" type="text/css" href="../../shared/styles/card.css">');
-    WindowPrt.document.close();
-    WindowPrt.focus();
-    WindowPrt.print();
-    WindowPrt.close();
+    return res;
   }
 }

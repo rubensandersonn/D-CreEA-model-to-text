@@ -1,6 +1,10 @@
-export const gameCards = [
+import { Card } from "src/app/shared/models/api";
+
+export const gameCards: Card[] = [
   {
-    id: "c1",
+    _id: "c1",
+    deck: null,
+    repetitions: 1,
     cardFront: {
       title: "Functional Test",
       art: "",
@@ -21,9 +25,11 @@ export const gameCards = [
   },
 ];
 
-export const challengeCards = [
+export const challengeCards: Card[] = [
   {
-    id: "c1",
+    _id: "c2",
+    repetitions: 1,
+    deck: null,
     cardFront: {
       title: "Case 1",
       art: "",
